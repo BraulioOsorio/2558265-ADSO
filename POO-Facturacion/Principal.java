@@ -10,10 +10,6 @@ public class Principal{
         int indicador_clientes=0;
         int indicador_vendedor=0;
         Productos nuevo = new Productos();
-        double[] precios = { 24.580, 4.230, 1.500, 13.456, 8.000, 2.000, 4.653, 10.020, 5.300, 2.350 };
-        nuevo.llenarPrecios(precios);
-        String[] nombreLlenar = {"Aceite","1 libra de Arroz","Media Libra de queso","Leche en polvo","Zanahoria","Carbe","Bocadillo","Libra de carne","Pira","Panela"};
-        nuevo.llenarNombres(nombreLlenar);
         while(salir==false){
             System.out.println("|| --------------------------------------------------- ||");
             System.out.println("|| ---------------------  WELCOME  ------------------- ||");

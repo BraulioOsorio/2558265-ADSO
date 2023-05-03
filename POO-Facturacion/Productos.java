@@ -5,21 +5,12 @@ public class Productos{
 
 }
 public Productos(){
-    precios = new double[10];
-    nombres = new String[10];
-    
+    this.precios = new double[10]{ 24.580, 4.230, 1.500, 13.456, 8.000, 2.000, 4.653, 10.020, 5.300, 2.350 };
+    this.nombres = new String[10]{"Aceite","1 libra de Arroz","Media Libra de queso","Leche en polvo","Zanahoria","Carbe","Bocadillo","Libra de carne","Pira","Panela"};
+       
 }
 
-public void llenarPrecio(float[] precios) {
-    for (int i = 0; i < precios.length; i++) {
-        precios[i] = precios[i];
-    }
-}
-public void llenarNombres(String[] nombreLlenar) {
-    for (int i = 0; i < nombreLlenar.length; i++) {
-        nombres[i] = nombreLlenar[i];
-    }
-}
+
 public void facturar(){
     System.out.print("aja");
 }
