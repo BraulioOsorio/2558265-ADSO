@@ -2,14 +2,18 @@ import java.util.Scanner;
 
 public class Principal{
     public static void main(String[]args){
-        Scanner entrada = new Scanner(System.in);
-        Scanner entrada1 = new Scanner(System.in);
-        boolean salir=false;
-        Personas clientes[]=new Personas[100];
-        Personas vendedores[]=new Personas[100];
         int indicador_clientes=0;
         int indicador_vendedor=0;
+        
+        Scanner entrada = new Scanner(System.in);
+        Scanner entrada1 = new Scanner(System.in);
+
+        Personas clientes[]=new Personas[100];
+        Personas vendedores[]=new Personas[100];
+        
         Productos nuevo = new Productos();
+
+        boolean salir=false;
         while(salir==false){
             System.out.println("|| --------------------------------------------------- ||");
             System.out.println("|| ---------------------  WELCOME  ------------------- ||");
@@ -61,6 +65,7 @@ public class Principal{
                     System.out.println("|| 1. -> Cliente                                       ||");
                     System.out.println("|| 2. -> Vendedor                                      ||");
                     System.out.println("|| --------------------------------------------------- ||");
+                    System.out.print("Ingrese el Estado de la persona a registar: ");
                     int escoger = entrada.nextInt();
                     if(valido!=1 && escoger==1){
                         clientes[indicador_clientes] = temporal;
@@ -70,7 +75,6 @@ public class Principal{
                         indicador_vendedor++;
                     }
                 }
-               
             }else if(opcion==2){
                 nuevo.facturar();
             }else if(opcion==3){
