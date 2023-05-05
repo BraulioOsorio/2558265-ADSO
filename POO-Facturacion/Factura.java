@@ -6,8 +6,7 @@ public class Factura{
     Personas vendedor;
     Productos listaProductos[];
     double total;
-    Scanner entrada;
-
+    Scanner entrada; 
     public Factura(){
         this.entrada = new Scanner(System.in);
         this.numeroFactura=numeroFactura;
@@ -18,11 +17,37 @@ public class Factura{
         this.fecha=fecha;
     }
 
-    public void Star(){
+    public void Star(Personas arreglo[],Personas arregloVendedor[]){
         System.out.println("|| ---------------------  WELCOME  ------------------- ||");
-        System.out.print("Ingrese la cedula del Cliente: ");
-        int cedula = this.entrada.nextInt();
-        
+        System.out.println("LISTA DE CLIENTES");
+        for(int i=0;i<arreglo.length;i++){
+            if(arreglo[i]!= null){
+                System.out.print((i+1)+"- ");
+                arreglo[i].imprimir();
+            }else{
+                break;
+            }
+        }
+        System.out.print("Ingrese el numero del cliente para elegirlo: ");
+        int numeroCliente = this.entrada.nextInt();
+        int num=numeroCliente-1;
+        this.cliente=arreglo[num];
+        System.out.println("---------------------------------------------------------------");
+        System.out.println("LISTA DE VENDEDORES");
+        for(int i=0;i<arregloVendedor.length;i++){
+            if(arregloVendedor[i]!= null){
+                System.out.print((i+1)+"- ");
+                arregloVendedor[i].imprimir();
+            }else{
+                break;
+            }
+        }
+        System.out.print("Ingrese el numero del vendedor para elegirlo: ");
+        int numeroVendedor = this.entrada.nextInt();
+        int num1=numeroVendedor-1;
+        this.vendedor=arregloVendedor[num1];
+
+        System.out.println(this.vendedor+" - "+this.cliente);
     }
 
 }

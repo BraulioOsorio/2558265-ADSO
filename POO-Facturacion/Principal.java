@@ -33,11 +33,7 @@ public class Principal{
                 String nombres=entrada1.nextLine();
                 System.out.print("Ingrese los apellidos: ");
                 String apellidos=entrada1.nextLine();
-                System.out.print("Ingrese la direccion: ");
-                String direccion=entrada1.nextLine();
-                System.out.print("Ingrese el telefono: ");
-                String telefono=entrada1.nextLine();
-                Personas temporal= new Personas(documento,nombres,apellidos,direccion,telefono);
+                Personas temporal= new Personas(documento,nombres,apellidos);
                 int valido=0;
                 for(int i=0;i<indicador_clientes;i++){
                     if(clientes[i].getDocumento() == documento){
@@ -72,7 +68,7 @@ public class Principal{
                     }
                 }
             }else if(opcion==2){
-                        nuevo.Star();
+                        nuevo.Star(clientes,vendedores);
             }else if(opcion==3){
                 for(int i=0;i<clientes.length;i++){
                     if(clientes[i]!= null){
