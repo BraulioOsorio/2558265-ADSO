@@ -5,7 +5,7 @@ public class Productos{
 
     public Productos(){
         this.precios = new double[7]; 
-        this.nombres = new String[10]; 
+        this.nombres = new String[7]; 
     }
     public void PrecioProductos(){
         this.precios[0] = 24.580;
@@ -25,10 +25,6 @@ public class Productos{
         this.nombres [4] = "Zanahoria";
         this.nombres [5] = "Carbe";
         this.nombres [6] = "Bocadillo";
-    }
-
-    public void facturar(){
-        System.out.print("aja");
     }
 }
 

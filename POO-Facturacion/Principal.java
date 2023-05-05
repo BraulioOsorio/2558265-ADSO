@@ -4,15 +4,11 @@ public class Principal{
     public static void main(String[]args){
         int indicador_clientes=0;
         int indicador_vendedor=0;
-        
         Scanner entrada = new Scanner(System.in);
         Scanner entrada1 = new Scanner(System.in);
-
         Personas clientes[]=new Personas[100];
         Personas vendedores[]=new Personas[100];
-        
-        Productos nuevo = new Productos();
-
+        Factura nuevo = new Factura();
         boolean salir=false;
         while(salir==false){
             System.out.println("|| --------------------------------------------------- ||");
@@ -76,7 +72,7 @@ public class Principal{
                     }
                 }
             }else if(opcion==2){
-                nuevo.facturar();
+                        nuevo.Star();
             }else if(opcion==3){
                 for(int i=0;i<clientes.length;i++){
                     if(clientes[i]!= null){
