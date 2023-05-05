@@ -30,8 +30,7 @@ public class Factura{
         }
         System.out.print("Ingrese el numero del cliente para elegirlo: ");
         int numeroCliente = this.entrada.nextInt();
-        int num=numeroCliente-1;
-        this.cliente=arreglo[num];
+        this.cliente=arreglo[numeroCliente-1];
         System.out.println("---------------------------------------------------------------");
         System.out.println("LISTA DE VENDEDORES");
         for(int i=0;i<arregloVendedor.length;i++){
@@ -44,10 +43,9 @@ public class Factura{
         }
         System.out.print("Ingrese el numero del vendedor para elegirlo: ");
         int numeroVendedor = this.entrada.nextInt();
-        int num1=numeroVendedor-1;
-        this.vendedor=arregloVendedor[num1];
-
-        System.out.println(this.vendedor+" - "+this.cliente);
+        this.vendedor=arregloVendedor[numeroVendedor-1];
+        
+        //System.out.println(this.vendedor.toString()+" - "+this.cliente.toString());
     }
 
 }

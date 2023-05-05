@@ -24,4 +24,9 @@ public class Personas{
         System.out.print(this.apellidos+"  ");
         System.out.println("");
     }
+
+    public String toString(){
+        return this.documento+"-> "+this.nombres+"  "+this.apellidos;
+    }
+    
 }   
