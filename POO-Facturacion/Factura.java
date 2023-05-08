@@ -45,7 +45,7 @@ public class Factura{
         int numeroVendedor = this.entrada.nextInt();
         this.vendedor=arregloVendedor[numeroVendedor-1];
         
-        //System.out.println(this.vendedor.toString()+" - "+this.cliente.toString());
+        System.out.println(this.vendedor.toString()+" - "+this.cliente.toString());
     }
 
 }
