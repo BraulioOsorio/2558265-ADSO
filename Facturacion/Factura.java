@@ -37,4 +37,10 @@ public class Factura{
             System.out.println(producto.getNombre()+" PRECIO: "+producto.getPrecio()+" CANTIDAD "+producto.getCantidad());   
         }
     }
+    public void imprimir(){
+        System.out.println("ID: "+this.contadorFactura);
+        System.out.println("FECHA: "+this.fecha.toString());
+        System.out.println("VENDEDOR: "+this.vendedor.getNombre());
+        System.out.println("CLIENTE: "+this.cliente.getNombre());
+    }
 }
