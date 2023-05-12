@@ -1,18 +1,22 @@
 import java.util.Date;
 public class Factura{
+    int contadorFactura=0;
     int id;
     Date fecha;
     Vendedor vendedor;
     Clientes cliente;
     ProductoFactura productos[];
-    int contadoProductos;
-    public Factura(Vendedor vendedor,Clientes cliente){
-        this.id++;
-        this.fecha= new Date();
+    int numProductos;
+    Producto producto;
+    public Factura(int id,Vendedor vendedor,Clientes cliente){
+        this.id=id;
         this.vendedor = vendedor;
         this.cliente = cliente;
+        this.fecha= new Date();
         this.productos = new ProductoFactura[99];
-        this.contadoProductos=0;
+        this.numProductos=0;
+        this.id=++contadorFactura;
+        this.producto=producto;
     }
     public int getId(){
         return id;
@@ -23,7 +27,7 @@ public class Factura{
     public Vendedor getVendedor(){
         return vendedor;
     }
-    public Cliente getCliente(){
+    public Clientes getCliente(){
         return cliente;
     }
     public ProductoFactura[] getProductos(){
@@ -31,29 +35,25 @@ public class Factura{
     }
     public double getTotal(){
         double total = 0;
-        for(ProductoFactura producto : productos){
-            total += producto.getPrecio() * producto.getCantidad();
+        for(int i=0;i<numProductos;i++){
+            total+=productos[i].getCantidad()*producto.getPrecio();
+        }
         return total;
     }
-    public String toString(){
-        return "Fecha:"+fecha+" ID FACTURA:"+id+" VENDEDOR:"+vendedor.getNombre()+" CLIENTE:"cliente.getNombre()+" TOTAL: $"+getTotal();
-    } 
-  
-    public void imprimirDetalle(){
-        System.out.println("---DETALLE FACTURA---");
-        System.out.println("ID: "+this.id);
-        System.out.println("FECHA: "+this.fecha.toString());
-        System.out.println("VENDEDOR: "+this.vendedor.getNombre());
-        System.out.println("CLIENTE: "+this.cliente.getNombre());
-        System.out.println("---PRODUCTOS---");
-        for(ProductoFactura pf : productos){
-            System.out.println("NOMBRE:"+pf.getNombre()+" PRECIO: "+pf.getPrecio()+" CANTIDAD "+pf.getCantidad());   
+    public void agregarProducto(Producto producto,int cantidad){
+        if(numProductos<productos.length){
+            productos[numProductos]=new ProductoFactura(producto,cantidad);
+            numProductos++;
+        }else{
+            System.out.println("No se pueden agregar mas productos");
         }
     }
-    public void imprimir(){
-        System.out.println("ID: "+this.id);
-        System.out.println("FECHA: "+this.fecha.toString());
-        System.out.println("VENDEDOR: "+this.vendedor.getNombre());
-        System.out.println("CLIENTE: "+this.cliente.getNombre());
+    public String toString(){
+        return "Fecha:"+fecha+" ID FACTURA:"+id+" VENDEDOR:"+vendedor.getNombre()+" CLIENTE:"+cliente.getNombre()+" TOTAL: $"+getTotal();
+    } 
+    public static void listaFacturas(Factura[] facturas){
+        for(Factura f : facturas){
+            System.out.println(f.toString());
+        }
     }
 }

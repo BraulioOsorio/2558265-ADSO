@@ -69,6 +69,8 @@ public class Principal{
                 }
             }else if(opcion==3){
                 System.out.println("NUEVA FACTURA");
+                System.out.println("Ingrese un id para la factura");
+                int numeroFac = entrada.nextInt();
                 System.out.println("Lista de Clientes");
                 for(int i=0;i<arrayClientes.length;i++){
                     if(arrayClientes[i]!= null){
@@ -94,8 +96,7 @@ public class Principal{
                 System.out.print("Selecione el Vendedor ingresando el numero identificador: ");
                 int selectVendedor = entrada.nextInt();
                 Vendedor VendedorSelect = arrayVendedores[selectVendedor -1];
-
-                Factura factura = new Factura(VendedorSelect,clienteSelect);
+                Factura factura = new Factura(numeroFac,VendedorSelect,clienteSelect);
                 System.out.println("Agregar Productos");
                 while(true){
                     System.out.print("Nombre del Producto o 1 para salir: ");
@@ -108,7 +109,7 @@ public class Principal{
                     System.out.print("Precio unitario del Producto: ");
                     double preciosPro = entrada.nextDouble();
                     Producto producto = new Producto(nombreProducto,preciosPro);
-                    factura.agregarPro(producto,cantidadPro);
+                    ProductoFactura productFact= new ProductoFactura(producto,cantidadPro);
                 }
                 System.out.println("TOtal Facturado: "+factura.getTotal());
                 arrayFactura[posicionFactura]=factura;
@@ -149,8 +150,7 @@ public class Principal{
                     for(int i=0;i<arrayFactura.length;i++){
                         if(arrayFactura[i]!= null){
                             System.out.print((i+1)+") ");
-                            arrayFactura[i].imprimir();
-                            System.out.println("TOTAL: "+arrayFactura[i].getTotal());
+                            arrayFactura[i].toString();
                         }else{
                             break;
                         }
@@ -158,31 +158,7 @@ public class Principal{
                 }
             }else if(opcion==7){
                System.out.println("ingrese el numero de la Factura");
-               int idFacturaDetalle =entrada.nextInt();
-               Factura facturaDetalle = null;
-               for(Factura f : arrayFactura){
-                    if(f.getIdFactura()==idFacturaDetalle){
-                        facturaDetalle = f;
-                        break;
-                    }
-               }
-                if(facturaDetalle==null){
-                    System.out.println("no se encontra la factura");
-                    break;
-                }
-                System.out.println("Detalle Factura: ");
-                System.out.println("ID: "+facturaDetalle.getIdFactura());
-                System.out.println("Fecha: "+facturaDetalle.getFecha());
-                System.out.println("Vendedor: "+facturaDetalle.getDocumento().getNombre());
-                System.out.println("Cliente: "+facturaDetalle.getDocumento().getNombre());
-                System.out.println("\n--Productos--\n");
-                for(ProductoFactura pf : facturaDetalle.getProducto()){
-                    Producto producto = pf.getProducto();
-                    System.out.println(producto.getNombre()+"Cantidad: " +pf.getCantidad());
-                    System.out.println("Precio unitario: $"+producto.getPrecio());
-                    System.out.println("Subtotal: $" +pf.getSubtotal());
-                    System.out.println("Total: $" +facturaDetalle.getTotal());
-                }
+              
             }
         }
         
