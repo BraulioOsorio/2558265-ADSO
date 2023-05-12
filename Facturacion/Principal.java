@@ -159,10 +159,10 @@ public class Principal{
             }else if(opcion==7){
                 System.out.println("\nVER DETALLE DE FACTURA\n");
                 System.out.print("Ingrese el ID de la factura: ");
-                int idFactura = escanner.nextInt();
+                int idFactura = entrada.nextInt();
                 Factura facturaSeleccionada = null;
                 for (Factura factura : arrayFactura) {
-                    if (factura.getId() == idFactura) {
+                    if (factura.getcontadorFactura() == idFactura) {
                         facturaSeleccionada = factura;
                         break;
                     }
@@ -170,7 +170,7 @@ public class Principal{
                 if (facturaSeleccionada == null) {
                     System.out.println("No se encontró la factura con el ID ingresado.");
                 } else {
-                    System.out.println("FACTURA #" + facturaSeleccionada.getId() + " - " +facturaSeleccionada.getFecha() + "\n" +"VENDEDOR: " + facturaSeleccionada.getVendedor().getNombre() +" - CLIENTE: " + facturaSeleccionada.getCliente().getNombre());
+                    System.out.println("FACTURA #" + facturaSeleccionada.getcontadorFactura() + " - " +facturaSeleccionada.getFecha() + "\n" +"VENDEDOR: " + facturaSeleccionada.getVendedor().getNombre() +" - CLIENTE: " + facturaSeleccionada.getCliente().getNombre());
                     System.out.println("\nPRODUCTOS:\n");
                     for (ProductoFactura productoFactura : facturaSeleccionada.getProductosFactura()) {
                         System.out.println("Nombre: " + productoFactura.getProducto().getNombre() +" - Precio: " + productoFactura.getProducto().getPrecio() +" - Cantidad: " + productoFactura.getCantidad() +" - Subtotal: " + productoFactura.getSubtotal());

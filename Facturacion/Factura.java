@@ -26,6 +26,13 @@ public class Factura{
         }
         return total;
     }
+    public int getcontadorFactura(){
+        return this.contadorFactura;
+    }
+
+    public Date getFecha(){
+        return this.fecha;
+    }
     public void detalleFactura(){
         System.out.println("---DETALLE FACTURA---");
         System.out.println("ID: "+this.contadorFactura);
