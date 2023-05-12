@@ -172,7 +172,7 @@ public class Principal{
                 } else {
                     System.out.println("FACTURA #" + facturaSeleccionada.getcontadorFactura() + " - " +facturaSeleccionada.getFecha() + "\n" +"VENDEDOR: " + facturaSeleccionada.getDocumento().getNombre() +" - CLIENTE: " + facturaSeleccionada.getDocumento().getNombre());
                     System.out.println("\nPRODUCTOS:\n");
-                    for (int i=0; i< ) {
+                    for (int i=0; i<Producto.getCantidadProductos();i++) {
                         System.out.println("Nombre: " + productoFactura.getProducto().getNombre() +" - Precio: " + productoFactura.getProducto().getPrecio() +" - Cantidad: " + productoFactura.getCantidad() +" - Subtotal: " + productoFactura.getSubtotal());
                     }
                     System.out.println("\nTOTAL FACTURADO: " + facturaSeleccionada.getTotal());
