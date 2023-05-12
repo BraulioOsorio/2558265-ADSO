@@ -161,7 +161,7 @@ public class Principal{
                 System.out.print("Ingrese el ID de la factura: ");
                 int idFactura = entrada.nextInt();
                 Factura facturaSeleccionada = null;
-                for (Factura factura : arrayFactura) {
+                for (int i=0;i<posicionFactura;i++) {
                     if (factura.getcontadorFactura() == idFactura) {
                         facturaSeleccionada = factura;
                         break;
