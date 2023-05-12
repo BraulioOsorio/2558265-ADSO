@@ -157,25 +157,31 @@ public class Principal{
                     }
                 }
             }else if(opcion==7){
-                System.out.println("\nVER DETALLE DE FACTURA\n");
-                System.out.print("Ingrese el ID de la factura: ");
-                int idFactura = entrada.nextInt();
-                Factura facturaSeleccionada = null;
-                for (int i=0;i<posicionFactura;i++) {
-                    if (factura.getcontadorFactura() == idFactura) {
-                        facturaSeleccionada = factura;
+               System.out.println("ingrese el numero de la Factura");
+               int idFacturaDetalle =entrada.nextInt();
+               Factura facturaDetalle = null;
+               for(Factura f : arrayFactura){
+                    if(f.getIdFactura()==idFacturaDetalle){
+                        facturaDetalle = f;
                         break;
                     }
+               }
+                if(facturaDetalle==null){
+                    System.out.println("no se encontra la factura");
+                    break;
                 }
-                if (facturaSeleccionada == null) {
-                    System.out.println("No se encontró la factura con el ID ingresado.");
-                } else {
-                    System.out.println("FACTURA #" + facturaSeleccionada.getcontadorFactura() + " - " +facturaSeleccionada.getFecha() + "\n" +"VENDEDOR: " + facturaSeleccionada.getDocumento().getNombre() +" - CLIENTE: " + facturaSeleccionada.getDocumento().getNombre());
-                    System.out.println("\nPRODUCTOS:\n");
-                    for (int i=0; i<Producto.getCantidadProductos();i++) {
-                        System.out.println("Nombre: " + productoFactura.getProducto().getNombre() +" - Precio: " + productoFactura.getProducto().getPrecio() +" - Cantidad: " + productoFactura.getCantidad() +" - Subtotal: " + productoFactura.getSubtotal());
-                    }
-                    System.out.println("\nTOTAL FACTURADO: " + facturaSeleccionada.getTotal());
+                System.out.println("Detalle Factura: ");
+                System.out.println("ID: "+facturaDetalle.getIdFactura());
+                System.out.println("Fecha: "+facturaDetalle.getFecha());
+                System.out.println("Vendedor: "+facturaDetalle.getDocumento().getNombre());
+                System.out.println("Cliente: "+facturaDetalle.getDocumento().getNombre());
+                System.out.println("\n--Productos--\n");
+                for(ProductoFactura pf : facturaDetalle.getProducto()){
+                    Producto producto = pf.getProducto();
+                    System.out.println(producto.getNombre()+"Cantidad: " +pf.getCantidad());
+                    System.out.println("Precio unitario: $"+producto.getPrecio());
+                    System.out.println("Subtotal: $" +pf.getSubtotal());
+                    System.out.println("Total: $" +facturaDetalle.getTotal());
                 }
             }
         }
