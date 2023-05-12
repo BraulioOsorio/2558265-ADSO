@@ -40,7 +40,7 @@ public class Factura{
         System.out.println("VENDEDOR: "+this.vendedor.getNombre());
         System.out.println("CLIENTE: "+this.cliente.getNombre());
         System.out.println("---PRODUCTOS---");
-        for(Producto producto : productos){
+        for(int i=0;i<contadoProductos;i++){
             System.out.println(producto.getNombre()+" PRECIO: "+producto.getPrecio()+" CANTIDAD "+producto.getCantidad());   
         }
     }
