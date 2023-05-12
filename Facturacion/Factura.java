@@ -21,7 +21,7 @@ public class Factura{
     }
     public double getTotal(){
         double total = 0;
-        for(Producto producto : productos){
+        for(int i=0;i<contadorFactura;i++){
             total = total + producto.getPrecio() * producto.getCantidad();
         }
         return total;
