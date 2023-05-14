@@ -110,8 +110,10 @@ public class Principal{
                     double preciosPro = entrada.nextDouble();
                     Producto producto = new Producto(nombreProducto,preciosPro);
                     ProductoFactura productFact= new ProductoFactura(producto,cantidadPro);
+                    productFact.imprimir();
                 }
-                System.out.println("TOtal Facturado: "+factura.getTotal());
+                System.out.println("Total Facturado: "+factura.getTotal());
+                System.out.println(factura.toString());
                 arrayFactura[posicionFactura]=factura;
                 posicionFactura++;
             }else if(opcion==4){

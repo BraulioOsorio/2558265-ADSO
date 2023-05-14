@@ -8,6 +8,7 @@ public class Factura{
     ProductoFactura productos[];
     int numProductos;
     Producto producto;
+    double total;
     public Factura(int id,Vendedor vendedor,Clientes cliente){
         this.id=id;
         this.vendedor = vendedor;
@@ -17,6 +18,7 @@ public class Factura{
         this.numProductos=0;
         this.id=++contadorFactura;
         this.producto=producto;
+        this.total=0;
     }
     public int getId(){
         return id;
@@ -34,7 +36,6 @@ public class Factura{
         return productos;
     }
     public double getTotal(){
-        double total = 0;
         for(int i=0;i<numProductos;i++){
             total+=productos[i].getCantidad()*producto.getPrecio();
         }
