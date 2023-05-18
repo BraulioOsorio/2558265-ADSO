@@ -3,7 +3,7 @@ public class Estadio{
     String ubicacion;
     Partido partidosJugados[];
 
-    public Estadio(){
+    public Estadio(String nombre,String ubicacion){
         this.nombre=nombre;
         this.ubicacion=ubicacion;
         this.partidosJugados=new Partido[20];
@@ -13,6 +13,9 @@ public class Estadio{
     }
     public String getUbicacion(){
         return ubicacion;
+    }
+    public void imprimir(){
+        System.out.println(this.nombre+" - "+this.ubicacion);
     }
     
 }

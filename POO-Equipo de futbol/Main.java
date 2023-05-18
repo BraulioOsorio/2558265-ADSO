@@ -7,7 +7,7 @@ public class Main{
         int jugadores=0;
         Equipo arrayEquipos[] = new Equipo[99];
         int equipos=0;
-        NuevoEquipo PasarJugador = new NuevoEquipo();
+        Procesos nuevoProceso = new Procesos();
         boolean salir=false;
         while(salir==false){
             System.out.println("     1-> Crear Jugador de Futbol");
@@ -15,9 +15,10 @@ public class Main{
             System.out.println("     3-> Cambiar Jugador de Equipo");
             System.out.println("     4-> Ver Listado de Equipos de Futbol");
             System.out.println("     5-> Ver detalle de Equipos de Futbol");
-            System.out.println("     6-> Registrar Partido");
-            System.out.println("     7-> Ver detalle de Partidos de Futbol");
-            System.out.println("     8-> Ver listado de Partidos de Futbol realizados en un Estadio");
+            System.out.println("     6-> Registrar Estadio");
+            System.out.println("     7-> Registrar Partido");
+            System.out.println("     8-> Ver detalle de Partidos de Futbol");
+            System.out.println("     9-> Ver listado de Partidos de Futbol realizados en un Estadio");
             System.out.print("Ingrese una opcion: ");
             int opcion = entrada.nextInt();
             if(opcion==1){
@@ -75,18 +76,17 @@ public class Main{
                     
                 }
             }else if(opcion==3){
-               
-              PasarJugador.nuevoEqui(arrayJugadores,arrayEquipos,jugadores,equipos);
-
+              nuevoProceso.nuevoEqui(arrayJugadores,arrayEquipos,jugadores,equipos);
             }else if(opcion==4){
                 for(int i=0;i<equipos;i++){
                     arrayEquipos[i].imprimir();
                 }
             }else if(opcion==5){
-                System.out.println("El ingeniero esta trabajando en ello");
-                for(int i=0;i<jugadores;i++){
-                    arrayJugadores[i].imprimir();
-                }
+                nuevoProceso.detalleEquipo(arrayEquipos,equipos);
+            }else if(opcion==6){
+                nuevoProceso.nuevoEstadio();
+            }else if(opcion==7){
+                nuevoProceso.registrarPartido();
             }
         }
     }
