@@ -7,6 +7,7 @@ public class Main{
         int jugadores=0;
         Equipo arrayEquipos[] = new Equipo[99];
         int equipos=0;
+        NuevoEquipo PasarJugador = new NuevoEquipo();
         boolean salir=false;
         while(salir==false){
             System.out.println("     1-> Crear Jugador de Futbol");
@@ -74,25 +75,8 @@ public class Main{
                     
                 }
             }else if(opcion==3){
-                System.out.print("Ingrese el documento del Jugador para cambiarlo de equipo: ");
-                int documento = entrada.nextInt();
-                int posicion =0;
-                for(int i=0;i<jugadores;i++){
-                    if(arrayJugadores[i].getDocumento()==documento){
-                        posicion=i;
-                    }
-                }
-                arrayJugadores[posicion].imprimir();
-                System.out.println("\nLISTA DE EQUIPOS");
-                for(int i=0;i<equipos;i++){
-                    System.out.print((i+1)+"-");
-                    arrayEquipos[i].imprimir();
-                }
-                System.out.print("ingrese el nuevo equipo del jugador");
-                int nuevoEquipo = entrada.nextInt();
-                NuevoEquipo cambiarJugador = new NuevoEquipo();
-                cambiarJugador.nuevoEqui(posicion,nuevoEquipo);
-              
+               
+              PasarJugador.nuevoEqui(arrayJugadores,arrayEquipos,jugadores,equipos);
 
             }else if(opcion==4){
                 for(int i=0;i<equipos;i++){
