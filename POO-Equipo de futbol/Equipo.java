@@ -37,7 +37,15 @@ public class Equipo{
             if(jugadoresEquipo[i]==jugador){
                 numJugadores--;
                 jugadoresEquipo[i]=null;
-                
+            }
+        }
+        for(int i=0;i<numJugadores;i++){
+            for(int j=0;j<numJugadores-1;j++){
+                if(jugadoresEquipo[j]==null){
+                    Jugadores temporal = jugadoresEquipo[j];
+                    jugadoresEquipo[j]=jugadoresEquipo[j+1];
+                    jugadoresEquipo[j+1]=temporal;
+                }
             }
         }
     }
