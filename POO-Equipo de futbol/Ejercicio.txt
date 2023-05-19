@@ -5,12 +5,12 @@ por una federación de futbol, donde se presentan las siguientes consideraciones
 	  principales como:
 	  -> Crear Jugador de Futbol--
 	  -> Crear Equipo de Futbol--
-	  -> Cambiar Jugador de Equipo-.
+	  -> Cambiar Jugador de Equipo--
 	  -> Ver Listado de Equipos de Futbol--
 	  -> Ver detalle de Equipos de Futbol--
 	  -> Registrar Estadio--
-	  -> Registrar Partido
-	  -> Ver detalle de Partidos de Futbol
+	  -> Registrar Partido--
+	  -> Ver detalle de Partidos de Futbol--
 	  -> Ver listado de Partidos de Futbol 
 	     realizados en un Estadio
 

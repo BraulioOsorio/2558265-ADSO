@@ -86,8 +86,13 @@ public class Main{
             }else if(opcion==6){
                 nuevoProceso.nuevoEstadio();
             }else if(opcion==7){
-                nuevoProceso.registrarPartido();
+                nuevoProceso.registrarPartido(arrayEquipos,equipos);
+            }else if(opcion==8){
+                nuevoProceso.detallePartido();
+            }else if(opcion==9){
+                nuevoProceso.ListaPartidosEstadio();
             }
         }
     }
 }
+        
