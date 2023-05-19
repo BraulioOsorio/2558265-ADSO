@@ -19,6 +19,7 @@ public class Main{
             System.out.println("     7-> Registrar Partido");
             System.out.println("     8-> Ver detalle de Partidos de Futbol");
             System.out.println("     9-> Ver listado de Partidos de Futbol realizados en un Estadio");
+            System.out.println("     10-> Salir");
             System.out.print("Ingrese una opcion: ");
             int opcion = entrada.nextInt();
             if(opcion==1){
@@ -63,8 +64,10 @@ public class Main{
                         break;
                     }else if(registrar==1){
                         System.out.println("\nLISTA DE JUGADORES DISPONIBLES\n");
+                        System.out.println("NOMBRE    DOCUMENTO    POSICION    EQUIPO");
                         for(int i=0;i<jugadores;i++){
                             if(arrayJugadores[i].getEquipo()==null){
+                                System.out.print((i+1)+" - ")
                                 arrayJugadores[i].imprimir();
                             }
                             
@@ -79,6 +82,7 @@ public class Main{
               nuevoProceso.nuevoEqui(arrayJugadores,arrayEquipos,jugadores,equipos);
             }else if(opcion==4){
                 for(int i=0;i<equipos;i++){
+                    System.out.print((i+1)+" - ")
                     arrayEquipos[i].imprimir();
                 }
             }else if(opcion==5){
@@ -91,6 +95,11 @@ public class Main{
                 nuevoProceso.detallePartido();
             }else if(opcion==9){
                 nuevoProceso.ListaPartidosEstadio();
+            }else if(opcion==10){
+                System.out.println("Gracias por usar el sistema :) ");
+                break;
+            }else{
+                System.out.println("Opcion invalida");
             }
         }
     }

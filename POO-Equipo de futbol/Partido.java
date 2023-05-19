@@ -37,13 +37,13 @@ public class Partido{
         this.resultado=resultado;
     }
     public void imprimirDetalle(){
-        System.out.println(this.equipoLocal+" - "+this.equipoVisitante+" - "+this.estadio+" - "+this.EquipoLresultado+" - "+this.EquipoVresultado+" - "+this.resultado);
+        System.out.println(this.equipoLocal+"    "+this.equipoVisitante+"    "+this.estadio+"    "+this.EquipoLresultado+"    "+this.EquipoVresultado+"    "+this.resultado);
     }
     public void imprimir(){
-        System.out.println(this.estadio+" - "+this.equipoLocal+" - "+this.equipoVisitante);
+        System.out.println(this.estadio+"    "+this.equipoLocal+"    "+this.equipoVisitante);
     }
     public void imprimirVS(){
-        System.out.println(this.equipoLocal+" VS "+this.equipoVisitante);
+        System.out.println(this.equipoLocal+"  VS  "+this.equipoVisitante);
     }
     
     

@@ -15,9 +15,11 @@ public class Procesos{
                     posicion=i;
                 }
             }
+            System.out.println("NOMBRE    DOCUMENTO    POSICION    EQUIPO");
             jugadores[posicion].imprimir();
             String EquipoAnterior = jugadores[posicion].getEquipo();
             System.out.println("\nLISTA DE EQUIPOS");
+            System.out.println("NOMBRE   ENTRENADOR");
             for(int i=0;i<numeroEquipos;i++){
                 System.out.print((i+1)+"-");
                 equipo[i].imprimir();
@@ -27,7 +29,6 @@ public class Procesos{
             
             jugadores[posicion].setEquipo(equipo[nuevoEquipo-1].getNombreEquipo());
             System.out.println("Jugador Cambiado con Exito");
-            jugadores[posicion].imprimir();
             equipo[nuevoEquipo-1].agregarJugador(jugadores[posicion]);
             for(int i=0;i<numeroEquipos;i++){
                 if(equipo[i].getNombreEquipo().equalsIgnoreCase(EquipoAnterior)){
@@ -38,12 +39,14 @@ public class Procesos{
     }
     public void detalleEquipo(Equipo equipo[],int numeroEquipos){
         System.out.println("Lista de equipos");
+        System.out.println("NOMBRE   ENTRENADOR");
         for(int i=0;i<numeroEquipos;i++){
             System.out.print((i+1)+" - ");
             equipo[i].imprimir();
         }
         System.out.print("\nElija un equipo por su numero: ");
         int opcion = entrada.nextInt();
+        System.out.println("NOMBRE   ENTRENADOR");
         equipo[opcion-1].imprimirDetalle();
 
     }
@@ -77,18 +80,20 @@ public class Procesos{
         }
         System.out.print("Eliga un estadio: ");
         int numeroEstadio = entrada.nextInt();
+        System.out.println("NOMBRE   UBICACION");
         arrayEstadios[numeroEstadio-1].imprimir();
+        System.out.println("NOMBRE   ENTRENADOR");
         for(int i=0;i<numeroEquipos;i++){
             System.out.print((i+1)+" - ");
             equipo[i].imprimir();
         }
-        System.out.print("Elija el equipo Local");
+        System.out.print("Elija el equipo Local: ");
         int equipoLocal = entrada.nextInt();
-        System.out.print("Elija el equipo Visitante");
+        System.out.print("Elija el equipo Visitante: ");
         int equipoVisitante = entrada.nextInt();
-        System.out.print("Goles del Equipo Local");
+        System.out.print("Goles del Equipo Local: ");
         int golesL = entrada.nextInt();
-        System.out.print("\nGoles del Equipo Visitante");
+        System.out.print("Goles del Equipo Visitante: ");
         int golesV = entrada.nextInt();
         Partido temporal = new Partido(equipo[equipoLocal-1].getNombreEquipo(),equipo[equipoVisitante-1].getNombreEquipo(),arrayEstadios[numeroEstadio-1].getNombre(),golesL,golesV);
         arrayPartidos[partidos]=temporal;
@@ -104,22 +109,26 @@ public class Procesos{
     }
     public void detallePartido(){
         System.out.println("\nLista de Partidos Realizados\n");
+        System.out.println("ESTADIO   EQUIPO LOCAL   EQUIPO VISITANTE");
         for(int i=0;i<partidos;i++){
             System.out.print((i+1)+" - ");
             arrayPartidos[i].imprimir();
         }
-        System.out.print("Elija el numero del partido del cual queire ver el detalle");
+        System.out.print("Elija el numero del partido del cual quiere ver el detalle: ");
         int detalle = entrada.nextInt();
+        System.out.println("\nEQUIPO LOCAL   EQUIPO VISITANTE    ESTADIO   GOLESL   GOLESV   GANADOR ");
         arrayPartidos[detalle-1].imprimirDetalle();
     }
     public void ListaPartidosEstadio(){
-        System.out.print("Lista de Estadios");
+        System.out.print("\nLista de Estadios\n");
+        System.out.println("NOMBRE   UBICACION");
         for(int i=0;i<estadios;i++){
             System.out.print((i+1)+" - ");
             arrayEstadios[i].imprimir();
         }
-        System.out.print("Eliga un estadio para ver los partidos realizados en el: ");
+        System.out.print("\nEliga un estadio para ver los partidos realizados en el: \n");
         int numeroEstadio = entrada.nextInt();
+        System.out.println("EQUIPO LOCAL   EQUIPO VISITANTE");
         arrayEstadios[numeroEstadio-1].PartidosEstadio();
     }
 }

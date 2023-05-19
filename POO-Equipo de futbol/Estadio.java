@@ -17,7 +17,7 @@ public class Estadio{
         return ubicacion;
     }
     public void imprimir(){
-        System.out.println(this.nombre+" - "+this.ubicacion);
+        System.out.println(this.nombre+"    "+this.ubicacion);
     }
     public void agregarPartido(Partido partidos){
         partidosJugados[numPartidos]=partidos;

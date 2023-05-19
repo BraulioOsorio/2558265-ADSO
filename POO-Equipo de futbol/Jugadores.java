@@ -38,6 +38,6 @@ public class Jugadores{
         this.equipo=equipo;
     }
     public void imprimir(){
-        System.out.println(this.nombre+" - "+this.documento+" - "+this.posicion+"--"+this.equipo);
+        System.out.println(this.nombre+"   "+this.documento+"   "+this.posicion+"   "+this.equipo);
     }
 }

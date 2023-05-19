@@ -23,14 +23,15 @@ public class Equipo{
        
     }
     public void imprimirDetalle(){
-        System.out.println(this.nombreEquipo+" - "+this.entrenador);
+        System.out.println(this.nombreEquipo+"    "+this.entrenador);
+        System.out.println("JUGADORES");
         for(int i=0;i<numJugadores;i++){
             System.out.print((i+1)+" - ");
             jugadoresEquipo[i].imprimir();
         }
     }
     public void imprimir(){
-        System.out.println(this.nombreEquipo+" - "+this.entrenador);
+        System.out.println(this.nombreEquipo+"    "+this.entrenador);
     }
     public void limpiar(Jugadores jugador){
         for(int i=0;i<numJugadores;i++){
