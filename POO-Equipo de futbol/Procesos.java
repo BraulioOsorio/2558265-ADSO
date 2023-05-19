@@ -14,6 +14,7 @@ public class Procesos{
                 }
             }
             jugadores[posicion].imprimir();
+            String EquipoAnterior = jugadores[posicion].getEquipo();
             System.out.println("\nLISTA DE EQUIPOS");
             for(int i=0;i<numeroEquipos;i++){
                 System.out.print((i+1)+"-");
@@ -26,6 +27,12 @@ public class Procesos{
             System.out.println("Jugador Cambiado con Exito");
             jugadores[posicion].imprimir();
             equipo[nuevoEquipo-1].agregarJugador(jugadores[posicion]);
+            for(int i=0;i<numeroEquipos;i++){
+                if(equipo[i].getNombreEquipo().equalsIgnoreCase(EquipoAnterior)){
+                    equipo[i].limpiar(jugadores[posicion]);
+                }
+            }
+            
     }
     public void detalleEquipo(Equipo equipo[],int numeroEquipos){
         System.out.println("Lista de equipos");

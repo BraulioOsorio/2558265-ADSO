@@ -32,6 +32,15 @@ public class Equipo{
     public void imprimir(){
         System.out.println(this.nombreEquipo+" - "+this.entrenador);
     }
+    public void limpiar(Jugadores jugador){
+        for(int i=0;i<numJugadores;i++){
+            if(jugadoresEquipo[i]==jugador){
+                numJugadores--;
+                jugadoresEquipo[i]=null;
+                
+            }
+        }
+    }
     
 
 }
