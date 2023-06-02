@@ -66,7 +66,7 @@ public class Tabla{
                 int numeroHasta = Integer.parseInt(campoHasta.getText());
                 String temporal = "";
                 for(int i=1;i<=numeroHasta;i++){
-                    temporal += numeroT+" X "+i+" = "+numeroT*i+ "\n";
+                    temporal += numeroT+" X "+i+" = "+numeroT*i+ "<br>";
                 }
                 etq_texto.setText(temporal);
                 campoNumero.setText("");
