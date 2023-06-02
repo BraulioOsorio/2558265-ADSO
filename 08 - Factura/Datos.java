@@ -13,7 +13,7 @@ public class Datos extends JFrame{
         Image icono = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_factura.png") );
         setIconImage(icono);
         setTitle("FACTURA");
-        setSize(760,970);
+        setSize(545,695);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
@@ -146,7 +146,7 @@ public class Datos extends JFrame{
         restriccion.gridwidth=2;
         restriccion.weightx=0;
         campo_cedula_vendedor.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(0,20,0,20);
+        restriccion.insets = new Insets(10,20,10,20);
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         principal.add(campo_cedula_vendedor,restriccion);
@@ -185,33 +185,11 @@ public class Datos extends JFrame{
         restriccion.fill = GridBagConstraints.BOTH;
         principal.add(campo_nombre_vendedor,restriccion);
 
-        //LINEA 8
-        JLabel direccion_vendedor = new JLabel("DIRECCION :");
-        restriccion.gridy=7;
-        restriccion.gridx=0;
-        restriccion.gridheight=1;
-        restriccion.gridwidth=1;
-        restriccion.weightx=0;
-        restriccion.weighty=0;
-        restriccion.fill = GridBagConstraints.BOTH;
-        principal.add(direccion_vendedor,restriccion);
-
-        JTextField campo_direccion_vendedor = new JTextField();
-        restriccion.gridy=7;
-        restriccion.gridx=1;
-        restriccion.gridheight=1;
-        restriccion.gridwidth=3;
-        restriccion.weightx=0;
-        restriccion.weighty=0;
-        campo_direccion_vendedor.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(10,20,10,20);
-        restriccion.fill = GridBagConstraints.BOTH;
-        principal.add(campo_direccion_vendedor,restriccion);
 
         //linea 9
         JLabel texto_lista = new JLabel("LISTA PRODUCTOS FACTURADOS:");
         texto_lista.setFont(new Font("Aril",Font.BOLD,20));
-        restriccion.gridy=8;
+        restriccion.gridy=7;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=12;
@@ -222,7 +200,7 @@ public class Datos extends JFrame{
         principal.add(texto_lista,restriccion);
         //linea 10
         JLabel ID = new JLabel("ID");
-        restriccion.gridy=9;
+        restriccion.gridy=8;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
@@ -232,7 +210,7 @@ public class Datos extends JFrame{
         principal.add(ID,restriccion);
 
         JLabel nombre_producto = new JLabel("NOMBRE");
-        restriccion.gridy=9;
+        restriccion.gridy=8;
         restriccion.gridx=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
@@ -242,7 +220,7 @@ public class Datos extends JFrame{
         principal.add(nombre_producto,restriccion);
 
         JLabel cant = new JLabel("CANT.");
-        restriccion.gridy=9;
+        restriccion.gridy=8;
         restriccion.gridx=2;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
@@ -253,7 +231,7 @@ public class Datos extends JFrame{
 
         //LINEA 11
         JTextField campo_id_producto = new JTextField();
-        restriccion.gridy=10;
+        restriccion.gridy=9;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
@@ -263,7 +241,7 @@ public class Datos extends JFrame{
         principal.add(campo_id_producto,restriccion);
 
         JTextField campo_nombre_producto = new JTextField();
-        restriccion.gridy=10;
+        restriccion.gridy=9;
         restriccion.gridx=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
@@ -275,7 +253,7 @@ public class Datos extends JFrame{
         
 
         JTextField campo_cantidad = new JTextField();
-        restriccion.gridy=10;
+        restriccion.gridy=9;
         restriccion.gridx=2;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
@@ -285,7 +263,7 @@ public class Datos extends JFrame{
         principal.add(campo_cantidad,restriccion);
 
         JButton btn3 = new JButton("ADD");
-        restriccion.gridy=10;
+        restriccion.gridy=9;
         restriccion.gridx=3;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
@@ -299,24 +277,31 @@ public class Datos extends JFrame{
         JLabel abajo = new JLabel("HELLOO");
 		abajo.setBackground( Color.WHITE );
         abajo.setOpaque(true);
-        restriccion.gridy=11;
+        abajo.setHorizontalAlignment(SwingConstants.RIGHT);
+        abajo.setVerticalAlignment(SwingConstants.TOP);
+        restriccion.gridy=10;
         restriccion.gridx=0;
-        restriccion.gridheight=0;
-        restriccion.gridwidth=0;
+        restriccion.gridheight=1;
+        restriccion.gridwidth=4;
         restriccion.weightx=0;
-        restriccion.weighty=0;
+        restriccion.weighty=1;
         restriccion.fill = GridBagConstraints.BOTH;
         principal.add(abajo,restriccion);
+
         //LINEA 13
+
         JLabel fondo = new JLabel("Total:$0");
-		fondo.setBackground( Color.BLUE );
+		fondo.setBackground( Color.WHITE );
         fondo.setOpaque(true);
-        restriccion.gridy=12;
+        fondo.setHorizontalAlignment(SwingConstants.RIGHT);
+        fondo.setVerticalAlignment(SwingConstants.TOP);
+        restriccion.gridy=11;
         restriccion.gridx=0;
-        restriccion.gridheight=0;
+        restriccion.gridheight=1;
         restriccion.gridwidth=0;
         restriccion.weightx=0;
         restriccion.weighty=0;
+        fondo.setBorder(new EmptyBorder(7,15,7,15));
         restriccion.fill = GridBagConstraints.BOTH;
         principal.add(fondo,restriccion);
         add(principal);
