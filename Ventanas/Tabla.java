@@ -9,7 +9,6 @@ public class Tabla{
         ventana.setSize(500,500);
         ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setResizable(false);
 
         JPanel contenedor = new JPanel();
         contenedor.setLayout(new BoxLayout(contenedor,BoxLayout.Y_AXIS));
@@ -68,7 +67,7 @@ public class Tabla{
                 for(int i=1;i<=numeroHasta;i++){
                     temporal += numeroT+" X "+i+" = "+numeroT*i+ "<br>";
                 }
-                etq_texto.setText(temporal);
+                etq_texto.setText("<html>"+temporal+"</html>");
                 campoNumero.setText("");
 				campoHasta.setText("");
 				numeroTabla.requestFocus();
