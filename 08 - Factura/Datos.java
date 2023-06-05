@@ -82,6 +82,8 @@ public class Datos extends JFrame{
         principal.add(nombres_clientes,restriccion);
 
         JTextField campo_nombre = new JTextField();
+        campo_nombre.setEnabled(false);
+        campo_nombre.setOpaque(false);
         restriccion.gridy=2;
         restriccion.gridx=1;
         restriccion.gridheight=1;
@@ -105,6 +107,8 @@ public class Datos extends JFrame{
         principal.add(direccion_clientes,restriccion);
 
         JTextField campo_direccion = new JTextField();
+        campo_direccion.setEnabled(false);
+        campo_direccion.setOpaque(false);
         restriccion.gridy=3;
         restriccion.gridx=1;
         restriccion.gridheight=1;
@@ -115,7 +119,24 @@ public class Datos extends JFrame{
         restriccion.insets = new Insets(10,20,10,20);
         restriccion.fill = GridBagConstraints.BOTH;
         principal.add(campo_direccion,restriccion);
+        // Evento Cliente
+        KeyListener eventoKey = new KeyListener(){
+            public void keyPressed(KeyEvent e){
+            }
 
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyChar() == '\n') {
+                    String cedula = campo_cedula.getText();
+                    Procesos procesos = new Procesos();
+                    String resultado = procesos.clientesExistentes(cedula);
+                    campo_nombre.setText(resultado);
+                }
+            }
+
+            public void keyTyped(KeyEvent e){
+            }
+        };
+        campo_cedula.addKeyListener( eventoKey ); 
         //linea 5
         JLabel texto_inicial_abajo = new JLabel("DATOS VENDEDOR:");
         texto_inicial_abajo.setFont(new Font("Aril",Font.BOLD,20));
