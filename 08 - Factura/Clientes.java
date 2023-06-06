@@ -13,7 +13,11 @@ public class Clientes {
         return cedula;
     }
 
-    public String getimprimirClientes() {
-        return this.cedula + " " + this.nombre + " " + this.direccion;
+    public String getNombreCliente(){
+        return nombre;
+    }
+
+    public String getDirrecion(){
+        return direccion;
     }
 }
