@@ -449,7 +449,20 @@ public class Datos extends JFrame{
                 campo_id_producto.setOpaque(true);
 			}
 		};
-		btn2.addActionListener( buscarvendedor );
+		btn3.addActionListener( buscarvendedor );
+
+         ActionListener agregarProducto = new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				int cantidad = Integer.parseInt(campo_cantidad.getText());
+                String idProducto = campo_id_producto.getText();
+                Procesos procesos = new Procesos();
+                int resultado = procesos.CalculoPrecio(idProducto);
+                int precioFinal = resultado * cantidad;
+                String precioStrin = Integer.toString(precioFinal);
+                abajo.setText(cantidad+" "+campo_nombre_producto+"  $"+precioStrin);
+			}
+		};
+		btn3.addActionListener( agregarProducto );
 
 
         

@@ -23,11 +23,11 @@ public class Procesos{
         arrayClientes[8] = clientes9;
         arrayClientes[9] = clientes10;
 
-        Productos Productos1 = new Productos("1010", "Leche");
-        Productos Productos2 = new Productos("1011", "Carne 1Kg");
-        Productos Productos3 = new Productos("1012", "Carne 1Lb");
-        Productos Productos4 = new Productos("1013", "Jabon Barra");
-        Productos Productos5 = new Productos("1014", "Detergente 1Kg");
+        Productos Productos1 = new Productos("1010", "Leche",1500);
+        Productos Productos2 = new Productos("1011", "Carne 1Kg",15550);
+        Productos Productos3 = new Productos("1012", "Carne 1Lb",7060);
+        Productos Productos4 = new Productos("1013", "Jabon Barra",3800);
+        Productos Productos5 = new Productos("1014", "Detergente 1Kg",20890);
         arrayProductos[0] = Productos1;
         arrayProductos[1] = Productos2;
         arrayProductos[2] = Productos3;
@@ -63,6 +63,20 @@ public class Procesos{
         }
 
         return resultado;
+    }
+
+    public int CalculoPrecio(String codigo){
+        int resultado = 0;
+        for (int i = 0; i < 5; i++) {
+            if ( arrayProductos[i].getIdProducto().equals(codigo)) {
+                resultado = arrayProductos[i].getPrecio();
+                break; 
+            }
+        }
+        return resultado;
+        
+
+
     }
 
 
