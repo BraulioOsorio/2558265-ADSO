@@ -8,10 +8,14 @@ import java.util.Currency;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 public class Datos extends JFrame{
+    String guardaDetalle;
+    int totalTotal;
     public Datos(){
         initComponents();
     }
     public void initComponents(){
+        guardaDetalle = "";
+        totalTotal = 0;
         Image icono = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_factura.png") );
         setIconImage(icono);
         setTitle("FACTURA");
@@ -298,6 +302,8 @@ public class Datos extends JFrame{
         //linea 12
 
         JLabel abajo = new JLabel("....");
+        JScrollPane scrollPane = new JScrollPane(abajo);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		abajo.setBackground( Color.WHITE );
         abajo.setOpaque(true);
         abajo.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -311,7 +317,7 @@ public class Datos extends JFrame{
         restriccion.weightx=0;
         restriccion.weighty=1;
         restriccion.fill = GridBagConstraints.BOTH;
-        principal.add(abajo,restriccion);
+        principal.add(scrollPane,restriccion);
 
         //LINEA 13
 
@@ -449,17 +455,27 @@ public class Datos extends JFrame{
                 campo_id_producto.setOpaque(true);
 			}
 		};
-		btn3.addActionListener( buscarvendedor );
+		btn2.addActionListener( buscarvendedor );
 
          ActionListener agregarProducto = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+                
 				int cantidad = Integer.parseInt(campo_cantidad.getText());
                 String idProducto = campo_id_producto.getText();
                 Procesos procesos = new Procesos();
                 int resultado = procesos.CalculoPrecio(idProducto);
                 int precioFinal = resultado * cantidad;
+                totalTotal = totalTotal + precioFinal;
                 String precioStrin = Integer.toString(precioFinal);
-                abajo.setText(cantidad+" "+campo_nombre_producto+"  $"+precioStrin);
+                guardaDetalle += cantidad+":   "+campo_nombre_producto.getText()+"  $"+precioStrin+"<hr>"+"<br>";
+                abajo.setText("<html>"+guardaDetalle+"</html>");
+                String totall =Integer.toString(totalTotal);
+                fondo.setText("Total:$"+totall);
+                campo_nombre_producto.setText("");
+                campo_cantidad.setText("");
+                campo_id_producto.setText("");
+
+
 			}
 		};
 		btn3.addActionListener( agregarProducto );
