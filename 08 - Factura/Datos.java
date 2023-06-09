@@ -424,6 +424,33 @@ public class Datos extends JFrame{
             }
         });
 
+        ActionListener buscarCliente = new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				String cedula = campo_cedula.getText();
+                Procesos procesos = new Procesos();
+                ClienteExistente resultado = procesos.clientesExistentes(cedula);
+                campo_nombre.setText(resultado.getNombre());
+                campo_direccion.setText(resultado.getDireccion());
+                campo_cedula_vendedor.requestFocus();
+			}
+		};
+		btn1.addActionListener( buscarCliente );
+
+        ActionListener buscarvendedor = new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				String cedula = campo_cedula_vendedor.getText();
+                Procesos procesos = new Procesos();
+                String resultado = procesos.VendedoresExistentes(cedula);
+                campo_nombre_vendedor.setText(resultado);
+                campo_id_producto.requestFocus();
+                campo_cantidad.setEnabled(true);
+                campo_id_producto.setEnabled(true);
+                campo_cantidad.setOpaque(true);
+                campo_id_producto.setOpaque(true);
+			}
+		};
+		btn2.addActionListener( buscarvendedor );
+
 
         
     }
