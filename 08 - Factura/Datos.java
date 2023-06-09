@@ -302,8 +302,10 @@ public class Datos extends JFrame{
         //linea 12
 
         JLabel abajo = new JLabel("....");
+        abajo.setFont(new Font("Aril",Font.PLAIN,15));
         JScrollPane scrollPane = new JScrollPane(abajo);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setBorder(null);
 		abajo.setBackground( Color.WHITE );
         abajo.setOpaque(true);
         abajo.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -401,9 +403,37 @@ public class Datos extends JFrame{
             public void keyTyped(KeyEvent e) {
             }
         };
+        KeyListener cantiKey = new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+            }
+
+            public void keyReleased(KeyEvent e) {
+                if (e.getKeyChar() == '\n') {
+                    int cantidad = Integer.parseInt(campo_cantidad.getText());
+                    String idProducto = campo_id_producto.getText();
+                    Procesos procesos = new Procesos();
+                    int resultado = procesos.CalculoPrecio(idProducto);
+                    int precioFinal = resultado * cantidad;
+                    totalTotal = totalTotal + precioFinal;
+                    String precioStrin = Integer.toString(precioFinal);
+                    guardaDetalle += cantidad+":   "+campo_nombre_producto.getText()+"  $"+precioStrin+"<hr>"+"<br>";
+                    abajo.setText("<html>"+guardaDetalle+"</html>");
+                    String totall =Integer.toString(totalTotal);
+                    fondo.setText("Total:$"+totall);
+                    campo_nombre_producto.setText("");
+                    campo_cantidad.setText("");
+                    campo_id_producto.setText("");
+                    campo_id_producto.requestFocus();
+                }
+            }
+
+            public void keyTyped(KeyEvent e) {
+            }
+        };
         campo_cedula_vendedor.addKeyListener( vendedorKey ); 
         campo_cedula.addKeyListener( eventoKey ); 
         campo_id_producto.addKeyListener( idKey ); 
+        campo_cantidad.addKeyListener( cantiKey ); 
 
         campo_id_producto.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
@@ -459,7 +489,6 @@ public class Datos extends JFrame{
 
          ActionListener agregarProducto = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-                
 				int cantidad = Integer.parseInt(campo_cantidad.getText());
                 String idProducto = campo_id_producto.getText();
                 Procesos procesos = new Procesos();
@@ -467,15 +496,14 @@ public class Datos extends JFrame{
                 int precioFinal = resultado * cantidad;
                 totalTotal = totalTotal + precioFinal;
                 String precioStrin = Integer.toString(precioFinal);
-                guardaDetalle += cantidad+":   "+campo_nombre_producto.getText()+"  $"+precioStrin+"<hr>"+"<br>";
+                guardaDetalle += cantidad+":"+campo_nombre_producto.getText()+"  $"+precioStrin+"<hr>"+"<br>";
                 abajo.setText("<html>"+guardaDetalle+"</html>");
                 String totall =Integer.toString(totalTotal);
                 fondo.setText("Total:$"+totall);
                 campo_nombre_producto.setText("");
                 campo_cantidad.setText("");
                 campo_id_producto.setText("");
-
-
+                campo_id_producto.requestFocus();
 			}
 		};
 		btn3.addActionListener( agregarProducto );
