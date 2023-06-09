@@ -1,6 +1,5 @@
 public class Procesos{
-    Clientes arrayClientes[] = new Clientes[5];
-    Vendedores arrayVendedores[] = new Vendedores[5];
+    Clientes arrayClientes[] = new Clientes[10];
     Productos arrayProductos[] = new Productos[5];
     public Procesos(){
         Clientes cliente1 = new Clientes("108800", "Oscar Loaiza", "Calle 20");
@@ -8,22 +7,21 @@ public class Procesos{
         Clientes cliente3 = new Clientes("108802", "Juan Lopez", "Calle 18");
         Clientes cliente4 = new Clientes("108803", "Catalina Mendez", "Calle 17");
         Clientes cliente5 = new Clientes("108804", "Andres Lopez", "Calle 16");
+        Clientes clientes6 = new Clientes("109900", "Juan Castillo", "calle 1");
+        Clientes clientes7 = new Clientes("109901", "Ana Segura", "calle 10");
+        Clientes clientes8 = new Clientes("109902", "Julian Perez", "calle 11");
+        Clientes clientes9 = new Clientes("109903", "Carolina Tobon", "calle 12");
+        Clientes clientes10 = new Clientes("109904", "Carlos Perez", "calle 13");
         arrayClientes[0] = cliente1;
         arrayClientes[1] = cliente2;
         arrayClientes[2] = cliente3;
         arrayClientes[3] = cliente4;
         arrayClientes[4] = cliente5;
-
-        Vendedores Vendedores1 = new Vendedores("109900", "Juan Castillo");
-        Vendedores Vendedores2 = new Vendedores("109901", "Ana Segura");
-        Vendedores Vendedores3 = new Vendedores("109902", "Julian Perez");
-        Vendedores Vendedores4 = new Vendedores("109903", "Carolina Tobon");
-        Vendedores Vendedores5 = new Vendedores("109904", "Carlos Perez");
-        arrayVendedores[0] = Vendedores1;
-        arrayVendedores[1] = Vendedores2;
-        arrayVendedores[2] = Vendedores3;
-        arrayVendedores[3] = Vendedores4;
-        arrayVendedores[4] = Vendedores5;
+        arrayClientes[5] = clientes6;
+        arrayClientes[6] = clientes7;
+        arrayClientes[7] = clientes8;
+        arrayClientes[8] = clientes9;
+        arrayClientes[9] = clientes10;
 
         Productos Productos1 = new Productos("1010", "Leche");
         Productos Productos2 = new Productos("1011", "Carne 1Kg");
@@ -42,7 +40,7 @@ public class Procesos{
         String nombreC = "";
         String direccionC = "";
         
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             if (arrayClientes[i].getNumcedula().equals(Numcedula)) {
                 nombreC = arrayClientes[i].getNombreCliente();
                 direccionC = arrayClientes[i].getDirrecion();
@@ -52,19 +50,6 @@ public class Procesos{
         
         ClienteExistente clienteExistente = new ClienteExistente(nombreC, direccionC);
         return clienteExistente;
-    }
-
-    public String VendedoresExistentes(String Numcedula) {    
-        String resultado = "";
-        
-        for (int i = 0; i < 5; i++) {
-            if (arrayVendedores[i].getNumcedula().equals(Numcedula)) {
-                resultado = arrayVendedores[i].getNombreVendedor();
-                break; 
-            }
-        }
-
-        return resultado;
     }
 
     public String ProductosExistentes(String codigo) {    

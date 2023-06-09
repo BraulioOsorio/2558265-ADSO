@@ -366,8 +366,8 @@ public class Datos extends JFrame{
                 if (e.getKeyChar() == '\n') {
                     String cedula = campo_cedula_vendedor.getText();
                     Procesos procesos = new Procesos();
-                    String resultado = procesos.VendedoresExistentes(cedula);
-                    campo_nombre_vendedor.setText(resultado);
+                    ClienteExistente resultado = procesos.clientesExistentes(cedula);
+                    campo_nombre_vendedor.setText(resultado.getNombre());
                     campo_id_producto.requestFocus();
                     campo_cantidad.setEnabled(true);
                     campo_id_producto.setEnabled(true);
@@ -440,8 +440,8 @@ public class Datos extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				String cedula = campo_cedula_vendedor.getText();
                 Procesos procesos = new Procesos();
-                String resultado = procesos.VendedoresExistentes(cedula);
-                campo_nombre_vendedor.setText(resultado);
+                ClienteExistente resultado = procesos.clientesExistentes(cedula);
+                campo_nombre_vendedor.setText(resultado.getNombre());
                 campo_id_producto.requestFocus();
                 campo_cantidad.setEnabled(true);
                 campo_id_producto.setEnabled(true);
