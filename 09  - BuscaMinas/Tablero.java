@@ -4,12 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.LayoutManager;
 import java.util.Currency;
-import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 public class Tablero extends JFrame{
-    String guardaDetalle;
-    int totalTotal;
     int Interno[][];
+    JButton Tablero[][];
+    JButton btn1;
     public Tablero(){
         initComponents();
     }
@@ -43,9 +42,10 @@ public class Tablero extends JFrame{
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         principal.add(minas,restriccion);
+
         Image caritaFeliz = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_happy.png"));
         caritaFeliz = caritaFeliz.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-        JButton btn1 = new JButton();
+        btn1 = new JButton();
         btn1.setIcon(new ImageIcon(caritaFeliz));
         restriccion.insets = new Insets(0,0,2,0);
         restriccion.gridy=0;
@@ -232,10 +232,14 @@ public class Tablero extends JFrame{
         restriccion.fill = GridBagConstraints.BOTH;
         principal.add(tiempo,restriccion);
 
-        JButton Tablero[][] = new JButton[9][9];
+        Image img_blanco = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_espacio.png"));
+        img_blanco = img_blanco.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        Tablero = new JButton[9][9];
         for(int i =0; i <9 ; i++){
             for(int j =0; j<9;j++){
-                Tablero[i][j]= new JButton();
+                this.Tablero[i][j] = new JButton();
+                this.Tablero[i][j].setIcon( new ImageIcon(img_blanco) );
+                this.Tablero[i][j].setFocusable(false);
                 restriccion.insets = new Insets(0,0,0,0);
                 restriccion.gridy=(i+1);
                 restriccion.gridx=j;
@@ -243,6 +247,8 @@ public class Tablero extends JFrame{
                 restriccion.gridwidth=1;
                 restriccion.weightx=1;
                 restriccion.weighty=1;
+                
+                
                 restriccion.fill = GridBagConstraints.BOTH;
                 principal.add(Tablero[i][j],restriccion);
 
@@ -257,15 +263,58 @@ public class Tablero extends JFrame{
 
             }
         }
-    
         add(principal);
         setVisible(true);
         
     }
 
     public void destaparCasilla(int columna, int fila){
-        System.out.println("has dado clik en "+fila+"-"+columna);
+        if(Interno[fila][columna]==9){
+            Image img_mina = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_bomba.png"));
+            img_mina = img_mina.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            this.Tablero[fila][columna].setDisabledIcon(new ImageIcon(img_mina));
+            this.Tablero[fila][columna].setEnabled(false);
+            DestaparTodo();
+        }else if(Interno[fila][columna]>=1 && Interno[fila][columna]<=8){
+            int numeroCasilla = Interno[fila][columna];
+            Image img_numero = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_num_"+numeroCasilla+".png"));
+            img_numero = img_numero.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            this.Tablero[fila][columna].setDisabledIcon(new ImageIcon(img_numero));
+            this.Tablero[fila][columna].setEnabled(false);
+        }else if(Interno[fila][columna]==0){
+            Image img_blanco = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_espacio.png"));
+            img_blanco = img_blanco.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            this.Tablero[fila][columna].setDisabledIcon(new ImageIcon(img_blanco));
+            this.Tablero[fila][columna].setEnabled(false);
+        }
+
     }
+    public void DestaparTodo(){
+        Image caritaTrite = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_triste.png"));
+        caritaTrite = caritaTrite.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+        btn1.setIcon(new ImageIcon(caritaTrite));
+        for(int i =0; i <9 ; i++){
+            for(int j =0; j<9;j++){
+                if(Interno[i][j]==9){
+                    Image img_mina = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_bomba.png"));
+                    img_mina = img_mina.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+                    this.Tablero[i][j].setDisabledIcon(new ImageIcon(img_mina));
+                    this.Tablero[i][j].setEnabled(false);
 
-
+                }else if(Interno[i][j]>=1 && Interno[i][j]<=8){
+                    int numeroCasilla = Interno[i][j];
+                    Image img_numero = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_num_"+numeroCasilla+".png"));
+                    img_numero = img_numero.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+                    this.Tablero[i][j].setDisabledIcon(new ImageIcon(img_numero));
+                    this.Tablero[i][j].setEnabled(false);
+                }else if(Interno[i][j]==0){
+                    Image img_blanco = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_espacio.png"));
+                    img_blanco = img_blanco.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+                    this.Tablero[i][j].setDisabledIcon(new ImageIcon(img_blanco));
+                    this.Tablero[i][j].setEnabled(false);
+                }
+            }
+                
+        }
+    }
 }
