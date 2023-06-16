@@ -69,7 +69,145 @@ public class Tablero extends JFrame{
             }
 
         }
-
+         for(int i =0; i <9 ; i++){
+            for(int j =0; j<9;j++){
+                if(Interno[i][j]==0){
+                    int numero = 0;
+                    if(i==0 && j==0){
+                        if(Interno[i][j+1]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j+1]==9){
+                            numero++;
+                        }
+                    }else if(i==0 && j==8){
+                        if(Interno[i][j-1]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j-1]==9){
+                            numero++;
+                        }
+                    }else if(i==8 && j==0){
+                        if(Interno[i-1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i-1][j+1]==9){
+                            numero++;
+                        }
+                        if(Interno[i][j+1]==9){
+                            numero++;
+                        }
+                    }else if(i==8 && j==8){
+                        if(Interno[i-1][j-1]==9){
+                            numero++;
+                        }
+                        if(Interno[i-1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i][j-1]==9){
+                            numero++;
+                        }
+                    }else if(i==8){
+                        if(Interno[i][j-1]==9){
+                            numero++;
+                        }
+                        if(Interno[i][j+1]==9){
+                            numero++;
+                        }
+                        if(Interno[i-1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i-1][j-1]==9){
+                            numero++;
+                        }
+                        if(Interno[i-1][j+1]==9){
+                            numero++;
+                        }
+                    }else if(i==0){
+                        if(Interno[i][j-1]==9){
+                            numero++;
+                        }
+                        if(Interno[i][j+1]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j+1]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j-1]==9){
+                            numero++;
+                        }
+                    }else if(j==8){
+                        if(Interno[i-1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i][j-1]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i-1][j-1]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j-1]==9){
+                            numero++;
+                        }
+                    }else if(j==0){
+                        if(Interno[i-1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i][j+1]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j+1]==9){
+                            numero++;
+                        }
+                        if(Interno[i-1][j+1]==9){
+                            numero++;
+                        }
+                    }else{
+                        if(Interno[i][j-1]==9){
+                            numero++;
+                        }
+                        if(Interno[i][j+1]==9){
+                            numero++;
+                        }
+                        if(Interno[i-1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j+1]==9){
+                            numero++;
+                        }
+                        if(Interno[i+1][j-1]==9){
+                            numero++;
+                        }
+                        if(Interno[i-1][j+1]==9){
+                            numero++;
+                        }
+                        if(Interno[i-1][j-1]==9){
+                            numero++;
+                        }
+                    }
+                    Interno[i][j]=numero;
+                }
+            }
+        }
+        
         System.out.println(bombasPlantadas);
         for(int i =0; i <9 ; i++){
             for(int j =0; j<9;j++){
