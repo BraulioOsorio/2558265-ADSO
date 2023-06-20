@@ -11,6 +11,13 @@ public class Tablero extends JFrame{
     JButton btn1;
     public Tablero(){
         initComponents();
+         ActionListener otraVEz = new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        Tablero pepe = new Tablero();
+                    }   
+                };
+                btn1.addActionListener(otraVEz);
+        
     }
     public void initComponents(){
         Image icono = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_bomba.png") );
