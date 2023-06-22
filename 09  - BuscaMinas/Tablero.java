@@ -5,18 +5,26 @@ import java.awt.event.*;
 import java.awt.LayoutManager;
 import java.util.Currency;
 import javax.swing.event.DocumentListener;
+import javax.swing.Timer;
 public class Tablero extends JFrame{
     int Interno[][];
     JButton Tablero[][];
     JButton btn1;
+    JLabel tiempo;
+    Timer timer;
+    int numeroCasillaDestapadas;
+    JLabel minas;
+    int minasRestantes;
     public Tablero(){
         initComponents();
          ActionListener otraVEz = new ActionListener(){
-                    public void actionPerformed(ActionEvent e){
-                        Tablero pepe = new Tablero();
-                    }   
-                };
-                btn1.addActionListener(otraVEz);
+            public void actionPerformed(ActionEvent e){
+                dispose(); 
+                Tablero pepe = new Tablero();
+            }   
+        };
+        btn1.addActionListener(otraVEz);
+        this.minasRestantes=20;
         
     }
     public void initComponents(){
@@ -34,7 +42,7 @@ public class Tablero extends JFrame{
         principal.setBorder(new EmptyBorder(15,15,15,15));
 
         GridBagConstraints restriccion = new GridBagConstraints();
-        JLabel minas = new JLabel("020");
+        minas = new JLabel("20");
         minas.setFont(new Font("Aril",Font.PLAIN,30));
         minas.setOpaque(true);
         minas.setForeground( Color.RED);
@@ -223,7 +231,7 @@ public class Tablero extends JFrame{
             System.out.println();
         }
 
-        JLabel tiempo = new JLabel("000");
+        tiempo = new JLabel("000");
         tiempo.setFont(new Font("Aril",Font.PLAIN,30));
         restriccion.insets = new Insets(0,0,2,10);
         tiempo.setOpaque(true);
@@ -238,7 +246,6 @@ public class Tablero extends JFrame{
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         principal.add(tiempo,restriccion);
-
         Image img_blanco = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_espacio.png"));
         img_blanco = img_blanco.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         Tablero = new JButton[9][9];
@@ -261,12 +268,15 @@ public class Tablero extends JFrame{
 
                 final int fila=i;
                 final int columna=j;
+                numeroCasillaDestapadas=0;
                 ActionListener evento = new ActionListener(){
                     public void actionPerformed(ActionEvent e){
                         destaparCasilla(columna, fila);
+                        
                     }
                 };
                 Tablero[i][j].addActionListener(evento);
+                Tablero[i][j].addMouseListener(new MiMouseListener(columna, fila,Tablero));
 
             }
         }
@@ -274,13 +284,56 @@ public class Tablero extends JFrame{
         setVisible(true);
         
     }
+    public class MiMouseListener extends MouseAdapter {
+        int columna;
+        int fila;
+        JButton[][] tablero;
 
+        public MiMouseListener(int columna, int fila,JButton[][] tablero) {
+            this.columna = columna;
+            this.fila = fila;
+            this.tablero = tablero;
+        }
+        public void mouseClicked(MouseEvent e) {
+            if (e.getButton() == MouseEvent.BUTTON3) {
+                System.out.println("Clic derecho del mouse detectado en la columna"+columna+" fila "+fila+" m"+minasRestantes);
+                if(Interno[fila][columna]==9){
+                    
+                    minasRestantes=minasRestantes-1;
+                    String restantes = Integer.toString(minasRestantes);
+                    Image img_bandera = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_bandera.png"));
+                    img_bandera = img_bandera.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+                    this.tablero[fila][columna].setDisabledIcon(new ImageIcon(img_bandera));
+                    this.tablero[fila][columna].setEnabled(false);
+                    minas.setText(restantes);
+                }
+                tiempo();
+            }
+        }
+    }
+    public void tiempo(){
+        if(numeroCasillaDestapadas==0){
+            numeroCasillaDestapadas=numeroCasillaDestapadas+1;
+            int delay = 1000;
+            timer = new Timer(delay, new ActionListener() {
+                int segundos = 0;
+                public void actionPerformed(ActionEvent e) {
+                    segundos++;
+                    tiempo.setText(String.format("%03d", segundos));
+                }
+            });
+
+            timer.start();
+        }
+    }
     public void destaparCasilla(int columna, int fila){
+        tiempo();
         if(Interno[fila][columna]==9){
             Image img_mina = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_bomba.png"));
             img_mina = img_mina.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
             this.Tablero[fila][columna].setDisabledIcon(new ImageIcon(img_mina));
             this.Tablero[fila][columna].setEnabled(false);
+            timer.stop();
             DestaparTodo();
         }else if(Interno[fila][columna]>=1 && Interno[fila][columna]<=8){
             int numeroCasilla = Interno[fila][columna];
