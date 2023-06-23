@@ -16,14 +16,16 @@ public class Tablero extends JFrame{
     JLabel tiempo;
     Timer timer;
     int numeroCasillaDestapadas;
+    int numeroTotalDeCasillasDestapar;
     JLabel minas;
     int minasRestantes;
     public Tablero(){
         initComponents();
          ActionListener otraVEz = new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                dispose(); 
+                
                 Tablero pepe = new Tablero();
+                dispose(); 
             }   
         };
         btn1.addActionListener(otraVEz);
@@ -60,7 +62,7 @@ public class Tablero extends JFrame{
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         principal.add(minas,restriccion);
-
+        
         Image caritaFeliz = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_happy.png"));
         caritaFeliz = caritaFeliz.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         btn1 = new JButton();
@@ -75,7 +77,7 @@ public class Tablero extends JFrame{
         btn1.setBorder(new EmptyBorder(10,10,10,10));
         restriccion.fill = GridBagConstraints.NORTH;
         principal.add(btn1,restriccion);
-
+        
         Interno = new int[9][9];
         int bombasPlantadas = 0;
         while (bombasPlantadas < 20){
@@ -87,146 +89,34 @@ public class Tablero extends JFrame{
             }
 
         }
-         for(int i =0; i <9 ; i++){
-            for(int j =0; j<9;j++){
-                if(Interno[i][j]==0){
-                    int numero = 0;
-                    if(i==0 && j==0){
-                        if(Interno[i][j+1]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j+1]==9){
-                            numero++;
-                        }
-                    }else if(i==0 && j==8){
-                        if(Interno[i][j-1]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j-1]==9){
-                            numero++;
-                        }
-                    }else if(i==8 && j==0){
-                        if(Interno[i-1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i-1][j+1]==9){
-                            numero++;
-                        }
-                        if(Interno[i][j+1]==9){
-                            numero++;
-                        }
-                    }else if(i==8 && j==8){
-                        if(Interno[i-1][j-1]==9){
-                            numero++;
-                        }
-                        if(Interno[i-1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i][j-1]==9){
-                            numero++;
-                        }
-                    }else if(i==8){
-                        if(Interno[i][j-1]==9){
-                            numero++;
-                        }
-                        if(Interno[i][j+1]==9){
-                            numero++;
-                        }
-                        if(Interno[i-1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i-1][j-1]==9){
-                            numero++;
-                        }
-                        if(Interno[i-1][j+1]==9){
-                            numero++;
-                        }
-                    }else if(i==0){
-                        if(Interno[i][j-1]==9){
-                            numero++;
-                        }
-                        if(Interno[i][j+1]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j+1]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j-1]==9){
-                            numero++;
-                        }
-                    }else if(j==8){
-                        if(Interno[i-1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i][j-1]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i-1][j-1]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j-1]==9){
-                            numero++;
-                        }
-                    }else if(j==0){
-                        if(Interno[i-1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i][j+1]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j+1]==9){
-                            numero++;
-                        }
-                        if(Interno[i-1][j+1]==9){
-                            numero++;
-                        }
-                    }else{
-                        if(Interno[i][j-1]==9){
-                            numero++;
-                        }
-                        if(Interno[i][j+1]==9){
-                            numero++;
-                        }
-                        if(Interno[i-1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j+1]==9){
-                            numero++;
-                        }
-                        if(Interno[i+1][j-1]==9){
-                            numero++;
-                        }
-                        if(Interno[i-1][j+1]==9){
-                            numero++;
-                        }
-                        if(Interno[i-1][j-1]==9){
-                            numero++;
+        for (int fila = 0; fila < 9; fila++) {
+            for (int columna = 0; columna < 9; columna++) {
+                if (Interno[fila][columna] != 9) {
+                    int contadorBombas = 0;
+                    for (int i = -1; i <= 1; i++) {
+                        for (int j = -1; j <= 1; j++) {
+                            int filaVecina = fila + i;
+                            int columnaVecina = columna + j;
+                            if (filaVecina >= 0 && filaVecina < 9 && columnaVecina >= 0 && columnaVecina < 9) {
+                                if (Interno[filaVecina][columnaVecina] == 9) {
+                                    contadorBombas++;
+                                }
+                            }
                         }
                     }
-                    Interno[i][j]=numero;
+                    Interno[fila][columna] = contadorBombas;
                 }
             }
         }
-        
-        System.out.println(bombasPlantadas);
+         
+        System.out.println("");
+        for(int i =0; i <9 ; i++){
+            for(int j =0; j<9;j++){
+                if(Interno[i][j]!=9){
+                    numeroTotalDeCasillasDestapar++;
+                }
+            }
+        }
         for(int i =0; i <9 ; i++){
             for(int j =0; j<9;j++){
                 System.out.print("["+Interno[i][j]+"]");
@@ -340,7 +230,6 @@ public class Tablero extends JFrame{
 
     public void tiempo(){
         if(numeroCasillaDestapadas==0){
-            numeroCasillaDestapadas=numeroCasillaDestapadas+1;
             int delay = 1000;
             timer = new Timer(delay, new ActionListener() {
                 int segundos = 0;
@@ -363,12 +252,15 @@ public class Tablero extends JFrame{
             timer.stop();
             DestaparTodo();
         }else if(Interno[fila][columna]>=1 && Interno[fila][columna]<=8){
+            numeroCasillaDestapadas=numeroCasillaDestapadas+1;
             int numeroCasilla = Interno[fila][columna];
             Image img_numero = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_num_"+numeroCasilla+".png"));
             img_numero = img_numero.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
             this.Tablero[fila][columna].setDisabledIcon(new ImageIcon(img_numero));
             this.Tablero[fila][columna].setEnabled(false);
+            
         }else if(Interno[fila][columna]==0){
+            numeroCasillaDestapadas=numeroCasillaDestapadas+1;
             Image img_blanco = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_espacio.png"));
             img_blanco = img_blanco.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
             this.Tablero[fila][columna].setDisabledIcon(new ImageIcon(img_blanco));
