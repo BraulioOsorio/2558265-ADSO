@@ -6,6 +6,9 @@ import java.awt.LayoutManager;
 import java.util.Currency;
 import javax.swing.event.DocumentListener;
 import javax.swing.Timer;
+import javax.swing.plaf.basic.BasicButtonUI;
+import java.lang.reflect.Field;
+
 public class Tablero extends JFrame{
     int Interno[][];
     JButton Tablero[][];
@@ -284,33 +287,57 @@ public class Tablero extends JFrame{
         setVisible(true);
         
     }
+
     public class MiMouseListener extends MouseAdapter {
         int columna;
         int fila;
         JButton[][] tablero;
+        Icon iconoBandera;
+        Icon iconoBlanco;
 
         public MiMouseListener(int columna, int fila,JButton[][] tablero) {
             this.columna = columna;
             this.fila = fila;
             this.tablero = tablero;
+
+            Image img_bandera = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_bandera.png"));
+            img_bandera = img_bandera.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            this.iconoBandera = new ImageIcon(img_bandera);
+
+            Image img_blanco = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_espacio.png"));
+            img_blanco = img_blanco.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            this.iconoBlanco = new ImageIcon(img_blanco);
         }
         public void mouseClicked(MouseEvent e) {
             if (e.getButton() == MouseEvent.BUTTON3) {
                 System.out.println("Clic derecho del mouse detectado en la columna"+columna+" fila "+fila+" m"+minasRestantes);
-                if(Interno[fila][columna]==9){
-                    
+                if(this.tablero[fila][columna].isEnabled() && validarSinBandera()){
                     minasRestantes=minasRestantes-1;
                     String restantes = Integer.toString(minasRestantes);
-                    Image img_bandera = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_bandera.png"));
-                    img_bandera = img_bandera.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
-                    this.tablero[fila][columna].setDisabledIcon(new ImageIcon(img_bandera));
-                    this.tablero[fila][columna].setEnabled(false);
                     minas.setText(restantes);
+                    this.tablero[fila][columna].setDisabledIcon(this.iconoBandera);
+                    this.tablero[fila][columna].setEnabled(false);
+                }else if(!validarSinBandera()){
+                    minasRestantes=minasRestantes+1;
+                    String restantes = Integer.toString(minasRestantes);
+                    minas.setText(restantes);
+                    this.tablero[fila][columna].setDisabledIcon(this.iconoBlanco);
+                    this.tablero[fila][columna].setEnabled(true);
                 }
                 tiempo();
             }
         }
+
+        public boolean validarSinBandera(){
+            Icon disabledIcon = this.tablero[fila][columna].getDisabledIcon();
+            
+            if (disabledIcon.equals(this.iconoBandera)) {
+                return false;
+            }
+            return true;
+        }
     }
+
     public void tiempo(){
         if(numeroCasillaDestapadas==0){
             numeroCasillaDestapadas=numeroCasillaDestapadas+1;
