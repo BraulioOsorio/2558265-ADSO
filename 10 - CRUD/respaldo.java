@@ -130,8 +130,15 @@ public class respaldo extends JFrame{
 				ModificarInterfaz vamo = new ModificarInterfaz();
 			}
 		};
+        ActionListener EliminarUsuario = new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+                dispose();
+				EliminarInterfaz vamo = new EliminarInterfaz();
+			}
+		};
         btn1.addActionListener( crearUsuario );
 		btn2.addActionListener( ModificarUsuario );
+        btn3.addActionListener( EliminarUsuario );
         
     }
 

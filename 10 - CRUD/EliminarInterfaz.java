@@ -9,14 +9,17 @@ import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.lang.reflect.Field;
 
-public class ModificarInterfaz extends JFrame{
+public class EliminarInterfaz extends JFrame{
 
-    public ModificarInterfaz(){
+    public EliminarInterfaz(){
         initComponents();
     }
     public void initComponents(){
         Color azulOscuro = new Color(0, 5, 118);
         Color raro = new Color(140, 140, 255);
+        Color inputEliminar = new Color(128, 120, 87);
+        
+
         Image icono = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_almacenes.png") );
         setIconImage(icono);
         setTitle("Usuarios");
@@ -36,7 +39,7 @@ public class ModificarInterfaz extends JFrame{
         texto_menu.setBackground(azulOscuro);
         texto_menu.setBorder(new MatteBorder(0, 0, 5, 0, Color.WHITE)); 
 
-        JLabel texto_inicial = new JLabel("MODIFICAR USUARIO");
+        JLabel texto_inicial = new JLabel("ELIMINAR USUARIO");
         texto_inicial.setFont(new Font("Aril",Font.BOLD,27));
         texto_inicial.setOpaque(true);
         texto_inicial.setForeground( Color.WHITE);
@@ -113,6 +116,7 @@ public class ModificarInterfaz extends JFrame{
         panelBotones.add(nombres_cliente,restriccion);
 
         JTextField campo_nombre = new JTextField();
+        campo_nombre.setBackground(inputEliminar);
         campo_nombre.setEnabled(false);
         restriccion.gridy=2;
         restriccion.gridx=1;
@@ -139,6 +143,7 @@ public class ModificarInterfaz extends JFrame{
         panelBotones.add(apellidos_clientes,restriccion);
 
         JTextField campo_apellidos = new JTextField();
+        campo_apellidos.setBackground(inputEliminar);
         campo_apellidos.setEnabled(false);
         restriccion.gridy=3;
         restriccion.gridx=1;
@@ -164,6 +169,7 @@ public class ModificarInterfaz extends JFrame{
         panelBotones.add(telefono_clientes,restriccion);
 
         JTextField campo_telefono = new JTextField();
+        campo_telefono.setBackground(inputEliminar);
         campo_telefono.setEnabled(false);
         restriccion.gridy=4;
         restriccion.gridx=1;
@@ -190,6 +196,7 @@ public class ModificarInterfaz extends JFrame{
         panelBotones.add(direccion_clientes,restriccion);
 
         JTextField campo_direccion = new JTextField();
+        campo_direccion.setBackground(inputEliminar);
         campo_direccion.setEnabled(false);
         restriccion.gridy=5;
         restriccion.gridx=1;
@@ -217,6 +224,7 @@ public class ModificarInterfaz extends JFrame{
         panelBotones.add(email_clientes,restriccion);
 
         JTextField campo_email = new JTextField();
+        campo_email.setBackground(inputEliminar);
         campo_email.setEnabled(false);
         restriccion.gridy=6;
         restriccion.gridx=1;
@@ -245,11 +253,11 @@ public class ModificarInterfaz extends JFrame{
         botones.add(btn1,restriccion);
 
         // linea 3
-        JButton btn2 = new JButton("MODIFICAR");
+        JButton btn2 = new JButton("ELIMINAR");
         btn2.setEnabled(false);
         btn2.setFont(new Font("Aril",Font.BOLD,17));
         btn2.setForeground( Color.WHITE);
-		btn2.setBackground(azulOscuro);
+		btn2.setBackground(Color.RED);
         restriccion.gridy=1;
         restriccion.gridx=1;
         restriccion.gridheight=1;
