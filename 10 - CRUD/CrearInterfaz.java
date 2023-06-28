@@ -17,6 +17,7 @@ public class CrearInterfaz extends JFrame{
     public void initComponents(){
         Color azulOscuro = new Color(0, 5, 118);
         Color raro = new Color(140, 140, 255);
+        Border borde = BorderFactory.createLineBorder(Color.RED, 1);
         Image icono = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_almacenes.png") );
         setIconImage(icono);
         setTitle("Usuarios");
@@ -65,8 +66,8 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
-        campo_cedula.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(5,0,5,18);
+        campo_cedula.setBorder(new EmptyBorder(7,0,7,0));
+        restriccion.insets = new Insets(5,0,5,0);
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_cedula,restriccion);
@@ -89,8 +90,8 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
-        campo_nombre.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(5,0,5,18);
+        campo_nombre.setBorder(new EmptyBorder(7,0,7,0));
+        restriccion.insets = new Insets(5,0,5,0);
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_nombre,restriccion);
@@ -113,8 +114,8 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
-        campo_apellidos.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(5,0,5,18);
+        campo_apellidos.setBorder(new EmptyBorder(7,0,7,0));
+        restriccion.insets = new Insets(5,0,5,0);
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_apellidos,restriccion);
@@ -137,8 +138,8 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
-        campo_telefono.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(5,0,5,18);
+        campo_telefono.setBorder(new EmptyBorder(7,0,7,0));
+        restriccion.insets = new Insets(5,0,5,0);
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_telefono,restriccion);
@@ -161,8 +162,8 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
-        campo_direccion.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(5,0,5,18);
+        campo_direccion.setBorder(new EmptyBorder(7,0,7,0));
+        restriccion.insets = new Insets(5,0,5,0);
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_direccion,restriccion);
@@ -186,9 +187,9 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
-        campo_email.setBorder(new EmptyBorder(7,200,7,15));
-        restriccion.insets = new Insets(5,0,5,18);
         restriccion.weighty=0;
+        campo_email.setBorder(new EmptyBorder(7,0,7,200));
+        restriccion.insets = new Insets(5,0,5,0);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_email,restriccion);
 
@@ -225,7 +226,7 @@ public class CrearInterfaz extends JFrame{
 
         principal.add(botones,BorderLayout.SOUTH);
         principal.add(texto_menu,BorderLayout.NORTH);
-        principal.add(panelBotones,BorderLayout.CENTER);
+        principal.add(panelBotones);
         add(principal);
         setVisible(true);
 
@@ -235,7 +236,46 @@ public class CrearInterfaz extends JFrame{
 				respaldo vamo = new respaldo();
 			}
 		};
+        ActionListener crear = new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                String cedula = campo_cedula.getText();
+                String nombres = campo_nombre.getText();
+                String apellidos = campo_apellidos.getText();
+                String telefono = campo_telefono.getText();
+                String direccion = campo_direccion.getText();
+                String email = campo_email.getText();
+                if (cedula.length() == 0 || nombres.length() == 0 || apellidos.length() == 0 || telefono.length() == 0 || direccion.length() == 0 || email.length() == 0 ) {
+                    
+                    if(cedula.length() == 0 ){
+                        campo_cedula.setBorder(borde);
+                    }
+                    if(nombres.length() == 0 ){
+                        campo_nombre.setBorder(borde);
+                    }
+                    if(apellidos.length() == 0 ){
+                        campo_apellidos.setBorder(borde);
+                    }
+                    if(telefono.length() == 0 ){
+                        campo_telefono.setBorder(borde);
+                    }
+                    if(direccion.length() == 0 ){
+                        campo_direccion.setBorder(borde);
+                    }
+                    if(email.length() == 0 ){
+                        campo_email.setBorder(borde);
+                    }
+                    
+                } else {
+                    Procesos procesos = new Procesos(); 
+                    procesos.CrearUsuario(cedula,nombres,apellidos,telefono,direccion,email);
+                    respaldo vamo = new respaldo();
+                    dispose();
+                    AlertaCorrecta alertaBuena = new AlertaCorrecta();
+                }
+            }
+        };
 		btn1.addActionListener( cancelar );
+        btn2.addActionListener( crear );
         
     }   
 }

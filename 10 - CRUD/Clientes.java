@@ -1,5 +1,4 @@
 public class Clientes {
-    int id;
     String cedula;
     String nombre;
     String apellidos;
@@ -7,8 +6,7 @@ public class Clientes {
     String direccion;
     String email;
 
-    public Clientes(int id,String cedula, String nombre,String apellidos,String telefono, String direccion,String email) {
-        this.id=id;
+    public Clientes(String cedula, String nombre,String apellidos,String telefono, String direccion,String email) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -36,8 +34,5 @@ public class Clientes {
     }
     public String getEmail() {
         return email;
-    }
-    public String getId() {
-        return id;
     }
 }

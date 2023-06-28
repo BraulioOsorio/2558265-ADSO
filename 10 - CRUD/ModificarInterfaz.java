@@ -270,6 +270,38 @@ public class ModificarInterfaz extends JFrame{
 				respaldo vamo = new respaldo();
 			}
 		};
+        KeyListener buscarCliente = new KeyListener() {
+            public void keyPressed(KeyEvent e) {
+            }
+
+            public void keyReleased(KeyEvent e) {
+                String cedula = campo_cedula.getText();
+                Procesos procesos = new Procesos();
+                ClienteExistente resultado = procesos.clientesExistentes(cedula);
+                campo_nombre.setText(resultado.getNombre());
+                campo_apellidos.setText(resultado.getApellido());
+                campo_telefono.setText(resultado.getTelefono());
+                campo_direccion.setText(resultado.getDireccion());
+                campo_email.setText(resultado.getEmail());
+                campo_nombre.setEnabled(true);
+                campo_apellidos.setEnabled(true);
+                campo_telefono.setEnabled(true);
+                campo_direccion.setEnabled(true);
+                campo_email.setEnabled(true);
+                if(e.getKeyChar()==KeyEvent.VK_BACK_SPACE){
+                    campo_nombre.setText("");
+                    campo_apellidos.setText("");
+                    campo_telefono.setText("");
+                    campo_direccion.setText("");
+                    campo_email.setText("");
+                }
+            }
+
+            public void keyTyped(KeyEvent e) {
+            }
+        };
+		campo_cedula.addKeyListener( buscarCliente ); 
+       
 		btn1.addActionListener( cancelar );
         
     }   

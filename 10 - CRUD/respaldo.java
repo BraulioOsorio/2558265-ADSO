@@ -10,9 +10,9 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import java.lang.reflect.Field;
 
 public class respaldo extends JFrame{
-
     public respaldo(){
         initComponents();
+        
     }
     public void initComponents(){
         Color azulOscuro = new Color(0, 5, 118);
@@ -116,7 +116,6 @@ public class respaldo extends JFrame{
         principal.add(panelBotones,BorderLayout.CENTER);
         add(principal);
         setVisible(true);
-
         ActionListener crearUsuario = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
                 dispose();
