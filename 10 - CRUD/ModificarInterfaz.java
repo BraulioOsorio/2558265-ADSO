@@ -118,10 +118,10 @@ public class ModificarInterfaz extends JFrame{
         restriccion.gridx=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
-        restriccion.weightx=0;
-        campo_nombre.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(5,20,5,-55);
+        restriccion.weightx=1;
         restriccion.weighty=0;
+        campo_nombre.setBorder(new EmptyBorder(7,7,7,0));
+        restriccion.insets = new Insets(5,0,5,20);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_nombre,restriccion);
 
@@ -144,10 +144,10 @@ public class ModificarInterfaz extends JFrame{
         restriccion.gridx=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
-        restriccion.weightx=0;
-        campo_apellidos.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(5,20,5,-55);
+        restriccion.weightx=1;
         restriccion.weighty=0;
+        campo_apellidos.setBorder(new EmptyBorder(7,7,7,0));
+        restriccion.insets = new Insets(5,0,5,20);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_apellidos,restriccion);
 
@@ -169,10 +169,10 @@ public class ModificarInterfaz extends JFrame{
         restriccion.gridx=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
-        restriccion.weightx=0;
-        campo_telefono.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(5,20,5,-55);
+        restriccion.weightx=1;
         restriccion.weighty=0;
+        campo_telefono.setBorder(new EmptyBorder(7,7,7,0));
+        restriccion.insets = new Insets(5,0,5,20);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_telefono,restriccion);
 
@@ -195,10 +195,10 @@ public class ModificarInterfaz extends JFrame{
         restriccion.gridx=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
-        restriccion.weightx=0;
-        campo_direccion.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(5,20,5,-55);
+        restriccion.weightx=1;
         restriccion.weighty=0;
+        campo_direccion.setBorder(new EmptyBorder(7,7,7,0));
+        restriccion.insets = new Insets(5,0,5,20);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_direccion,restriccion);
 
@@ -222,11 +222,10 @@ public class ModificarInterfaz extends JFrame{
         restriccion.gridx=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
-        restriccion.weightx=0;
-        
+        restriccion.weightx=1;
         restriccion.weighty=0;
-        campo_email.setBorder(new EmptyBorder(7,170,7,15));
-        restriccion.insets = new Insets(5,20,5,-55);
+        campo_email.setBorder(new EmptyBorder(7,7,7,0));
+        restriccion.insets = new Insets(5,0,5,20);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_email,restriccion);
 

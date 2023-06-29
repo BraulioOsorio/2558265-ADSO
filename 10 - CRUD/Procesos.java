@@ -46,6 +46,8 @@ public class Procesos{
                 telefonoC = arrayClientes[i].getTelefono();
                 emailC = arrayClientes[i].getEmail();
                 break; 
+            // }else{
+            //     break;
             }
         }
         

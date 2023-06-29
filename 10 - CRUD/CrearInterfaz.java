@@ -49,7 +49,7 @@ public class CrearInterfaz extends JFrame{
         panelBotones.setBackground(raro);
 
         JLabel cedula_cliente = new JLabel("Cedula :");
-        cedula_cliente.setFont(new Font("Aril",Font.BOLD,15));
+        cedula_cliente.setFont(new Font("Aril",Font.BOLD,22));
         restriccion.insets = new Insets(0,10,0,0);
         restriccion.gridy=0;
         restriccion.gridx=0;
@@ -65,15 +65,15 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridx=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
-        restriccion.weightx=0;
-        campo_cedula.setBorder(new EmptyBorder(7,0,7,0));
-        restriccion.insets = new Insets(5,0,5,0);
+        restriccion.weightx=1;
+        campo_cedula.setBorder(new EmptyBorder(7,7,7,0));
+        restriccion.insets = new Insets(5,0,5,20);
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_cedula,restriccion);
         
         JLabel nombres_cliente = new JLabel("Nombres :");
-        nombres_cliente.setFont(new Font("Aril",Font.BOLD,15));
+        nombres_cliente.setFont(new Font("Aril",Font.BOLD,22));
         restriccion.insets = new Insets(0,10,0,25);
         restriccion.gridy=1;
         restriccion.gridx=0;
@@ -90,14 +90,14 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
-        campo_nombre.setBorder(new EmptyBorder(7,0,7,0));
-        restriccion.insets = new Insets(5,0,5,0);
+        campo_nombre.setBorder(new EmptyBorder(7,7,7,0));
+        restriccion.insets = new Insets(5,0,5,20);
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_nombre,restriccion);
 
         JLabel apellidos_clientes = new JLabel("Apellidos :");
-        apellidos_clientes.setFont(new Font("Aril",Font.BOLD,15));
+        apellidos_clientes.setFont(new Font("Aril",Font.BOLD,22));
         restriccion.insets = new Insets(0,10,0,0);
         restriccion.gridy=2;
         restriccion.gridx=0;
@@ -114,14 +114,14 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
-        campo_apellidos.setBorder(new EmptyBorder(7,0,7,0));
-        restriccion.insets = new Insets(5,0,5,0);
+        campo_apellidos.setBorder(new EmptyBorder(7,7,7,0));
+        restriccion.insets = new Insets(5,0,5,20);
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_apellidos,restriccion);
 
         JLabel telefono_clientes = new JLabel("Teléfono :");
-        telefono_clientes.setFont(new Font("Aril",Font.BOLD,15));
+        telefono_clientes.setFont(new Font("Aril",Font.BOLD,22));
         restriccion.insets = new Insets(0,10,0,0);
         restriccion.gridy=3;
         restriccion.gridx=0;
@@ -138,14 +138,14 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
-        campo_telefono.setBorder(new EmptyBorder(7,0,7,0));
-        restriccion.insets = new Insets(5,0,5,0);
+        campo_telefono.setBorder(new EmptyBorder(7,7,7,0));
+        restriccion.insets = new Insets(5,0,5,20);
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_telefono,restriccion);
 
         JLabel direccion_clientes = new JLabel("Dirección :");
-        direccion_clientes.setFont(new Font("Aril",Font.BOLD,15));
+        direccion_clientes.setFont(new Font("Aril",Font.BOLD,22));
         restriccion.insets = new Insets(0,10,0,0);
         restriccion.gridy=4;
         restriccion.gridx=0;
@@ -162,15 +162,15 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
-        campo_direccion.setBorder(new EmptyBorder(7,0,7,0));
-        restriccion.insets = new Insets(5,0,5,0);
+        campo_direccion.setBorder(new EmptyBorder(7,7,7,0));
+        restriccion.insets = new Insets(5,0,5,20);
         restriccion.weighty=0;
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_direccion,restriccion);
 
 
         JLabel email_clientes = new JLabel("Email :");
-        email_clientes.setFont(new Font("Aril",Font.BOLD,15));
+        email_clientes.setFont(new Font("Aril",Font.BOLD,22));
         restriccion.insets = new Insets(0,10,0,0);
         restriccion.gridy=5;
         restriccion.gridx=0;
@@ -186,10 +186,10 @@ public class CrearInterfaz extends JFrame{
         restriccion.gridx=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
-        restriccion.weightx=0;
+        restriccion.weightx=1;
         restriccion.weighty=0;
-        campo_email.setBorder(new EmptyBorder(7,0,7,200));
-        restriccion.insets = new Insets(5,0,5,0);
+        campo_email.setBorder(new EmptyBorder(7,7,7,0));
+        restriccion.insets = new Insets(5,0,5,20);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_email,restriccion);
 
