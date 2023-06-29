@@ -17,6 +17,7 @@ public class ModificarInterfaz extends JFrame{
     public void initComponents(){
         Color azulOscuro = new Color(0, 5, 118);
         Color raro = new Color(140, 140, 255);
+        Border borde = BorderFactory.createLineBorder(Color.RED, 1);
         Image icono = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_almacenes.png") );
         setIconImage(icono);
         setTitle("Usuarios");
@@ -46,7 +47,7 @@ public class ModificarInterfaz extends JFrame{
         texto_menu.add(texto_inicial);
 
         JPanel panelBotones = new JPanel(new GridBagLayout());
-        panelBotones.setBorder(new EmptyBorder(10,0,0,0));
+        panelBotones.setBorder(new EmptyBorder(20,0,0,0));
         panelBotones.setBackground(raro);
 
         JLabel cedula_cliente = new JLabel("Cedula:");
@@ -57,7 +58,7 @@ public class ModificarInterfaz extends JFrame{
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,20,0,0);
+        restriccion.insets = new Insets(0,30,0,0);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(cedula_cliente,restriccion);
 
@@ -66,9 +67,9 @@ public class ModificarInterfaz extends JFrame{
         restriccion.gridx=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
-        restriccion.weightx=0;
+        restriccion.weightx=1;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(3,0,3,10);
+        restriccion.insets = new Insets(3,-50,3,10);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_cedula,restriccion);
 
@@ -83,7 +84,7 @@ public class ModificarInterfaz extends JFrame{
         restriccion.weightx=0;
         restriccion.weighty=0;
         btnBuscar.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(0,0,0,0);
+        restriccion.insets = new Insets(0,0,0,50);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(btnBuscar,restriccion);
 
@@ -95,20 +96,20 @@ public class ModificarInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=3;
         restriccion.weightx=0;
-        restriccion.weighty=0;
-        restriccion.insets = new Insets(10,0,10,0);
+        restriccion.weighty=3;
+        restriccion.insets = new Insets(10,20,10,20);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(usuarios_encontrados,restriccion);
         
         JLabel nombres_cliente = new JLabel("Nombres :");
-        nombres_cliente.setFont(new Font("Aril",Font.BOLD,15));
+        nombres_cliente.setFont(new Font("Aril",Font.BOLD,19));
         restriccion.gridy=2;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,40,0,0);
+        restriccion.insets = new Insets(0,60,0,0);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(nombres_cliente,restriccion);
 
@@ -121,12 +122,12 @@ public class ModificarInterfaz extends JFrame{
         restriccion.weightx=1;
         restriccion.weighty=0;
         campo_nombre.setBorder(new EmptyBorder(7,7,7,0));
-        restriccion.insets = new Insets(5,0,5,20);
+        restriccion.insets = new Insets(0,20,5,-70);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_nombre,restriccion);
 
         JLabel apellidos_clientes = new JLabel("Apellidos :");
-        apellidos_clientes.setFont(new Font("Aril",Font.BOLD,15));
+        apellidos_clientes.setFont(new Font("Aril",Font.BOLD,19));
 
         restriccion.gridy=3;
         restriccion.gridx=0;
@@ -134,7 +135,7 @@ public class ModificarInterfaz extends JFrame{
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,40,0,0);
+        restriccion.insets = new Insets(0,60,0,0);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(apellidos_clientes,restriccion);
 
@@ -147,19 +148,19 @@ public class ModificarInterfaz extends JFrame{
         restriccion.weightx=1;
         restriccion.weighty=0;
         campo_apellidos.setBorder(new EmptyBorder(7,7,7,0));
-        restriccion.insets = new Insets(5,0,5,20);
+        restriccion.insets = new Insets(0,20,5,-70);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_apellidos,restriccion);
 
         JLabel telefono_clientes = new JLabel("Teléfono :");
-        telefono_clientes.setFont(new Font("Aril",Font.BOLD,15));
+        telefono_clientes.setFont(new Font("Aril",Font.BOLD,19));
         restriccion.gridy=4;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,40,0,0);
+        restriccion.insets = new Insets(0,60,0,0);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(telefono_clientes,restriccion);
 
@@ -172,19 +173,19 @@ public class ModificarInterfaz extends JFrame{
         restriccion.weightx=1;
         restriccion.weighty=0;
         campo_telefono.setBorder(new EmptyBorder(7,7,7,0));
-        restriccion.insets = new Insets(5,0,5,20);
+        restriccion.insets = new Insets(0,20,5,-70);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_telefono,restriccion);
 
         JLabel direccion_clientes = new JLabel("Dirección :");
-        direccion_clientes.setFont(new Font("Aril",Font.BOLD,15));
+        direccion_clientes.setFont(new Font("Aril",Font.BOLD,19));
         restriccion.gridy=5;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,40,0,0);
+        restriccion.insets = new Insets(0,60,0,0);
 
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(direccion_clientes,restriccion);
@@ -198,20 +199,20 @@ public class ModificarInterfaz extends JFrame{
         restriccion.weightx=1;
         restriccion.weighty=0;
         campo_direccion.setBorder(new EmptyBorder(7,7,7,0));
-        restriccion.insets = new Insets(5,0,5,20);
+        restriccion.insets = new Insets(0,20,5,-70);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_direccion,restriccion);
 
 
         JLabel email_clientes = new JLabel("Email :");
-        email_clientes.setFont(new Font("Aril",Font.BOLD,15));
+        email_clientes.setFont(new Font("Aril",Font.BOLD,19));
         restriccion.gridy=6;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,40,0,0);
+        restriccion.insets = new Insets(0,60,0,0);
 
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(email_clientes,restriccion);
@@ -225,15 +226,16 @@ public class ModificarInterfaz extends JFrame{
         restriccion.weightx=1;
         restriccion.weighty=0;
         campo_email.setBorder(new EmptyBorder(7,7,7,0));
-        restriccion.insets = new Insets(5,0,5,20);
+        restriccion.insets = new Insets(0,20,5,-70);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_email,restriccion);
 
         JPanel botones = new JPanel();
         botones.setBackground(raro);
         botones.setBorder(new EmptyBorder(10,0,15,0));
+        
         JButton btn1 = new JButton("CANCELAR");
-        btn1.setFont(new Font("Aril",Font.BOLD,17));
+        btn1.setFont(new Font("Aril",Font.BOLD,20));
 		btn1.setBackground(Color.GRAY);
         restriccion.gridy=0;
         restriccion.gridx=0;
@@ -246,7 +248,7 @@ public class ModificarInterfaz extends JFrame{
         // linea 3
         JButton btn2 = new JButton("MODIFICAR");
         btn2.setEnabled(false);
-        btn2.setFont(new Font("Aril",Font.BOLD,17));
+        btn2.setFont(new Font("Aril",Font.BOLD,20));
         btn2.setForeground( Color.WHITE);
 		btn2.setBackground(azulOscuro);
         restriccion.gridy=1;
@@ -287,18 +289,30 @@ public class ModificarInterfaz extends JFrame{
                 campo_telefono.setEnabled(true);
                 campo_direccion.setEnabled(true);
                 campo_email.setEnabled(true);
-                if(e.getKeyChar()==KeyEvent.VK_BACK_SPACE){
-                    campo_nombre.setText("");
-                    campo_apellidos.setText("");
-                    campo_telefono.setText("");
-                    campo_direccion.setText("");
-                    campo_email.setText("");
-                }
+                btn2.setEnabled(true);
+                
             }
 
             public void keyTyped(KeyEvent e) {
             }
         };
+        ActionListener modificar = new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+                String cedula = campo_cedula.getText();
+                String nombres = campo_nombre.getText();
+                String apellidos = campo_apellidos.getText();
+                String telefono = campo_telefono.getText();
+                String direccion = campo_direccion.getText();
+                String email = campo_email.getText();
+                Procesos procesos = new Procesos(); 
+                procesos.ModificarUsuuario(cedula,nombres,apellidos,telefono,direccion,email);
+                respaldo vamo = new respaldo();
+                dispose();
+                AlertaCorrecta alertaBuena = new AlertaCorrecta();
+                
+			}
+		};
+        btn2.addActionListener( modificar );
 		campo_cedula.addKeyListener( buscarCliente ); 
        
 		btn1.addActionListener( cancelar );

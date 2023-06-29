@@ -1,11 +1,13 @@
 public class ClienteExistente {
+    private String cedula;
     private String nombre;
     private String apellidos;
     private String telefono;
     private String direccion;
     private String email;
     
-    public ClienteExistente(String nombre, String apellidos, String telefono, String direccion, String email) {
+    public ClienteExistente(String cedula,String nombre, String apellidos, String telefono, String direccion, String email) {
+        this.cedula = cedula;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.telefono=telefono;
@@ -15,6 +17,9 @@ public class ClienteExistente {
     
     public String getNombre() {
         return nombre;
+    }
+    public String getNumcedula() {
+        return cedula;
     }
     
     public String getDireccion() {

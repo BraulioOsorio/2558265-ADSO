@@ -110,8 +110,7 @@ public class respaldo extends JFrame{
         restriccion.insets = new Insets(7,0,49,0);
         restriccion.fill = GridBagConstraints.CENTER;
         panelBotones.add(btn4,restriccion);
-        restriccion.weightx=1;
-        restriccion.weighty=1;
+
         principal.add(texto_menu,BorderLayout.NORTH);
         principal.add(panelBotones,BorderLayout.CENTER);
         add(principal);
@@ -132,12 +131,19 @@ public class respaldo extends JFrame{
         ActionListener EliminarUsuario = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
                 dispose();
-				EliminarInterfaz vamo = new EliminarInterfaz();
+				EliminarUsuario vamo = new EliminarUsuario();
+			}
+		};
+        ActionListener Listar = new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+                dispose();
+				Listar vamo = new Listar();
 			}
 		};
         btn1.addActionListener( crearUsuario );
 		btn2.addActionListener( ModificarUsuario );
         btn3.addActionListener( EliminarUsuario );
+        btn4.addActionListener( Listar );
         
     }
 

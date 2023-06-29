@@ -23,7 +23,7 @@ public class CrearInterfaz extends JFrame{
         setTitle("Usuarios");
         setSize(360,405);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setResizable(false);
 
         JPanel principal = new JPanel();
@@ -49,7 +49,7 @@ public class CrearInterfaz extends JFrame{
         panelBotones.setBackground(raro);
 
         JLabel cedula_cliente = new JLabel("Cedula :");
-        cedula_cliente.setFont(new Font("Aril",Font.BOLD,22));
+        cedula_cliente.setFont(new Font("Aril",Font.BOLD,17));
         restriccion.insets = new Insets(0,10,0,0);
         restriccion.gridy=0;
         restriccion.gridx=0;
@@ -73,7 +73,7 @@ public class CrearInterfaz extends JFrame{
         panelBotones.add(campo_cedula,restriccion);
         
         JLabel nombres_cliente = new JLabel("Nombres :");
-        nombres_cliente.setFont(new Font("Aril",Font.BOLD,22));
+        nombres_cliente.setFont(new Font("Aril",Font.BOLD,17));
         restriccion.insets = new Insets(0,10,0,25);
         restriccion.gridy=1;
         restriccion.gridx=0;
@@ -97,7 +97,7 @@ public class CrearInterfaz extends JFrame{
         panelBotones.add(campo_nombre,restriccion);
 
         JLabel apellidos_clientes = new JLabel("Apellidos :");
-        apellidos_clientes.setFont(new Font("Aril",Font.BOLD,22));
+        apellidos_clientes.setFont(new Font("Aril",Font.BOLD,17));
         restriccion.insets = new Insets(0,10,0,0);
         restriccion.gridy=2;
         restriccion.gridx=0;
@@ -121,7 +121,7 @@ public class CrearInterfaz extends JFrame{
         panelBotones.add(campo_apellidos,restriccion);
 
         JLabel telefono_clientes = new JLabel("Teléfono :");
-        telefono_clientes.setFont(new Font("Aril",Font.BOLD,22));
+        telefono_clientes.setFont(new Font("Aril",Font.BOLD,17));
         restriccion.insets = new Insets(0,10,0,0);
         restriccion.gridy=3;
         restriccion.gridx=0;
@@ -145,7 +145,7 @@ public class CrearInterfaz extends JFrame{
         panelBotones.add(campo_telefono,restriccion);
 
         JLabel direccion_clientes = new JLabel("Dirección :");
-        direccion_clientes.setFont(new Font("Aril",Font.BOLD,22));
+        direccion_clientes.setFont(new Font("Aril",Font.BOLD,17));
         restriccion.insets = new Insets(0,10,0,0);
         restriccion.gridy=4;
         restriccion.gridx=0;
@@ -170,7 +170,7 @@ public class CrearInterfaz extends JFrame{
 
 
         JLabel email_clientes = new JLabel("Email :");
-        email_clientes.setFont(new Font("Aril",Font.BOLD,22));
+        email_clientes.setFont(new Font("Aril",Font.BOLD,17));
         restriccion.insets = new Insets(0,10,0,0);
         restriccion.gridy=5;
         restriccion.gridx=0;
@@ -196,7 +196,7 @@ public class CrearInterfaz extends JFrame{
         JPanel botones = new JPanel();
         botones.setBackground(raro);
         JButton btn1 = new JButton("CANCELAR");
-        btn1.setFont(new Font("Aril",Font.BOLD,17));
+        btn1.setFont(new Font("Aril",Font.BOLD,20));
         btn1.setOpaque(true);
         btn1.setForeground( Color.BLACK);
 		btn1.setBackground(Color.GRAY);
@@ -210,7 +210,7 @@ public class CrearInterfaz extends JFrame{
 
         // linea 3
         JButton btn2 = new JButton("REGISTRAR");
-        btn2.setFont(new Font("Aril",Font.BOLD,17));
+        btn2.setFont(new Font("Aril",Font.BOLD,20));
         btn2.setOpaque(true);
         btn2.setForeground( Color.WHITE);
 		btn2.setBackground(azulOscuro);

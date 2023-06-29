@@ -9,23 +9,21 @@ import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.lang.reflect.Field;
 
-public class EliminarInterfaz extends JFrame{
+public class EliminarUsuario extends JFrame{
 
-    public EliminarInterfaz(){
+    public EliminarUsuario(){
         initComponents();
     }
     public void initComponents(){
         Color azulOscuro = new Color(0, 5, 118);
         Color raro = new Color(140, 140, 255);
         Color inputEliminar = new Color(128, 120, 87);
-        
 
         Image icono = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_almacenes.png") );
         setIconImage(icono);
         setTitle("Usuarios");
         setSize(460,460);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
 
         JPanel principal = new JPanel();
@@ -49,7 +47,7 @@ public class EliminarInterfaz extends JFrame{
         texto_menu.add(texto_inicial);
 
         JPanel panelBotones = new JPanel(new GridBagLayout());
-        panelBotones.setBorder(new EmptyBorder(10,0,0,0));
+        panelBotones.setBorder(new EmptyBorder(20,0,0,0));
         panelBotones.setBackground(raro);
 
         JLabel cedula_cliente = new JLabel("Cedula:");
@@ -60,7 +58,7 @@ public class EliminarInterfaz extends JFrame{
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,20,0,0);
+        restriccion.insets = new Insets(0,30,0,0);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(cedula_cliente,restriccion);
 
@@ -69,9 +67,9 @@ public class EliminarInterfaz extends JFrame{
         restriccion.gridx=1;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
-        restriccion.weightx=0;
+        restriccion.weightx=1;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(3,7,3,10);
+        restriccion.insets = new Insets(3,-50,3,10);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_cedula,restriccion);
 
@@ -86,7 +84,7 @@ public class EliminarInterfaz extends JFrame{
         restriccion.weightx=0;
         restriccion.weighty=0;
         btnBuscar.setBorder(new EmptyBorder(7,15,7,15));
-        restriccion.insets = new Insets(0,0,0,0);
+        restriccion.insets = new Insets(0,0,0,50);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(btnBuscar,restriccion);
 
@@ -98,25 +96,26 @@ public class EliminarInterfaz extends JFrame{
         restriccion.gridheight=1;
         restriccion.gridwidth=3;
         restriccion.weightx=0;
-        restriccion.weighty=0;
-        restriccion.insets = new Insets(10,0,10,0);
+        restriccion.weighty=3;
+        restriccion.insets = new Insets(10,20,10,20);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(usuarios_encontrados,restriccion);
         
         JLabel nombres_cliente = new JLabel("Nombres :");
-        nombres_cliente.setFont(new Font("Aril",Font.BOLD,15));
+        nombres_cliente.setFont(new Font("Aril",Font.BOLD,19));
         restriccion.gridy=2;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,40,0,0);
+        restriccion.insets = new Insets(0,60,0,0);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(nombres_cliente,restriccion);
 
         JTextField campo_nombre = new JTextField();
         campo_nombre.setBackground(inputEliminar);
+        campo_nombre.setDisabledTextColor(Color.DARK_GRAY);
         campo_nombre.setEnabled(false);
         restriccion.gridy=2;
         restriccion.gridx=1;
@@ -125,26 +124,26 @@ public class EliminarInterfaz extends JFrame{
         restriccion.weightx=1;
         restriccion.weighty=0;
         campo_nombre.setBorder(new EmptyBorder(7,7,7,0));
-        restriccion.insets = new Insets(5,0,5,20);
+        restriccion.insets = new Insets(0,20,5,-70);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_nombre,restriccion);
 
         JLabel apellidos_clientes = new JLabel("Apellidos :");
-        apellidos_clientes.setFont(new Font("Aril",Font.BOLD,15));
-
+        apellidos_clientes.setFont(new Font("Aril",Font.BOLD,19));
         restriccion.gridy=3;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,40,0,0);
+        restriccion.insets = new Insets(0,60,0,0);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(apellidos_clientes,restriccion);
 
         JTextField campo_apellidos = new JTextField();
-        campo_apellidos.setBackground(inputEliminar);
         campo_apellidos.setEnabled(false);
+        campo_apellidos.setBackground(inputEliminar);
+        campo_apellidos.setDisabledTextColor(Color.DARK_GRAY);
         restriccion.gridy=3;
         restriccion.gridx=1;
         restriccion.gridheight=1;
@@ -152,25 +151,26 @@ public class EliminarInterfaz extends JFrame{
         restriccion.weightx=1;
         restriccion.weighty=0;
         campo_apellidos.setBorder(new EmptyBorder(7,7,7,0));
-        restriccion.insets = new Insets(5,0,5,20);
+        restriccion.insets = new Insets(0,20,5,-70);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_apellidos,restriccion);
 
         JLabel telefono_clientes = new JLabel("Teléfono :");
-        telefono_clientes.setFont(new Font("Aril",Font.BOLD,15));
+        telefono_clientes.setFont(new Font("Aril",Font.BOLD,19));
         restriccion.gridy=4;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,40,0,0);
+        restriccion.insets = new Insets(0,60,0,0);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(telefono_clientes,restriccion);
 
         JTextField campo_telefono = new JTextField();
-        campo_telefono.setBackground(inputEliminar);
         campo_telefono.setEnabled(false);
+        campo_telefono.setDisabledTextColor(Color.DARK_GRAY);
+        campo_telefono.setBackground(inputEliminar);
         restriccion.gridy=4;
         restriccion.gridx=1;
         restriccion.gridheight=1;
@@ -178,26 +178,26 @@ public class EliminarInterfaz extends JFrame{
         restriccion.weightx=1;
         restriccion.weighty=0;
         campo_telefono.setBorder(new EmptyBorder(7,7,7,0));
-        restriccion.insets = new Insets(5,0,5,20);
+        restriccion.insets = new Insets(0,20,5,-70);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_telefono,restriccion);
 
         JLabel direccion_clientes = new JLabel("Dirección :");
-        direccion_clientes.setFont(new Font("Aril",Font.BOLD,15));
+        direccion_clientes.setFont(new Font("Aril",Font.BOLD,19));
         restriccion.gridy=5;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,40,0,0);
-
+        restriccion.insets = new Insets(0,60,0,0);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(direccion_clientes,restriccion);
 
         JTextField campo_direccion = new JTextField();
-        campo_direccion.setBackground(inputEliminar);
         campo_direccion.setEnabled(false);
+        campo_direccion.setBackground(inputEliminar);
+        campo_direccion.setDisabledTextColor(Color.DARK_GRAY);
         restriccion.gridy=5;
         restriccion.gridx=1;
         restriccion.gridheight=1;
@@ -205,28 +205,27 @@ public class EliminarInterfaz extends JFrame{
         restriccion.weightx=1;
         restriccion.weighty=0;
         campo_direccion.setBorder(new EmptyBorder(7,7,7,0));
-        restriccion.insets = new Insets(5,0,5,20);
+        restriccion.insets = new Insets(0,20,5,-70);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_direccion,restriccion);
 
 
         JLabel email_clientes = new JLabel("Email :");
-        email_clientes.setFont(new Font("Aril",Font.BOLD,15));
+        email_clientes.setFont(new Font("Aril",Font.BOLD,19));
         restriccion.gridy=6;
         restriccion.gridx=0;
         restriccion.gridheight=1;
         restriccion.gridwidth=1;
         restriccion.weightx=0;
         restriccion.weighty=0;
-        restriccion.insets = new Insets(0,40,0,0);
-
+        restriccion.insets = new Insets(0,60,0,0);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(email_clientes,restriccion);
 
         JTextField campo_email = new JTextField();
-        campo_email.setBackground(inputEliminar);
-        campo_email.setForeground( Color.BLACK);
         campo_email.setEnabled(false);
+        campo_email.setBackground(inputEliminar);
+        campo_email.setDisabledTextColor(Color.DARK_GRAY);
         restriccion.gridy=6;
         restriccion.gridx=1;
         restriccion.gridheight=1;
@@ -234,15 +233,16 @@ public class EliminarInterfaz extends JFrame{
         restriccion.weightx=1;
         restriccion.weighty=0;
         campo_email.setBorder(new EmptyBorder(7,7,7,0));
-        restriccion.insets = new Insets(5,0,5,20);
+        restriccion.insets = new Insets(0,20,5,-70);
         restriccion.fill = GridBagConstraints.BOTH;
         panelBotones.add(campo_email,restriccion);
 
         JPanel botones = new JPanel();
         botones.setBackground(raro);
         botones.setBorder(new EmptyBorder(10,0,15,0));
+        
         JButton btn1 = new JButton("CANCELAR");
-        btn1.setFont(new Font("Aril",Font.BOLD,17));
+        btn1.setFont(new Font("Aril",Font.BOLD,20));
 		btn1.setBackground(Color.GRAY);
         restriccion.gridy=0;
         restriccion.gridx=0;
@@ -255,7 +255,7 @@ public class EliminarInterfaz extends JFrame{
         // linea 3
         JButton btn2 = new JButton("ELIMINAR");
         btn2.setEnabled(false);
-        btn2.setFont(new Font("Aril",Font.BOLD,17));
+        btn2.setFont(new Font("Aril",Font.BOLD,20));
         btn2.setForeground( Color.WHITE);
 		btn2.setBackground(Color.RED);
         restriccion.gridy=1;
@@ -291,13 +291,6 @@ public class EliminarInterfaz extends JFrame{
                 campo_telefono.setText(resultado.getTelefono());
                 campo_direccion.setText(resultado.getDireccion());
                 campo_email.setText(resultado.getEmail());
-                if(e.getKeyChar()==KeyEvent.VK_BACK_SPACE){
-                    campo_nombre.setText("");
-                    campo_apellidos.setText("");
-                    campo_telefono.setText("");
-                    campo_direccion.setText("");
-                    campo_email.setText("");
-                }
             }
 
             public void keyTyped(KeyEvent e) {

@@ -31,7 +31,18 @@ public class Procesos{
         System.out.println(arrayClientes[posicion-1].getNumcedula()+" - "+posicion);
         
     }
+    public void ModificarUsuuario(String cedula,String nombres,String apellidos,String telefono,String direccion,String email) {   
+        Clientes temporal = new Clientes(cedula, nombres,apellidos,telefono,direccion,email);
+        for (int i = 0; i < 20; i++) {
+            if (arrayClientes[i].getNumcedula().equals(cedula)) {
+                arrayClientes[i] = temporal;
+                break;
+            }
+        }
+        
+    }
     public ClienteExistente clientesExistentes(String Numcedula) {    
+        String cedula ="";
         String nombreC = "";
         String apellidoC = "";
         String telefonoC = "";
@@ -40,18 +51,43 @@ public class Procesos{
         
         for (int i = 0; i < 20; i++) {
             if (arrayClientes[i].getNumcedula().equals(Numcedula)) {
+                cedula = arrayClientes[i].getNumcedula();
                 nombreC = arrayClientes[i].getNombreCliente();
                 direccionC = arrayClientes[i].getDirrecion();
                 apellidoC = arrayClientes[i].getApellido();
                 telefonoC = arrayClientes[i].getTelefono();
-                emailC = arrayClientes[i].getEmail();
-                break; 
-            // }else{
-            //     break;
+                emailC = arrayClientes[i].getEmail(); 
+            }else{
+                break;
             }
         }
         
-        ClienteExistente clienteExistente = new ClienteExistente(nombreC,apellidoC,telefonoC ,direccionC,emailC);
+        ClienteExistente clienteExistente = new ClienteExistente(cedula,nombreC,apellidoC,telefonoC ,direccionC,emailC);
+        return clienteExistente;
+    }
+
+    public ClienteExistente buscarCliente(int arreglo) {    
+        String cedula ="";
+        String nombreC = "";
+        String apellidoC = "";
+        String telefonoC = "";
+        String direccionC = "";
+        String emailC = "";
+        
+        for (int i = arreglo; i <=arreglo; i++) {
+            if (arrayClientes[i]!=null) {
+                cedula = arrayClientes[i].getNumcedula();
+                nombreC = arrayClientes[i].getNombreCliente();
+                direccionC = arrayClientes[i].getDirrecion();
+                apellidoC = arrayClientes[i].getApellido();
+                telefonoC = arrayClientes[i].getTelefono();
+                emailC = arrayClientes[i].getEmail(); 
+            }else{
+                break;
+            }
+        }
+        
+        ClienteExistente clienteExistente = new ClienteExistente(cedula,nombreC,apellidoC,telefonoC ,direccionC,emailC);
         return clienteExistente;
     }
 }
