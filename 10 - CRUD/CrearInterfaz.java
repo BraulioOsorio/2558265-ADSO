@@ -10,11 +10,15 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import java.lang.reflect.Field;
 
 public class CrearInterfaz extends JFrame{
-
-    public CrearInterfaz(){
+    Clientes arrayClientes[];
+    Respaldo menuPrincipal;
+    public CrearInterfaz(Respaldo respaldo,Clientes arrayClientesM[]){
+        this.arrayClientes = arrayClientesM;
+        this.menuPrincipal = respaldo;
         initComponents();
     }
     public void initComponents(){
+        Procesos procesos = new Procesos(arrayClientes);
         Color azulOscuro = new Color(0, 5, 118);
         Color raro = new Color(140, 140, 255);
         Border borde = BorderFactory.createLineBorder(Color.RED, 1);
@@ -232,8 +236,8 @@ public class CrearInterfaz extends JFrame{
 
         ActionListener cancelar = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				menuPrincipal.setVisible(true);
                 dispose();
-				respaldo vamo = new respaldo();
 			}
 		};
         ActionListener crear = new ActionListener(){
@@ -265,12 +269,20 @@ public class CrearInterfaz extends JFrame{
                         campo_email.setBorder(borde);
                     }
                     
+                    DatosIncompletos alertaError = new DatosIncompletos();
+                    
                 } else {
-                    Procesos procesos = new Procesos(); 
-                    procesos.CrearUsuario(cedula,nombres,apellidos,telefono,direccion,email);
-                    respaldo vamo = new respaldo();
-                    dispose();
-                    AlertaCorrecta alertaBuena = new AlertaCorrecta();
+                    int resultado = procesos.VerificarUsuario(cedula);
+                    if(resultado!=1){
+                        procesos.CrearUsuario(cedula,nombres,apellidos,telefono,direccion,email);
+                        menuPrincipal.setVisible(true);
+                        AlertaCorrecta alertaBuena = new AlertaCorrecta();
+                        dispose();
+                    }else{
+                        CedulaExistente aletarExiste = new CedulaExistente();
+                    }
+
+                    
                 }
             }
         };

@@ -9,8 +9,8 @@ import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.lang.reflect.Field;
 
-public class AlertaCorrecta extends JFrame{
-    public AlertaCorrecta(){
+public class CedulaExistente extends JFrame{
+    public CedulaExistente(){
         initComponents();
     }
     public void initComponents(){
@@ -18,7 +18,7 @@ public class AlertaCorrecta extends JFrame{
         Image icono = getToolkit().createImage( ClassLoader.getSystemResource("imagenes/icono_almacenes.png") );
         setIconImage(icono);
         setTitle("Alerta");
-        setSize(300,200);
+        setSize(400,200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -29,7 +29,7 @@ public class AlertaCorrecta extends JFrame{
 
         GridBagConstraints restriccion = new GridBagConstraints();
 
-        Image correcto = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_success.png"));
+        Image correcto = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_error.png"));
         correcto = correcto.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
         JLabel  btn1 = new JLabel ();
         btn1.setIcon(new ImageIcon(correcto));
@@ -44,7 +44,7 @@ public class AlertaCorrecta extends JFrame{
         principal.add(btn1,restriccion);
 
         
-        JLabel dio = new JLabel("CORRECTO");
+        JLabel dio = new JLabel("CEDULA EXISTE");
         dio.setFont(new Font("Aril",Font.BOLD,25));
         dio.setHorizontalAlignment(SwingConstants.CENTER);
         restriccion.gridy=0;
@@ -56,7 +56,7 @@ public class AlertaCorrecta extends JFrame{
         restriccion.fill = GridBagConstraints.BOTH;
         principal.add(dio,restriccion);
 
-        JLabel mensaje = new JLabel("Se a creado un nuevo usuario");
+        JLabel mensaje = new JLabel("La cedula ya esta registrada");
         mensaje.setFont(new Font("Aril",Font.PLAIN,15));
         mensaje.setHorizontalAlignment(SwingConstants.CENTER);
         restriccion.gridy=1;

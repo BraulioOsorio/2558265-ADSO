@@ -10,11 +10,15 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import java.lang.reflect.Field;
 
 public class EliminarUsuario extends JFrame{
-
-    public EliminarUsuario(){
+    Clientes arrayClientes[];
+    Respaldo menuPrincipal;
+    public EliminarUsuario(Respaldo respaldo ,Clientes arrayClientesM[]){
+        this.menuPrincipal = respaldo;
+        this.arrayClientes = arrayClientesM;
         initComponents();
     }
     public void initComponents(){
+        Procesos procesos = new Procesos(arrayClientes);
         Color azulOscuro = new Color(0, 5, 118);
         Color raro = new Color(140, 140, 255);
         Color inputEliminar = new Color(128, 120, 87);
@@ -254,7 +258,7 @@ public class EliminarUsuario extends JFrame{
 
         // linea 3
         JButton btn2 = new JButton("ELIMINAR");
-        btn2.setEnabled(false);
+        //btn2.setEnabled(false);
         btn2.setFont(new Font("Aril",Font.BOLD,20));
         btn2.setForeground( Color.WHITE);
 		btn2.setBackground(Color.RED);
@@ -274,8 +278,9 @@ public class EliminarUsuario extends JFrame{
 
         ActionListener cancelar = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+                menuPrincipal.setVisible(true);
                 dispose();
-				respaldo vamo = new respaldo();
+				
 			}
 		};
         KeyListener buscarCliente = new KeyListener() {
@@ -284,7 +289,6 @@ public class EliminarUsuario extends JFrame{
 
             public void keyReleased(KeyEvent e) {
                 String cedula = campo_cedula.getText();
-                Procesos procesos = new Procesos();
                 ClienteExistente resultado = procesos.clientesExistentes(cedula);
                 campo_nombre.setText(resultado.getNombre());
                 campo_apellidos.setText(resultado.getApellido());
@@ -296,8 +300,18 @@ public class EliminarUsuario extends JFrame{
             public void keyTyped(KeyEvent e) {
             }
         };
+        ActionListener Eliminar = new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+                String cedula = campo_cedula.getText();
+                procesos.EliminarUsuario(cedula);
+                menuPrincipal.setVisible(true);
+                AlertaCorrecta alertaBuena = new AlertaCorrecta();
+                dispose();
+			}
+		};
 		campo_cedula.addKeyListener( buscarCliente ); 
 		btn1.addActionListener( cancelar );
+        btn2.addActionListener( Eliminar );
         
     }   
 }

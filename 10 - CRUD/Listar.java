@@ -8,14 +8,23 @@ import javax.swing.event.DocumentListener;
 import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.lang.reflect.Field;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class Listar extends JFrame{
+    Clientes arrayClientes[];
+    Respaldo menuPrincipal;
 
-    public Listar(){
+    private JTable table;
+    private DefaultTableModel tableModel;
+
+    public Listar(Respaldo respaldo,Clientes arrayClientesM[]){
+        this.menuPrincipal = respaldo;
+        this.arrayClientes = arrayClientesM; 
         initComponents();
     }
     public void initComponents(){
-        Procesos interior = new Procesos();
+        Procesos interior = new Procesos(arrayClientes);
         Color azulOscuro = new Color(0, 5, 118);
         Color raro = new Color(140, 140, 255);
         Border borde = BorderFactory.createLineBorder(Color.RED, 1);
@@ -46,32 +55,31 @@ public class Listar extends JFrame{
         texto_inicial.setBorder(new EmptyBorder(4,0,4,0));
         texto_menu.add(texto_inicial);
 
-        JPanel panelBotones = new JPanel(new GridBagLayout());
-        panelBotones.setBackground(raro);
-        panelBotones.setBorder(new EmptyBorder(15,15,15,0));
-        JScrollPane bajar = new JScrollPane(panelBotones);
+        Object[] columnNames = {"N","CEDULA","NOMBRES","APELLIDOS"};
+        tableModel = new DefaultTableModel(columnNames, 0){
+            public boolean isCellEditable(int row, int colum){
+                return false;
+            }
+        };
+        table = new JTable(tableModel);
+        table.getColumn("N").setPreferredWidth(15);
+        table.getColumn("CEDULA").setPreferredWidth(150);
+        table.getColumn("NOMBRES").setPreferredWidth(150);
+        table.getColumn("APELLIDOS").setPreferredWidth(150);
+        table.getTableHeader().setResizingAllowed(false);
+        table.getTableHeader().setReorderingAllowed(false);
+        JScrollPane bajar = new JScrollPane(table);
         bajar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         bajar.setBorder(null);
 
-        JLabel Lista[] = new JLabel[20];
-        for(int i =0; i <20; i++){
-            
-            ClienteExistente resultado = interior.buscarCliente(i);
-            Lista[i]= new JLabel (i+" - "+resultado.getNumcedula()+" "+resultado.getNombre()+" "+resultado.getApellido());
-            restriccion.insets = new Insets(0,0,0,10);
-            Lista[i].setBorder(new EmptyBorder(0,0,7,0));
-            Lista[i].setOpaque(true);
-            Lista[i].setBackground(Color.WHITE);
-            Lista[i].setBorder(new MatteBorder(0, 0, 1, 0, Color.BLACK)); 
-            restriccion.gridy=(i+1);
-            restriccion.gridx=0;
-            restriccion.gridheight=1;
-            restriccion.gridwidth=1;
-            restriccion.weightx=1;
-            restriccion.weighty=1;
-            restriccion.fill = GridBagConstraints.BOTH;
-            panelBotones.add(Lista[i],restriccion);
 
+
+        
+        for(int i =0; i <20; i++){
+            if(arrayClientes[i]!=null){
+                Object [] datoFila = new Object[]{i,arrayClientes[i].getNumcedula(),arrayClientes[i].getNombreCliente(),arrayClientes[i].getApellido()};
+                this.tableModel.addRow(datoFila);
+            }
         }
 
         JPanel botones = new JPanel(new GridBagLayout());
@@ -98,8 +106,9 @@ public class Listar extends JFrame{
 
         ActionListener atras = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+                menuPrincipal.setVisible(true);
                 dispose();
-				respaldo vamo = new respaldo();
+				
 			}
 		};
 		btn1.addActionListener( atras );

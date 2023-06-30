@@ -9,8 +9,10 @@ import javax.swing.Timer;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.lang.reflect.Field;
 
-public class respaldo extends JFrame{
-    public respaldo(){
+public class Respaldo extends JFrame{
+    Clientes arrayClientes[];
+    public Respaldo(Clientes arrayClientesM[]){
+        this.arrayClientes = arrayClientesM; 
         initComponents();
         
     }
@@ -34,7 +36,9 @@ public class respaldo extends JFrame{
         // linea 1
         JPanel texto_menu = new JPanel();
         texto_menu.setBackground(azulOscuro);
+
         texto_menu.setBorder(new MatteBorder(0, 0, 5, 0, Color.WHITE)); 
+        
         JLabel texto_inicial = new JLabel("Menú");
         texto_inicial.setFont(new Font("Aril",Font.BOLD,50));
         texto_inicial.setOpaque(true);
@@ -115,29 +119,32 @@ public class respaldo extends JFrame{
         principal.add(panelBotones,BorderLayout.CENTER);
         add(principal);
         setVisible(true);
+
+        Respaldo ventanaActual = this;
+        
         ActionListener crearUsuario = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-                dispose();
-				CrearInterfaz vamo = new CrearInterfaz();
+                setVisible(false);
+				CrearInterfaz vamo = new CrearInterfaz(ventanaActual, arrayClientes);
 			}
 		};
 		
         ActionListener ModificarUsuario = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-                dispose();
-				ModificarInterfaz vamo = new ModificarInterfaz();
+                setVisible(false);
+				ModificarInterfaz vamo = new ModificarInterfaz(ventanaActual, arrayClientes);
 			}
 		};
         ActionListener EliminarUsuario = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-                dispose();
-				EliminarUsuario vamo = new EliminarUsuario();
+                setVisible(false);
+				EliminarUsuario vamo = new EliminarUsuario(ventanaActual, arrayClientes);
 			}
 		};
         ActionListener Listar = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-                dispose();
-				Listar vamo = new Listar();
+                setVisible(false);
+				Listar vamo = new Listar(ventanaActual, arrayClientes);
 			}
 		};
         btn1.addActionListener( crearUsuario );

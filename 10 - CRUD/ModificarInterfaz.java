@@ -10,11 +10,16 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import java.lang.reflect.Field;
 
 public class ModificarInterfaz extends JFrame{
+    Clientes arrayClientes[];
+    Respaldo menuPrincipal;
 
-    public ModificarInterfaz(){
+    public ModificarInterfaz(Respaldo respaldo, Clientes arrayClientesM[]){
+        this.arrayClientes = arrayClientesM; 
+        this.menuPrincipal = respaldo;
         initComponents();
     }
     public void initComponents(){
+        Procesos procesos = new Procesos(arrayClientes);
         Color azulOscuro = new Color(0, 5, 118);
         Color raro = new Color(140, 140, 255);
         Border borde = BorderFactory.createLineBorder(Color.RED, 1);
@@ -267,8 +272,8 @@ public class ModificarInterfaz extends JFrame{
 
         ActionListener cancelar = new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				menuPrincipal.setVisible(true);
                 dispose();
-				respaldo vamo = new respaldo();
 			}
 		};
         KeyListener buscarCliente = new KeyListener() {
@@ -277,7 +282,6 @@ public class ModificarInterfaz extends JFrame{
 
             public void keyReleased(KeyEvent e) {
                 String cedula = campo_cedula.getText();
-                Procesos procesos = new Procesos();
                 ClienteExistente resultado = procesos.clientesExistentes(cedula);
                 campo_nombre.setText(resultado.getNombre());
                 campo_apellidos.setText(resultado.getApellido());
@@ -304,12 +308,10 @@ public class ModificarInterfaz extends JFrame{
                 String telefono = campo_telefono.getText();
                 String direccion = campo_direccion.getText();
                 String email = campo_email.getText();
-                Procesos procesos = new Procesos(); 
                 procesos.ModificarUsuuario(cedula,nombres,apellidos,telefono,direccion,email);
-                respaldo vamo = new respaldo();
-                dispose();
+                menuPrincipal.setVisible(true);
                 AlertaCorrecta alertaBuena = new AlertaCorrecta();
-                
+                dispose();
 			}
 		};
         btn2.addActionListener( modificar );
