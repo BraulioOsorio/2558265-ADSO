@@ -268,18 +268,17 @@ public class CrearInterfaz extends JFrame{
                     if(email.length() == 0 ){
                         campo_email.setBorder(borde);
                     }
-                    
-                    DatosIncompletos alertaError = new DatosIncompletos();
-                    
+                    Alerta CamposObli = new Alerta("DATOS INVALIDOS","Todos los campos son obligatorios","warning");
+
                 } else {
                     int resultado = procesos.VerificarUsuario(cedula);
                     if(resultado!=1){
                         procesos.CrearUsuario(cedula,nombres,apellidos,telefono,direccion,email);
                         menuPrincipal.setVisible(true);
-                        AlertaCorrecta alertaBuena = new AlertaCorrecta();
+                        Alerta alertaBuena = new Alerta("CORRECTO","Se a creado el Usuario","success");
                         dispose();
                     }else{
-                        CedulaExistente aletarExiste = new CedulaExistente();
+                        Alerta alertaExistente = new Alerta("CEDULA EXISTE","La cedula ya esta registrada","error");
                     }
 
                     

@@ -310,7 +310,7 @@ public class ModificarInterfaz extends JFrame{
                 String email = campo_email.getText();
                 procesos.ModificarUsuuario(cedula,nombres,apellidos,telefono,direccion,email);
                 menuPrincipal.setVisible(true);
-                AlertaCorrecta alertaBuena = new AlertaCorrecta();
+                Alerta alertaBuena = new Alerta("CORRECTO","Se a creado el Usuario","success");
                 dispose();
 			}
 		};

@@ -305,7 +305,7 @@ public class EliminarUsuario extends JFrame{
                 String cedula = campo_cedula.getText();
                 procesos.EliminarUsuario(cedula);
                 menuPrincipal.setVisible(true);
-                AlertaCorrecta alertaBuena = new AlertaCorrecta();
+                Alerta alertaBuena = new Alerta("CORRECTO","Se a creado el Usuario","success");
                 dispose();
 			}
 		};
