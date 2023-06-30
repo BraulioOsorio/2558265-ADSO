@@ -261,10 +261,12 @@ public class Tablero extends JFrame{
             
         }else if(Interno[fila][columna]==0){
             numeroCasillaDestapadas=numeroCasillaDestapadas+1;
+            destaparEspacioEnBlanco(fila,columna);
             Image img_blanco = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_espacio.png"));
             img_blanco = img_blanco.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
             this.Tablero[fila][columna].setDisabledIcon(new ImageIcon(img_blanco));
             this.Tablero[fila][columna].setEnabled(false);
+            
         }
 
     }
@@ -294,6 +296,72 @@ public class Tablero extends JFrame{
                 }
             }
                 
+        }
+    }
+    public void destaparEspacioEnBlanco(int fila, int columna){  
+        if (!this.Tablero[fila][columna].isEnabled()) {
+            return;
+        }
+
+        this.Tablero[fila][columna].setEnabled(false); 
+
+        if (Interno[fila][columna] == 0) {
+            this.Tablero[fila][columna].setEnabled(false);
+            if(fila == 0 && columna == 0){
+               destaparEspacioEnBlanco(fila, columna + 1);
+               destaparEspacioEnBlanco(fila + 1, columna);
+               destaparEspacioEnBlanco(fila + 1, columna + 1);
+            } else if (fila == 0 && columna == 8){
+                destaparEspacioEnBlanco(fila, columna - 1);
+                destaparEspacioEnBlanco(fila + 1, columna);
+                destaparEspacioEnBlanco(fila + 1, columna - 1);
+            } else if (fila == 8 && columna == 0){
+                destaparEspacioEnBlanco(fila - 1, columna);
+                destaparEspacioEnBlanco(fila - 1, columna + 1);
+                destaparEspacioEnBlanco(fila, columna + 1);
+            } else if (fila==8 && columna==8){
+                destaparEspacioEnBlanco(fila - 1, columna);
+                destaparEspacioEnBlanco(fila - 1, columna - 1);
+                destaparEspacioEnBlanco(fila, columna - 1);
+            } else if (fila != 0 && fila != 8 && columna == 0){
+                destaparEspacioEnBlanco(fila - 1, columna);
+                destaparEspacioEnBlanco(fila - 1, columna + 1);
+                destaparEspacioEnBlanco(fila, columna + 1);
+                destaparEspacioEnBlanco(fila + 1, columna + 1);
+                destaparEspacioEnBlanco(fila + 1, columna);
+            } else if (fila != 0 && fila != 8 && columna == 8 ){
+                destaparEspacioEnBlanco(fila - 1, columna);
+                destaparEspacioEnBlanco(fila - 1, columna-1);
+                destaparEspacioEnBlanco(fila , columna-1);
+                destaparEspacioEnBlanco(fila + 1, columna-1);
+                destaparEspacioEnBlanco(fila + 1, columna);
+            } else if (fila == 0 && columna != 0 && columna!= 8){
+                destaparEspacioEnBlanco(fila, columna-1);
+                destaparEspacioEnBlanco(fila + 1, columna-1);
+                destaparEspacioEnBlanco(fila + 1, columna);
+                destaparEspacioEnBlanco(fila + 1, columna+1);
+                destaparEspacioEnBlanco(fila, columna+1);
+            }else if (fila == 8 && columna != 0 && columna != 8 ){
+                destaparEspacioEnBlanco(fila, columna-1);
+                destaparEspacioEnBlanco(fila-1, columna-1);
+                destaparEspacioEnBlanco(fila-1, columna);
+                destaparEspacioEnBlanco(fila-1, columna+1);
+                destaparEspacioEnBlanco(fila, columna+1);
+            } else {
+                destaparEspacioEnBlanco(fila - 1, columna);
+                destaparEspacioEnBlanco(fila - 1, columna + 1);
+                destaparEspacioEnBlanco(fila - 1, columna - 1);
+                destaparEspacioEnBlanco(fila, columna - 1);
+                destaparEspacioEnBlanco(fila, columna + 1);
+                destaparEspacioEnBlanco(fila + 1, columna);
+                destaparEspacioEnBlanco(fila + 1, columna + 1);
+                destaparEspacioEnBlanco(fila + 1, columna - 1); 
+            }
+        } else {
+            Image numero = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icono_num_" + Interno[fila][columna] + ".png"));
+            numero = numero.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            this.Tablero[fila][columna].setDisabledIcon(new ImageIcon(numero));
+            this.Tablero[fila][columna].setEnabled(false);
         }
     }
 }

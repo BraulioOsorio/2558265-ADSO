@@ -1,51 +1,56 @@
-import java.util.Scanner;
+import java.util.*;
+
 public class Factura{
-    int numeroFactura;
-    String fecha;
-    Personas cliente;
-    Personas vendedor;
-    Productos listaProductos[];
+
+    Date fecha;
+    int id;
+    Persona vendedor;
+    Persona cliente;
+    int cantidadP;
+    ItemsFactura[] items;    
     double total;
-    Scanner entrada; 
-    public Factura(){
-        this.entrada = new Scanner(System.in);
-        this.numeroFactura=numeroFactura;
-        this.cliente=cliente;
-        this.vendedor=vendedor;
-        this.total=total;
-        this.listaProductos = new Productos[200];
-        this.fecha=fecha;
+
+
+    public Factura(Persona cliente, Persona vendedor){
+        this.fecha = new Date();
+        this.vendedor = vendedor;
+        this.cliente = cliente;
+        this.cantidadP = 0;
+        this.items = new ItemsFactura[99];
+        this.total = 0;
     }
 
-    public void Star(Personas arreglo[],Personas arregloVendedor[]){
-        System.out.println("|| ---------------------  WELCOME  ------------------- ||");
-        System.out.println("LISTA DE CLIENTES");
-        for(int i=0;i<arreglo.length;i++){
-            if(arreglo[i]!= null){
-                System.out.print((i+1)+"- ");
-                arreglo[i].imprimir();
-            }else{
-                break;
-            }
-        }
-        System.out.print("Ingrese el numero del cliente para elegirlo: ");
-        int numeroCliente = this.entrada.nextInt();
-        this.cliente=arreglo[numeroCliente-1];
-        System.out.println("---------------------------------------------------------------");
-        System.out.println("LISTA DE VENDEDORES");
-        for(int i=0;i<arregloVendedor.length;i++){
-            if(arregloVendedor[i]!= null){
-                System.out.print((i+1)+"- ");
-                arregloVendedor[i].imprimir();
-            }else{
-                break;
-            }
-        }
-        System.out.print("Ingrese el numero del vendedor para elegirlo: ");
-        int numeroVendedor = this.entrada.nextInt();
-        this.vendedor=arregloVendedor[numeroVendedor-1];
-        
-        System.out.println(this.vendedor.toString()+" - "+this.cliente.toString());
+    public Date getFecha() {
+        return fecha;
     }
 
+    public Persona getVendedor() {
+        return vendedor;
+    }
+
+    public Persona getCliente() {
+        return cliente;
+    }
+    
+    public int getId(){
+        return id;
+    }
+
+    public ItemsFactura[] getItems(){
+        return items;
+    }
+
+    public double getTotal(){
+        return total;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void agregarProductoComprado(ItemsFactura items){
+        this.items[cantidadP] = items;
+        cantidadP++;
+        total += items.getSubtotal();
+    }
 }
