@@ -5,9 +5,6 @@ import java.awt.event.*;
 import java.awt.LayoutManager;
 import java.util.Currency;
 import javax.swing.event.DocumentListener;
-import javax.swing.Timer;
-import javax.swing.plaf.basic.BasicButtonUI;
-import java.lang.reflect.Field;
 
 public class ModificarInterfaz extends JFrame{
     Clientes arrayClientes[];

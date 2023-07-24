@@ -1,1 +1,5 @@
 *.class
+/13-AppParqueadero/nbproject/private/
+/13-AppParqueadero/build/
+/13-AppPaqueadero/nbproject/private/
+/13-AppPaqueadero/build/
