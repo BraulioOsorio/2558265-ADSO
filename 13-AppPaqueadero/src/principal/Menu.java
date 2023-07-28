@@ -1,11 +1,14 @@
 package principal;
 
+import Clases.DataBase;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class Menu extends javax.swing.JFrame {
-
-    public Menu() {
+    
+    DataBase basedatos;
+    public Menu(DataBase basedatos) {
+        this.basedatos = basedatos;
         initComponents();
         initComponentAltern();
     }
@@ -55,12 +58,22 @@ public class Menu extends javax.swing.JFrame {
         btn_editar.setForeground(new java.awt.Color(255, 255, 255));
         btn_editar.setText("EDITAR");
         btn_editar.setFocusPainted(false);
+        btn_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editarActionPerformed(evt);
+            }
+        });
 
         btn_eliminar.setBackground(new java.awt.Color(0, 51, 255));
         btn_eliminar.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         btn_eliminar.setForeground(new java.awt.Color(255, 255, 255));
         btn_eliminar.setText("ELIMINAR");
         btn_eliminar.setFocusPainted(false);
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
 
         btn_salir.setBackground(new java.awt.Color(153, 0, 0));
         btn_salir.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -159,7 +172,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btn_listarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listarActionPerformed
         contentPrincipal.removeAll();
-        PanelListar contenTemporal = new PanelListar();
+        PanelListar contenTemporal = new PanelListar(basedatos);
         contenTemporal.setSize(contentPrincipal.getSize());
         contentPrincipal.add(contenTemporal);
         repaint();
@@ -168,12 +181,30 @@ public class Menu extends javax.swing.JFrame {
 
     private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
         contentPrincipal.removeAll();
-        PanelCrear contenTemporal = new PanelCrear();
+        PanelCrear contenTemporal = new PanelCrear(basedatos);
         contenTemporal.setSize(contentPrincipal.getSize());
         contentPrincipal.add(contenTemporal);
         repaint();
         revalidate();
     }//GEN-LAST:event_btn_crearActionPerformed
+
+    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
+        contentPrincipal.removeAll();
+        PanelModificar contenTemporal = new PanelModificar(basedatos);
+        contenTemporal.setSize(contentPrincipal.getSize());
+        contentPrincipal.add(contenTemporal);
+        repaint();
+        revalidate();
+    }//GEN-LAST:event_btn_editarActionPerformed
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        contentPrincipal.removeAll();
+        PanelEliminar contenTemporal = new PanelEliminar(basedatos);
+        contenTemporal.setSize(contentPrincipal.getSize());
+        contentPrincipal.add(contenTemporal);
+        repaint();
+        revalidate();
+    }//GEN-LAST:event_btn_eliminarActionPerformed
 
     public void initComponentAltern(){
         setVisible(true);

@@ -4,27 +4,19 @@
  */
 package principal;
 
-import Clases.DataBase;
-import java.awt.Color;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
-
 /**
  *
  * @author INSTRUCTOR
  */
-public class PanelCrear extends javax.swing.JPanel {
+public class PanelEliminar extends javax.swing.JPanel {
 
-    DataBase basedatos;
-    public PanelCrear(DataBase basedatos) {
-        this.basedatos = basedatos;
+    /**
+     * Creates new form PanelListar
+     */
+    public PanelEliminar() {
         initComponents();
-        iniComponents2();
     }
-    
-    public void iniComponents2(){
-        Border borde = BorderFactory.createLineBorder(Color.RED, 1);
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,33 +42,41 @@ public class PanelCrear extends javax.swing.JPanel {
         etq_titulo.setBackground(new java.awt.Color(255, 255, 255));
         etq_titulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         etq_titulo.setForeground(new java.awt.Color(0, 0, 0));
-        etq_titulo.setText("CREAR CLIENTE");
+        etq_titulo.setText("ELIMINAR CLIENTE");
         etq_titulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         etq_cedula.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         etq_cedula.setForeground(new java.awt.Color(0, 0, 0));
-        etq_cedula.setText("CEDULA:");
+        etq_cedula.setText("BUSCAR");
 
         etq_nombres.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         etq_nombres.setForeground(new java.awt.Color(0, 0, 0));
         etq_nombres.setText("NOMBRES");
 
+        campo_nombres.setEnabled(false);
+
         etq_apellidos.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         etq_apellidos.setForeground(new java.awt.Color(0, 0, 0));
         etq_apellidos.setText("APELLIDOS");
+
+        campo_apellidos.setEnabled(false);
 
         etq_telefono.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         etq_telefono.setForeground(new java.awt.Color(0, 0, 0));
         etq_telefono.setText("TELEFONO:");
 
+        campo_telefono.setEnabled(false);
+
         etq_email.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         etq_email.setForeground(new java.awt.Color(0, 0, 0));
         etq_email.setText("EMAIL:");
 
+        campo_email.setEnabled(false);
+
         btn_registrar.setBackground(new java.awt.Color(0, 0, 204));
         btn_registrar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btn_registrar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_registrar.setText("REGISTRAR");
+        btn_registrar.setText("ELIMINAR");
         btn_registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_registrarActionPerformed(evt);
@@ -94,43 +94,47 @@ public class PanelCrear extends javax.swing.JPanel {
                         .addComponent(etq_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(281, 281, 281)
-                        .addComponent(btn_registrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_registrar)))
+                .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(etq_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campo_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(etq_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(campo_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(campo_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(etq_apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(campo_apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(campo_apellidos))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(etq_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(campo_telefono))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(etq_email, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(campo_email, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(etq_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campo_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                                    .addComponent(campo_email, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(132, 132, 132))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(etq_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(campo_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(etq_titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(etq_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campo_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(campo_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(etq_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etq_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campo_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,28 +150,14 @@ public class PanelCrear extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(etq_email, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(campo_email, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                .addGap(59, 59, 59)
                 .addComponent(btn_registrar)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarActionPerformed
-        String cedula = campo_cedula.getText();
-        String nombres = campo_nombres.getText();
-        String apellidos = campo_apellidos.getText();
-        String telefono = campo_telefono.getText();
-        String direccion = "";
-        String email = campo_email.getText();
-        boolean respuesta = this.basedatos.insertarPersona(cedula,nombres,apellidos,telefono,direccion,email);
-            if(respuesta){
-                campo_cedula.setText("");
-                campo_nombres.setText("");
-                campo_apellidos.setText("");
-                campo_telefono.setText("");
-                campo_email.setText("");
-                campo_cedula.requestFocus();
-            }
+        // TODO add your handling code here:
     }//GEN-LAST:event_btn_registrarActionPerformed
 
 

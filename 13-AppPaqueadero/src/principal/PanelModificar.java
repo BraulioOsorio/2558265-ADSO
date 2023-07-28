@@ -5,26 +5,19 @@
 package principal;
 
 import Clases.DataBase;
-import java.awt.Color;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 
 /**
  *
  * @author INSTRUCTOR
  */
-public class PanelCrear extends javax.swing.JPanel {
+public class PanelModificar extends javax.swing.JPanel {
 
     DataBase basedatos;
-    public PanelCrear(DataBase basedatos) {
+    public PanelModificar(DataBase basedatos) {
         this.basedatos = basedatos;
         initComponents();
-        iniComponents2();
     }
-    
-    public void iniComponents2(){
-        Border borde = BorderFactory.createLineBorder(Color.RED, 1);
-    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,12 +43,18 @@ public class PanelCrear extends javax.swing.JPanel {
         etq_titulo.setBackground(new java.awt.Color(255, 255, 255));
         etq_titulo.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         etq_titulo.setForeground(new java.awt.Color(0, 0, 0));
-        etq_titulo.setText("CREAR CLIENTE");
+        etq_titulo.setText("MODIFICAR CLIENTE");
         etq_titulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         etq_cedula.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         etq_cedula.setForeground(new java.awt.Color(0, 0, 0));
         etq_cedula.setText("CEDULA:");
+
+        campo_cedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campo_cedulaKeyReleased(evt);
+            }
+        });
 
         etq_nombres.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         etq_nombres.setForeground(new java.awt.Color(0, 0, 0));
@@ -76,7 +75,7 @@ public class PanelCrear extends javax.swing.JPanel {
         btn_registrar.setBackground(new java.awt.Color(0, 0, 204));
         btn_registrar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btn_registrar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_registrar.setText("REGISTRAR");
+        btn_registrar.setText("MODIFICAR");
         btn_registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_registrarActionPerformed(evt);
@@ -153,22 +152,15 @@ public class PanelCrear extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarActionPerformed
-        String cedula = campo_cedula.getText();
-        String nombres = campo_nombres.getText();
-        String apellidos = campo_apellidos.getText();
-        String telefono = campo_telefono.getText();
-        String direccion = "";
-        String email = campo_email.getText();
-        boolean respuesta = this.basedatos.insertarPersona(cedula,nombres,apellidos,telefono,direccion,email);
-            if(respuesta){
-                campo_cedula.setText("");
-                campo_nombres.setText("");
-                campo_apellidos.setText("");
-                campo_telefono.setText("");
-                campo_email.setText("");
-                campo_cedula.requestFocus();
-            }
+        // TODO add your handling code here:
     }//GEN-LAST:event_btn_registrarActionPerformed
+
+    private void campo_cedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_cedulaKeyReleased
+        String cedula = campo_cedula.getText();
+        boolean resultado = DataBase.ModificarPersonas(cedula);
+        
+        btn_registrar.setEnabled(true);
+    }//GEN-LAST:event_campo_cedulaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,5 +1,6 @@
 package principal;
 
+import Clases.DataBase;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -12,7 +13,9 @@ import javax.swing.border.LineBorder;
 
 public class Login extends javax.swing.JFrame {
 
+    DataBase basedatos;
     public Login() {
+        this.basedatos = new DataBase();
         initComponents();
         initComponents2();
     }
@@ -129,7 +132,7 @@ public class Login extends javax.swing.JFrame {
         String password = campo_password.getText();
         
         if (email.equalsIgnoreCase("andres@mail.com.co") && password.equalsIgnoreCase("12345")) {   
-            Menu ventana = new Menu();
+            Menu ventana = new Menu(basedatos);
             dispose();            
         }else{
             System.out.println("DATOS INVALIDOS");

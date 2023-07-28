@@ -4,19 +4,54 @@
  */
 package principal;
 
+import Clases.DataBase;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author INSTRUCTOR
  */
 public class PanelListar extends javax.swing.JPanel {
-
-    /**
-     * Creates new form PanelListar
-     */
-    public PanelListar() {
+    
+    DataBase basedatos;
+    DefaultTableModel modelo;
+    
+    public PanelListar(DataBase basedatos) {
+        this.basedatos = basedatos;
         initComponents();
+        inirAlternComponents();
+        cargarListaPersonas();
     }
-
+    
+    public void inirAlternComponents(){
+        modelo = (DefaultTableModel) tablaPersonas.getModel();
+    }
+    public void cargarListaPersonas(){
+        ResultSet listado = this.basedatos.listarPersonas();
+        if(listado != null){
+            try {
+                modelo.setRowCount(0);
+                do{
+                    String cedula = listado.getString("cedula");
+                    String nombres = listado.getString("nombres");
+                    String apellidos = listado.getString("apellidos");
+                    String telefono = listado.getString("telefono");
+                    String email = listado.getString("email");
+                    
+                    Object[] fila = new Object[]{cedula,nombres,apellidos,telefono,email};
+                    modelo.addRow(fila);
+                }while(listado.next());
+            } catch (SQLException ex) {
+                System.out.println("Error al extraer datos "+ex.getMessage());
+            }
+        }else{
+            System.out.println("basio");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,13 +63,13 @@ public class PanelListar extends javax.swing.JPanel {
 
         etq_titulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaPersonas = new javax.swing.JTable();
 
         etq_titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         etq_titulo.setText("LISTADO DE CLIENTES");
         etq_titulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPersonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -61,7 +96,7 @@ public class PanelListar extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaPersonas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,6 +124,6 @@ public class PanelListar extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel etq_titulo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaPersonas;
     // End of variables declaration//GEN-END:variables
 }
