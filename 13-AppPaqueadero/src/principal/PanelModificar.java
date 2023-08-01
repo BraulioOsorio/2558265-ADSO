@@ -3,8 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package principal;
-
+import java.sql.ResultSet;
 import Clases.DataBase;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,6 +54,11 @@ public class PanelModificar extends javax.swing.JPanel {
         etq_cedula.setForeground(new java.awt.Color(0, 0, 0));
         etq_cedula.setText("CEDULA:");
 
+        campo_cedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_cedulaActionPerformed(evt);
+            }
+        });
         campo_cedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 campo_cedulaKeyReleased(evt);
@@ -152,15 +161,44 @@ public class PanelModificar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarActionPerformed
-        // TODO add your handling code here:
+        String cedula = campo_cedula.getText();
+        String nombres = campo_nombres.getText();
+        String apellidos = campo_apellidos.getText();
+        String telefono = campo_telefono.getText();
+        String email = campo_email.getText();
+        boolean respuesta = this.basedatos.updatePeople(cedula,nombres,apellidos,telefono,email);
+            if(respuesta){
+                JOptionPane.showMessageDialog(null,"Modificado con éxito");
+                campo_cedula.setEnabled(true);
+                campo_cedula.setText("");
+                campo_nombres.setText("");
+                campo_apellidos.setText("");
+                campo_telefono.setText("");
+                campo_email.setText("");
+                campo_cedula.requestFocus();
+            }
     }//GEN-LAST:event_btn_registrarActionPerformed
 
     private void campo_cedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_cedulaKeyReleased
         String cedula = campo_cedula.getText();
-        boolean resultado = DataBase.ModificarPersonas(cedula);
-        
-        btn_registrar.setEnabled(true);
+       
+        ResultSet resultado = this.basedatos.ModificarPersonas(cedula);
+        try {
+            if (resultado.next()) {
+                campo_nombres.setText(resultado.getString("nombre"));
+                campo_apellidos.setText(resultado.getString("apellido"));
+                campo_telefono.setText(resultado.getString("telefono"));
+                campo_email.setText(resultado.getString("email"));
+                campo_cedula.setEnabled(false);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error "+e.getMessage());
+        }  
     }//GEN-LAST:event_campo_cedulaKeyReleased
+
+    private void campo_cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_cedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campo_cedulaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,16 +4,15 @@
  */
 package principal;
 
-/**
- *
- * @author INSTRUCTOR
- */
+import java.sql.ResultSet;
+import Clases.DataBase;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 public class PanelEliminar extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelListar
-     */
-    public PanelEliminar() {
+    DataBase basedatos;
+    public PanelEliminar(DataBase basedatos) {
+        this.basedatos = basedatos;
         initComponents();
     }
 
@@ -49,6 +48,12 @@ public class PanelEliminar extends javax.swing.JPanel {
         etq_cedula.setForeground(new java.awt.Color(0, 0, 0));
         etq_cedula.setText("BUSCAR");
 
+        campo_cedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campo_cedulaKeyReleased(evt);
+            }
+        });
+
         etq_nombres.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         etq_nombres.setForeground(new java.awt.Color(0, 0, 0));
         etq_nombres.setText("NOMBRES");
@@ -77,6 +82,7 @@ public class PanelEliminar extends javax.swing.JPanel {
         btn_registrar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btn_registrar.setForeground(new java.awt.Color(255, 255, 255));
         btn_registrar.setText("ELIMINAR");
+        btn_registrar.setEnabled(false);
         btn_registrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_registrarActionPerformed(evt);
@@ -157,8 +163,40 @@ public class PanelEliminar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarActionPerformed
-        // TODO add your handling code here:
+        String cedula = campo_cedula.getText();
+        boolean resultado = this.basedatos.EliminarPersona(cedula);
+        if (resultado) {
+            JOptionPane.showMessageDialog(null,"Eliminado con éxito");
+            campo_cedula.setText("");
+            campo_nombres.setText("");
+            campo_apellidos.setText("");
+            campo_telefono.setText("");
+            campo_email.setText("");
+            btn_registrar.setEnabled(false);
+        }
     }//GEN-LAST:event_btn_registrarActionPerformed
+
+    private void campo_cedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_cedulaKeyReleased
+        String cedula = campo_cedula.getText();
+        ResultSet resultado = this.basedatos.EliminarPersonabuscar(cedula);
+        try {
+            if (resultado.next()) {
+                campo_nombres.setText(resultado.getString("nombre"));
+                campo_apellidos.setText(resultado.getString("apellido"));
+                campo_telefono.setText(resultado.getString("telefono"));
+                campo_email.setText(resultado.getString("email"));
+                btn_registrar.setEnabled(true);
+            } else{
+                campo_nombres.setText("");
+                campo_apellidos.setText("");
+                campo_telefono.setText("");
+                campo_email.setText("");
+                btn_registrar.setEnabled(false);
+            } 
+        } catch (SQLException e) {
+            System.out.println("Error "+e.getMessage());
+        }  
+    }//GEN-LAST:event_campo_cedulaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

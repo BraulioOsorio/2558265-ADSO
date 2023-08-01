@@ -7,6 +7,7 @@ package principal;
 import Clases.DataBase;
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 /**
@@ -157,10 +158,10 @@ public class PanelCrear extends javax.swing.JPanel {
         String nombres = campo_nombres.getText();
         String apellidos = campo_apellidos.getText();
         String telefono = campo_telefono.getText();
-        String direccion = "";
         String email = campo_email.getText();
-        boolean respuesta = this.basedatos.insertarPersona(cedula,nombres,apellidos,telefono,direccion,email);
+        boolean respuesta = this.basedatos.insertarPersona(cedula,nombres,apellidos,telefono,email);
             if(respuesta){
+                JOptionPane.showMessageDialog(null,"Creado con éxito");
                 campo_cedula.setText("");
                 campo_nombres.setText("");
                 campo_apellidos.setText("");

@@ -134,6 +134,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="campo_cedula">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campo_cedulaKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="etq_nombres">
       <Properties>
@@ -211,6 +214,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="ELIMINAR"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_registrarActionPerformed"/>

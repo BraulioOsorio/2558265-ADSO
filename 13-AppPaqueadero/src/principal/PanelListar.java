@@ -37,8 +37,8 @@ public class PanelListar extends javax.swing.JPanel {
                 modelo.setRowCount(0);
                 do{
                     String cedula = listado.getString("cedula");
-                    String nombres = listado.getString("nombres");
-                    String apellidos = listado.getString("apellidos");
+                    String nombres = listado.getString("nombre");
+                    String apellidos = listado.getString("apellido");
                     String telefono = listado.getString("telefono");
                     String email = listado.getString("email");
                     
