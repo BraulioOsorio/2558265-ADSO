@@ -4,6 +4,8 @@
  */
 package clases;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Conexion {
     Statement manipularDB;
@@ -22,8 +24,7 @@ public class Conexion {
             conexion = DriverManager.getConnection(url, user, password);
             manipularDB = conexion.createStatement();
             System.out.println("Conexion Exitosa a Base de Datos "+databasename);
-            String consulta = "UPDATE tareas SET estado = 'TIEMPO' WHERE (estado = 'PROCESO' or estado = 'PENDIENTE') and now() > Fecha_fin;";
-            manipularDB.executeUpdate(consulta);
+           
         } catch (SQLException ex) {
             System.out.println("Mensaje de error: " + ex.getMessage());
             conexion = null;
@@ -32,6 +33,17 @@ public class Conexion {
         
     }
     
+    
+    
+    public void updateall(){
+         
+        try {
+            String consulta = "UPDATE tareas SET estado = 'TIEMPO' WHERE (estado = 'PROCESO' or estado = 'PENDIENTE') and now() > Fecha_fin;";
+            manipularDB.executeUpdate(consulta);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public boolean addTasks(String tarea,String fecha,String id){
         boolean respuesta = false;
@@ -162,11 +174,13 @@ public class Conexion {
             System.out.println("Error al modificar");
         }
     }
-    public boolean insertarPersona(String nombre,String email,String pass,String foto){
+    public boolean insertarPersona(String nombre,String email,String pass){
         boolean respuesta = false;
         try {
-            String consulta = "INSERT INTO usuarios (nombre_user,correo,pass,icono) VALUES ('"+nombre+"','"+email+"','"+pass+"','"+foto+"')";
+            String consulta = "INSERT INTO usuarios (nombre_user,correo,pass) VALUES ('"+nombre+"','"+email+"','"+pass+"')";
             int resultado = this.manipularDB.executeUpdate(consulta);
+            String upda = "UPDATE usuarios SET Icono = '"+email+"' WHERE id_usuario = LAST_INSERT_ID()";
+            manipularDB.executeUpdate(upda);
             if (resultado == 1){
                 respuesta = true;
             }

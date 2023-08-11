@@ -6,8 +6,10 @@ CREATE TABLE usuarios(
     id_usuario INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nombre_user VARCHAR(60),
     correo VARCHAR(60) UNIQUE,
-    pass VARCHAR(255)
-    
+    pass VARCHAR(255),
+    Fecha_inicio DATE,
+    Fecha_fin DATE,
+    Icono VARCHAR(255)
 );
 CREATE TABLE tareas(
     id_tarea INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -26,9 +28,7 @@ INSERT INTO `tareas` (`id_tarea`, `tarea`, `estado`) VALUES (NULL, 'hacer ejerci
 
 
 ALTER TABLE `tareas` CHANGE `estado` `estado` ENUM("PENDIENTE","PROCESO","CANCELAR","REALIZADO","TIEMPO") NULL;
-ALTER TABLE `tareas` ADD `Fecha_inicio` DATE AFTER `estado`;
-ALTER TABLE `tareas` ADD `Fecha_fin` DATE AFTER `Fecha_inicio`;
-ALTER TABLE `usuarios` ADD `Icono` ENUM("1","2","3","4","5","6") NOT NULL AFTER `pass`;
+
 
 
 

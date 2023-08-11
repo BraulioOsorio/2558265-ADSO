@@ -1,0 +1,38 @@
+primera opcion:
+SELECT
+    u.id_usuario,
+    u.nombre_user,
+    (
+        SELECT COUNT(*) FROM user_tareas ut
+        INNER JOIN tareas t ON ut.id_tarea = t.id_tarea
+        WHERE ut.id_usuario = u.id_usuario AND t.estado = 'REALIZADO'
+    ) AS tareas_realizadas,
+    (
+        SELECT COUNT(*) FROM user_tareas ut
+        WHERE ut.id_usuario = u.id_usuario
+    ) AS total_tareas_asignadas,
+    (
+        SELECT (
+            COUNT(*) /
+            (SELECT COUNT(*) FROM user_tareas ut WHERE ut.id_usuario = u.id_usuario)
+        ) * 100
+    ) AS porcentaje_realizado
+FROM
+    usuarios u;
+ y meter el resultado de la consulta en un jlabel
+
+segunda opcion:
+SELECT
+    u.id_usuario,
+    u.nombre_user,
+    COUNT(DISTINCT ut.id_tarea) AS total_tareas_asignadas,
+    SUM(CASE WHEN t.estado = 'REALIZADO' THEN 1 ELSE 0 END) AS tareas_realizadas,
+    (SUM(CASE WHEN t.estado = 'REALIZADO' THEN 1 ELSE 0 END) / COUNT(DISTINCT ut.id_tarea)) * 100 AS porcentaje_realizado
+FROM
+    usuarios u
+LEFT JOIN
+    user_tareas ut ON u.id_usuario = ut.id_usuario
+LEFT JOIN
+    tareas t ON ut.id_tarea = t.id_tarea
+GROUP BY
+    u.id_usuario, u.nombre_user;

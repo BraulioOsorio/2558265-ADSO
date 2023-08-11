@@ -1,6 +1,7 @@
 package Principal;
 
 import clases.Conexion;
+
 import java.sql.ResultSet;
 import java.awt.Image;
 import java.sql.SQLException;
@@ -10,12 +11,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-
+    
     Conexion conexion;
     
     String estados;
     public Login(Conexion conexion) {
-        this.conexion = new Conexion();
+        this.conexion = conexion;
+        this.conexion.updateall();
         initComponents();
         this.estados = estados;
         initComponents2();

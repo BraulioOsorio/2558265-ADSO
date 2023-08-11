@@ -7,12 +7,16 @@ import java.sql.*;
 import clases.Conexion;
 import java.awt.Image;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 
 
 
@@ -27,6 +31,7 @@ public class PanelTareas extends javax.swing.JFrame {
     String correos;
     String estados;
     String idUser;
+    String Fecha;
     public PanelTareas(Conexion conexion,String nombre,String foto,String correo,String estado,String id) {
         this.conexion = conexion;
         this.estados = estado;
@@ -35,6 +40,7 @@ public class PanelTareas extends javax.swing.JFrame {
         this.fotos=foto;
         this.correos=correo;
         initComponents();
+        this.Fecha = Fecha;
         initComponentsAlter();
         tareasPendientes();
         tareasRealizadas();
@@ -58,12 +64,11 @@ public class PanelTareas extends javax.swing.JFrame {
         btn_recuperar = new javax.swing.JButton();
         NombreTarea = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        fechaFin = new javax.swing.JTextField();
-        formatoFecha = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaPros = new javax.swing.JTable();
         close = new javax.swing.JButton();
         porcentaje = new javax.swing.JLabel();
+        calendario = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(647, 663));
@@ -172,12 +177,6 @@ public class PanelTareas extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Fecha de Finalización :");
 
-        fechaFin.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(154, 168, 213), null));
-
-        formatoFecha.setBackground(new java.awt.Color(0, 0, 0));
-        formatoFecha.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        formatoFecha.setText("DD/MM/YYYY");
-
         tablaPros.setAutoCreateRowSorter(true);
         tablaPros.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         tablaPros.setModel(new javax.swing.table.DefaultTableModel(
@@ -230,6 +229,15 @@ public class PanelTareas extends javax.swing.JFrame {
         porcentaje.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         porcentaje.setText("Porcentaje de tareas realizadas: %");
 
+        calendario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                calendarioKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                calendarioKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -249,6 +257,11 @@ public class PanelTareas extends javax.swing.JFrame {
                         .addContainerGap(48, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NombreTarea)
+                            .addComponent(nombreUser)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(205, 205, 205)
+                                .addComponent(close))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane2)
@@ -256,22 +269,14 @@ public class PanelTareas extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(campo_task, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(33, 33, 33)
-                                    .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(32, 32, 32)
-                                    .addComponent(btn_add)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(205, 205, 205)
-                                .addComponent(close))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(NombreTarea)
-                                .addGap(135, 135, 135)
-                                .addComponent(formatoFecha))
-                            .addComponent(nombreUser))
+                                    .addGap(261, 261, 261)
+                                    .addComponent(btn_add))))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(calendario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(187, 187, 187))
         );
         layout.setVerticalGroup(
@@ -294,14 +299,13 @@ public class PanelTareas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(emailUser)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(formatoFecha)
-                    .addComponent(NombreTarea))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo_task, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_add)
-                    .addComponent(fechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(NombreTarea)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(campo_task, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_add))
+                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -309,7 +313,7 @@ public class PanelTareas extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(close)
-                .addGap(156, 156, 156))
+                .addGap(184, 184, 184))
         );
 
         pack();
@@ -317,12 +321,12 @@ public class PanelTareas extends javax.swing.JFrame {
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         String tarea = campo_task.getText();
-        String fecha = fechaFin.getText();
+
         
         try {
             DateTimeFormatter formatoOriginal = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             DateTimeFormatter formatoDeseado = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-            LocalDate fechaLocal = LocalDate.parse(fecha, formatoOriginal);
+            LocalDate fechaLocal = LocalDate.parse(this.Fecha, formatoOriginal);
             String fechaFormateada = fechaLocal.format(formatoDeseado);
             if (!tarea.equalsIgnoreCase("")) {
             boolean response = conexion.addTasks(tarea,fechaFormateada,this.idUser);
@@ -330,8 +334,8 @@ public class PanelTareas extends javax.swing.JFrame {
                     System.out.println("Se agrego exitosamente");
                     JOptionPane.showMessageDialog(null, "Tarea agregada");
                     campo_task.setText("");
-                    fechaFin.setText("");
                     campo_task.requestFocus();
+                    
                 }else{
                     System.out.println("No se pudo agregar");
                 }
@@ -343,6 +347,8 @@ public class PanelTareas extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Porfavor Coloquele los / para separar la fecha Gracias");
         }
+        //calendario.setDate(null); 
+            
         
         
     }//GEN-LAST:event_btn_addActionPerformed
@@ -376,6 +382,15 @@ public class PanelTareas extends javax.swing.JFrame {
         modi.setResizable(false);
         modi.setLocationRelativeTo(null);
     }//GEN-LAST:event_btn_recuperarActionPerformed
+
+    private void calendarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calendarioKeyReleased
+          
+                
+    }//GEN-LAST:event_calendarioKeyReleased
+
+    private void calendarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calendarioKeyPressed
+         
+    }//GEN-LAST:event_calendarioKeyPressed
     
     public final void initComponentsAlter(){
         setTitle("Welcome "+this.nombres);
@@ -385,7 +400,7 @@ public class PanelTareas extends javax.swing.JFrame {
         modelo_two = (DefaultTableModel) tablaReali.getModel();
         modelo_tre = (DefaultTableModel) tablaPros.getModel();
         setIconImage( getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icon_app.png")) );
-        Image img_candado = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/"+this.fotos+".jpg"));
+        Image img_candado = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/"+this.fotos+".png"));
         img_candado = img_candado.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
         FotoUser.setIcon(new ImageIcon(img_candado));
         tabla.getTableHeader().setResizingAllowed(false);
@@ -478,6 +493,20 @@ public class PanelTareas extends javax.swing.JFrame {
             }
         });
         
+        calendario.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if ("date".equals(evt.getPropertyName())) {
+                    // Obtén la fecha seleccionada
+                    java.util.Date seleccionada = calendario.getDate();
+                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                    String fechaFormateada = formato.format(seleccionada);
+                    System.out.println(fechaFormateada);
+                    Fecha = fechaFormateada;
+                }
+            }
+        });
+        
         
     }
     public void actualizaTarea(boolean estado){
@@ -554,11 +583,10 @@ public class PanelTareas extends javax.swing.JFrame {
     private javax.swing.JLabel NombreTarea;
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_recuperar;
+    private com.toedter.calendar.JDateChooser calendario;
     public javax.swing.JTextField campo_task;
     private javax.swing.JButton close;
     private javax.swing.JLabel emailUser;
-    public javax.swing.JTextField fechaFin;
-    private javax.swing.JLabel formatoFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
