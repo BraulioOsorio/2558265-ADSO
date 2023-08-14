@@ -1,11 +1,7 @@
 package Principal;
 
 import clases.Conexion;
-<<<<<<< HEAD
-
-=======
 import hasdcode.Index;
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
 import java.sql.ResultSet;
 import java.awt.Image;
 import java.sql.SQLException;
@@ -15,23 +11,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-<<<<<<< HEAD
-    
-    Conexion conexion;
-=======
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
     
     Conexion conexion;
     Index pass;
     String estados;
     public Login(Conexion conexion) {
         this.conexion = conexion;
-<<<<<<< HEAD
-        this.conexion.updateall();
-        initComponents();
-=======
         this.pass = new Index();
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
         this.estados = estados;
         initComponents();
         initComponents2();

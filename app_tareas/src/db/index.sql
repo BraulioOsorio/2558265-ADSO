@@ -8,10 +8,7 @@ CREATE TABLE usuarios(
     nombre_user VARCHAR(60),
     correo VARCHAR(60) UNIQUE,
     pass VARCHAR(255),
-<<<<<<< HEAD
-=======
     
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
     Icono VARCHAR(255)
 );
 CREATE TABLE tareas(
@@ -31,11 +28,3 @@ CREATE TABLE user_tareas(
 ALTER TABLE `tareas` CHANGE `estado` `estado` TINYINT(4) NULL DEFAULT '0';
 
 ALTER TABLE `tareas` CHANGE `estado` `estado` ENUM("PENDIENTE","PROCESO","CANCELAR","REALIZADO","TIEMPO") NULL;
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d

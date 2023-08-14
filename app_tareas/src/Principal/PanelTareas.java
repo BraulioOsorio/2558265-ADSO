@@ -14,10 +14,6 @@ import javax.swing.table.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.text.SimpleDateFormat;
-<<<<<<< HEAD
-import java.util.Date;
-=======
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
 
 
 
@@ -35,10 +31,7 @@ public class PanelTareas extends javax.swing.JFrame {
     String estados;
     String idUser;
     String Fecha;
-<<<<<<< HEAD
-=======
     
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
     public PanelTareas(Conexion conexion,String nombre,String foto,String correo,String estado,String id) {
         this.conexion = conexion;
         this.estados = estado;
@@ -249,15 +242,6 @@ public class PanelTareas extends javax.swing.JFrame {
             }
         });
 
-        calendario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                calendarioKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                calendarioKeyReleased(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -278,29 +262,6 @@ public class PanelTareas extends javax.swing.JFrame {
                                 .addComponent(NombreTarea)))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
-                            .addComponent(NombreTarea)
-                            .addComponent(nombreUser)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(205, 205, 205)
-                                .addComponent(close))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane2)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(campo_task, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(261, 261, 261)
-                                    .addComponent(btn_add))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(calendario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(187, 187, 187))
-=======
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addComponent(jLabel1))
@@ -324,7 +285,6 @@ public class PanelTareas extends javax.swing.JFrame {
                         .addGap(267, 267, 267)
                         .addComponent(close)))
                 .addContainerGap())
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,22 +296,6 @@ public class PanelTareas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nombreUser)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-<<<<<<< HEAD
-                        .addComponent(emailUser)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(NombreTarea)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(campo_task, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_add))
-                    .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-=======
                         .addComponent(emailUser))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,16 +320,11 @@ public class PanelTareas extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(close)
-<<<<<<< HEAD
-                .addGap(184, 184, 184))
-=======
                 .addGap(17, 17, 17))
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
         );
 
         pack();
@@ -473,11 +412,7 @@ public class PanelTareas extends javax.swing.JFrame {
         modelo_two = (DefaultTableModel) tablaReali.getModel();
         modelo_tre = (DefaultTableModel) tablaPros.getModel();
         setIconImage( getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icon_app.png")) );
-<<<<<<< HEAD
-        Image img_candado = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/"+this.fotos+".png"));
-=======
         Image img_candado = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/"+fotos+".png"));
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
         img_candado = img_candado.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
         FotoUser.setIcon(new ImageIcon(img_candado));
         tabla.getTableHeader().setResizingAllowed(false);

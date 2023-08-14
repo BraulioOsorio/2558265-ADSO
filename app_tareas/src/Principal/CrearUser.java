@@ -13,32 +13,20 @@ import java.io.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.imageio.ImageIO;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
 
 public class CrearUser extends javax.swing.JFrame {
     String secretKey;
     Conexion conexion;
-<<<<<<< HEAD
-=======
     Index hasdcode;
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
     ImageIcon imagenTemporal;
     public CrearUser(Conexion conexion) {
         initComponents();
         this.conexion = conexion;
-<<<<<<< HEAD
-        fotos();
-        imagenTemporal = null;
-        
-=======
         this.hasdcode = new Index();
         this.imagenTemporal = imagenTemporal;
         this.secretKey = "mySecretKey12345";
          fotos();
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
     }
     
     public void fotos(){
@@ -61,16 +49,6 @@ public class CrearUser extends javax.swing.JFrame {
         campo_pass = new javax.swing.JTextField();
         passValidar = new javax.swing.JLabel();
         campo_pass_validar = new javax.swing.JTextField();
-<<<<<<< HEAD
-        jButton1 = new javax.swing.JButton();
-        btn_salir = new javax.swing.JButton();
-        btnLoadImage = new javax.swing.JButton();
-        panelPreview = new javax.swing.JPanel();
-        etqPreview = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        imagenLabel = new javax.swing.JLabel();
-        btnUploadImage = new javax.swing.JButton();
-=======
         btnLoadImage = new javax.swing.JButton();
         panelPreview = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -79,7 +57,6 @@ public class CrearUser extends javax.swing.JFrame {
         campo_cedula = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         imagenLabel = new javax.swing.JLabel();
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Crear Usuario");
@@ -126,8 +103,6 @@ public class CrearUser extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
-=======
         btnLoadImage.setBackground(new java.awt.Color(154, 168, 213));
         btnLoadImage.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnLoadImage.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,7 +116,6 @@ public class CrearUser extends javax.swing.JFrame {
 
         panelPreview.setBackground(new java.awt.Color(248, 239, 230));
 
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
         jButton1.setBackground(new java.awt.Color(154, 168, 213));
         jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton1.setText("Crear Perfil");
@@ -162,60 +136,6 @@ public class CrearUser extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
-        btnLoadImage.setBackground(new java.awt.Color(154, 168, 213));
-        btnLoadImage.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnLoadImage.setForeground(new java.awt.Color(255, 255, 255));
-        btnLoadImage.setText("Buscar Imagen");
-        btnLoadImage.setFocusable(false);
-        btnLoadImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoadImageActionPerformed(evt);
-            }
-        });
-
-        panelPreview.setBackground(new java.awt.Color(248, 239, 230));
-
-        etqPreview.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        etqPreview.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        etqPreview.setText("Vista Previa");
-
-        imagenLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jScrollPane1.setViewportView(imagenLabel);
-
-        btnUploadImage.setBackground(new java.awt.Color(154, 168, 213));
-        btnUploadImage.setText("Guardar");
-        btnUploadImage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUploadImageActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelPreviewLayout = new javax.swing.GroupLayout(panelPreview);
-        panelPreview.setLayout(panelPreviewLayout);
-        panelPreviewLayout.setHorizontalGroup(
-            panelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(etqPreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(panelPreviewLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPreviewLayout.createSequentialGroup()
-                        .addGap(0, 311, Short.MAX_VALUE)
-                        .addComponent(btnUploadImage)))
-                .addContainerGap())
-        );
-        panelPreviewLayout.setVerticalGroup(
-            panelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPreviewLayout.createSequentialGroup()
-                .addComponent(etqPreview, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnUploadImage)
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-=======
         javax.swing.GroupLayout panelPreviewLayout = new javax.swing.GroupLayout(panelPreview);
         panelPreview.setLayout(panelPreviewLayout);
         panelPreviewLayout.setHorizontalGroup(
@@ -245,48 +165,15 @@ public class CrearUser extends javax.swing.JFrame {
 
         imagenLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jScrollPane1.setViewportView(imagenLabel);
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-<<<<<<< HEAD
-                .addGap(74, 74, 74)
-=======
                 .addGap(70, 70, 70)
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(btnLoadImage, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(campo_nombre)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pass)
-                                    .addComponent(passValidar)
-                                    .addComponent(nombre)
-                                    .addComponent(correo))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(campo_correo)
-                            .addComponent(campo_pass)
-                            .addComponent(campo_pass_validar))
-                        .addGap(81, 81, 81))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-<<<<<<< HEAD
-                        .addGap(98, 98, 98)
-                        .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(panelPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-=======
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(campo_pass, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pass, javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,7 +205,6 @@ public class CrearUser extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(165, 165, 165)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)))
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -326,32 +212,6 @@ public class CrearUser extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(Titulo)
-<<<<<<< HEAD
-                .addGap(18, 18, 18)
-                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campo_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campo_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campo_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(passValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campo_pass_validar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(panelPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLoadImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-=======
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -383,7 +243,6 @@ public class CrearUser extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(215, 215, 215))
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -395,13 +254,8 @@ public class CrearUser extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-<<<<<<< HEAD
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 40, Short.MAX_VALUE))
-=======
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
         );
 
         pack();
@@ -431,35 +285,21 @@ public class CrearUser extends javax.swing.JFrame {
         String email = campo_correo.getText();
         String pass = campo_pass.getText();
         String passValidar = campo_pass_validar.getText();
-<<<<<<< HEAD
-        try {
-            if(nombres.length() > 0 && pass.length() > 0){
-=======
         String cedula = campo_cedula.getText();
         try {
             if(nombres.length() > 0 && pass.length() > 0 && cedula.length() > 0){
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
                 
                 boolean resultado = validarcorreo(email);
 
                 if(pass.equals(passValidar)){
                     if(resultado){
-<<<<<<< HEAD
-                        boolean respuesta = this.conexion.insertarPersona(nombres,email,pass);
-                        if(respuesta){
-                            JOptionPane.showMessageDialog(null,"Creado con éxito");
-=======
                         String passEncript = hasdcode.encrypt(pass,this.secretKey);
                         boolean respuesta = this.conexion.insertarPersona(nombres,email,passEncript,cedula);
                         if(respuesta){
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
                             campo_correo.setText("");
                             campo_nombre.setText("");
                             campo_pass.setText("");
                             campo_pass_validar.setText("");
-<<<<<<< HEAD
-
-=======
                             
                             guardarFoto();
                             campo_cedula.setText("");
@@ -468,7 +308,6 @@ public class CrearUser extends javax.swing.JFrame {
                             
                             
                             JOptionPane.showMessageDialog(null,"Creado con éxito");
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Correo Invalido");
@@ -502,22 +341,12 @@ public class CrearUser extends javax.swing.JFrame {
             imagenLabel.setIcon(imagenTemporal);
         }
     }//GEN-LAST:event_btnLoadImageActionPerformed
-<<<<<<< HEAD
-
-    private void btnUploadImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploadImageActionPerformed
-        String email = campo_correo.getText();
-        try {
-            BufferedImage image = createBufferedImage(imagenTemporal);
-            if (image != null) {
-                String outputFilePath = "src/imagenes/"+email+".png";
-=======
     public void guardarFoto(){
         
         try {
             BufferedImage image = createBufferedImage(imagenTemporal);
             if (image != null) {
                 String outputFilePath = "src/imagenes/"+campo_cedula.getText()+".png";
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
                 ImageIO.write(image, "png", new File(outputFilePath));
 
                 System.out.println("La imagen se ha cargado correctamente y se ha guardado en " + outputFilePath);
@@ -527,12 +356,7 @@ public class CrearUser extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
-    }//GEN-LAST:event_btnUploadImageActionPerformed
-    
-=======
     }
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
                                                
 
     private BufferedImage createBufferedImage(ImageIcon temporal){
@@ -580,10 +404,6 @@ public class CrearUser extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
     private javax.swing.JButton btnLoadImage;
-<<<<<<< HEAD
-    private javax.swing.JButton btnUploadImage;
-=======
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
     private javax.swing.JButton btn_salir;
     private javax.swing.JTextField campo_cedula;
     private javax.swing.JTextField campo_correo;
@@ -591,10 +411,6 @@ public class CrearUser extends javax.swing.JFrame {
     private javax.swing.JTextField campo_pass;
     private javax.swing.JTextField campo_pass_validar;
     private javax.swing.JLabel correo;
-<<<<<<< HEAD
-    private javax.swing.JLabel etqPreview;
-=======
->>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
     private javax.swing.JLabel imagenLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
