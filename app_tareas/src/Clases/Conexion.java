@@ -35,6 +35,7 @@ public class Conexion {
     
     
     
+<<<<<<< HEAD
     public void updateall(){
          
         try {
@@ -44,6 +45,9 @@ public class Conexion {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+=======
+    
+>>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
     
     public boolean addTasks(String tarea,String fecha,String id){
         boolean respuesta = false;
@@ -67,6 +71,8 @@ public class Conexion {
     public ResultSet tasksPendientes(String id){
         ResultSet listado = null;
         try {
+            String uestado = "UPDATE tareas SET estado = 'TIEMPO' WHERE (estado = 'PROCESO' or estado = 'PENDIENTE') and now() > Fecha_fin;";
+            manipularDB.executeUpdate(uestado);
             String consulta = "SELECT * FROM tareas  JOIN user_tareas  ON tareas.id_tarea = user_tareas.id_tarea WHERE user_tareas.id_usuario = '"+id+"' AND tareas.estado = 'PENDIENTE' ORDER BY DATEDIFF(tareas.Fecha_fin, NOW()) ASC"; 
             
             listado = manipularDB.executeQuery(consulta);
@@ -93,10 +99,10 @@ public class Conexion {
         return iniciar;
     }
     
-    public ResultSet datos(String correo,String pass){
+    public ResultSet datos(String correo){
         ResultSet listado = null;
         try {
-            String consulta = "SELECT * FROM usuarios WHERE correo = '"+correo+"' and pass = '"+pass+"' ";
+            String consulta = "SELECT * FROM usuarios WHERE correo = '"+correo+"' ";
             listado = manipularDB.executeQuery(consulta);
             listado.next();
             
@@ -174,12 +180,21 @@ public class Conexion {
             System.out.println("Error al modificar");
         }
     }
+<<<<<<< HEAD
     public boolean insertarPersona(String nombre,String email,String pass){
         boolean respuesta = false;
         try {
             String consulta = "INSERT INTO usuarios (nombre_user,correo,pass) VALUES ('"+nombre+"','"+email+"','"+pass+"')";
             int resultado = this.manipularDB.executeUpdate(consulta);
             String upda = "UPDATE usuarios SET Icono = '"+email+"' WHERE id_usuario = LAST_INSERT_ID()";
+=======
+    public boolean insertarPersona(String nombre,String email,String pass,String cedula){
+        boolean respuesta = false;
+        try {
+            String consulta = "INSERT INTO usuarios (nombre_user,correo,pass,cedula) VALUES ('"+nombre+"','"+email+"','"+pass+"','"+cedula+"')";
+            int resultado = this.manipularDB.executeUpdate(consulta);
+            String upda = "UPDATE usuarios SET Icono = '"+cedula+"' WHERE id_usuario = LAST_INSERT_ID()";
+>>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
             manipularDB.executeUpdate(upda);
             if (resultado == 1){
                 respuesta = true;
@@ -201,9 +216,9 @@ public class Conexion {
         return resultado;
     }
     
-    public void actualizarDatos(String correoBefore,String correo,String nombre,String foto){
+    public void actualizarDatos(String correoBefore,String correo,String nombre){
         try {
-            String consulta = "UPDATE usuarios SET correo = '"+correo+"',nombre_user = '"+nombre+"', Icono = '"+foto+"' WHERE correo = '"+correoBefore+"'";
+            String consulta = "UPDATE usuarios SET correo = '"+correo+"',nombre_user = '"+nombre+"' WHERE correo = '"+correoBefore+"'";
             manipularDB.executeUpdate(consulta);
         } catch (SQLException e) {
             System.out.println("Error al modificar");
@@ -229,6 +244,19 @@ public class Conexion {
         }
         
         return respuesta;
+    }
+    
+    public ResultSet avgTaks(String id){
+       ResultSet listado = null;
+        try { 
+            String consulta = "SELECT (AVG(tareas.estado='REALIZADO') * 100) AS promedio FROM user_tareas INNER JOIN tareas ON user_tareas.id_tarea = tareas.id_tarea INNER JOIN usuarios ON user_tareas.id_usuario = usuarios.id_usuario WHERE usuarios.id_usuario = "+id +" ";
+            listado = manipularDB.executeQuery(consulta);
+            listado.next();
+            
+        } catch (SQLException e) {
+            System.out.println("Error al consultar promedio: "+e.getMessage());
+        }
+        return listado;
     }
 }
 

@@ -1,7 +1,11 @@
 package Principal;
 
 import clases.Conexion;
+<<<<<<< HEAD
 
+=======
+import hasdcode.Index;
+>>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
 import java.sql.ResultSet;
 import java.awt.Image;
 import java.sql.SQLException;
@@ -11,15 +15,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
+<<<<<<< HEAD
     
     Conexion conexion;
+=======
+>>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
     
+    Conexion conexion;
+    Index pass;
     String estados;
     public Login(Conexion conexion) {
         this.conexion = conexion;
+<<<<<<< HEAD
         this.conexion.updateall();
         initComponents();
+=======
+        this.pass = new Index();
+>>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
         this.estados = estados;
+        initComponents();
         initComponents2();
     }
     
@@ -198,24 +212,32 @@ public class Login extends javax.swing.JFrame {
     private void btn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresarActionPerformed
         String email = campo_email.getText();
         String password = campo_password .getText();
-        boolean respuesta = this.conexion.login(email,password);
-        ResultSet resultado = this.conexion.datos(email,password);
+        String secretKey = "mySecretKey12345";
+        
         try {
+            ResultSet resultado = this.conexion.datos(email);
             String nombre = resultado.getString("nombre_user");
             String foto = resultado.getString("icono");
             String correo = resultado.getString("correo");
             String idUser = resultado.getString("id_usuario");
-            if (respuesta) {
-                PanelTareas ventana = new PanelTareas(conexion,nombre,foto,correo,this.estados,idUser);
-                ventana.setVisible(true);
-                ventana.setResizable(false);
-                ventana.setLocationRelativeTo(null);
-                campo_email.setText("");
-                campo_password.setText("");
-                dispose();
+            String passGuardada = resultado.getString("pass");
+            
+            String passDescrypt = pass.decrypt(passGuardada, secretKey);
+            if (passDescrypt.equalsIgnoreCase(password)) {
+                    PanelTareas ventana = new PanelTareas(conexion,nombre,foto,correo,this.estados,idUser);
+                    ventana.setVisible(true);
+                    ventana.setResizable(false);
+                    ventana.setLocationRelativeTo(null);
+                    campo_email.setText("");
+                    campo_password.setText("");
+                    dispose();
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Verifique su contraseña");
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Datos incorrectos");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Verifique su correo");
+            
         }
         
         

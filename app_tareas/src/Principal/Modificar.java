@@ -6,15 +6,22 @@ package Principal;
 
 import clases.Conexion;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 import java.sql.*;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author INSTRUCTOR
@@ -23,6 +30,7 @@ public class Modificar extends javax.swing.JFrame {
 
     Conexion conexion;
     String nombres;
+    ImageIcon imagenTemporal;
     String fotos;
     String correos;
     String estados;
@@ -33,6 +41,7 @@ public class Modificar extends javax.swing.JFrame {
         this.nombres = nombre;
         this.idUser = id;
         this.fotos=foto;
+        this.imagenTemporal = imagenTemporal;
         this.correos=correo;
         this.conexion = conexion;
         initAlter();
@@ -40,29 +49,7 @@ public class Modificar extends javax.swing.JFrame {
     
     public void initAlter(){
         setIconImage( getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icon_app.png")) ); 
-        Image uno = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/1.jpg"));
-        uno = uno.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        foto1.setIcon(new ImageIcon(uno));
         
-        Image dos = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/2.jpg"));
-        dos = dos.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        foto2.setIcon(new ImageIcon(dos));
-        
-        Image tres = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/3.jpg"));
-        tres = tres.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        foto3.setIcon(new ImageIcon(tres));
-        
-        Image cuatro = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/4.jpg"));
-        cuatro = cuatro.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        foto4.setIcon(new ImageIcon(cuatro));
-        
-        Image cinco = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/5.jpg"));
-        cinco = cinco.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        foto5.setIcon(new ImageIcon(cinco));
-        
-        Image six = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/6.jpg"));
-        six = six.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        foto6.setIcon(new ImageIcon(six));
     }
 
     /**
@@ -79,24 +66,14 @@ public class Modificar extends javax.swing.JFrame {
         Titulo = new javax.swing.JLabel();
         correo = new javax.swing.JLabel();
         campo_correo = new javax.swing.JTextField();
-        foto = new javax.swing.JLabel();
-        campo_foto = new javax.swing.JTextField();
         nombre = new javax.swing.JLabel();
         campo_nombre = new javax.swing.JTextField();
         btn_modificar = new javax.swing.JButton();
         btn_salir = new javax.swing.JButton();
-        foto1 = new javax.swing.JLabel();
-        foto2 = new javax.swing.JLabel();
-        foto3 = new javax.swing.JLabel();
-        foto4 = new javax.swing.JLabel();
-        foto5 = new javax.swing.JLabel();
-        foto6 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        btnLoadImage = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        imagenLabel = new javax.swing.JLabel();
+        panelPreview = new javax.swing.JPanel();
 
         jLabel1.setText("jLabel1");
 
@@ -113,20 +90,14 @@ public class Modificar extends javax.swing.JFrame {
         correo.setText("Ingrese su correo para Buscarlo :");
 
         campo_correo.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(154, 168, 213), null));
+        campo_correo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campo_correoActionPerformed(evt);
+            }
+        });
         campo_correo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 campoBucarCorreo(evt);
-            }
-        });
-
-        foto.setBackground(new java.awt.Color(0, 0, 0));
-        foto.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        foto.setText("N° Foto :");
-
-        campo_foto.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(154, 168, 213), null));
-        campo_foto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_fotoActionPerformed(evt);
             }
         });
 
@@ -163,145 +134,99 @@ public class Modificar extends javax.swing.JFrame {
             }
         });
 
-        foto1.setBackground(new java.awt.Color(0, 0, 0));
-        foto1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnLoadImage.setBackground(new java.awt.Color(154, 168, 213));
+        btnLoadImage.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnLoadImage.setForeground(new java.awt.Color(0, 0, 0));
+        btnLoadImage.setText("Buscar Imagen");
+        btnLoadImage.setFocusable(false);
+        btnLoadImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadImageActionPerformed(evt);
+            }
+        });
 
-        foto2.setBackground(new java.awt.Color(0, 0, 0));
-        foto2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        imagenLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jScrollPane1.setViewportView(imagenLabel);
 
-        foto3.setBackground(new java.awt.Color(0, 0, 0));
-        foto3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        foto3.setText(" ");
+        panelPreview.setBackground(new java.awt.Color(248, 239, 230));
 
-        foto4.setBackground(new java.awt.Color(0, 0, 0));
-        foto4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        foto4.setText(" ");
-
-        foto5.setBackground(new java.awt.Color(0, 0, 0));
-        foto5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-
-        foto6.setBackground(new java.awt.Color(0, 0, 0));
-        foto6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setText("Foto Nª2");
-
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setText("Foto Nª1");
-
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel4.setText("Foto Nª3");
-
-        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel5.setText("Foto Nª4");
-
-        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel6.setText("Foto Nª5");
-
-        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel7.setText("Foto Nª6");
+        javax.swing.GroupLayout panelPreviewLayout = new javax.swing.GroupLayout(panelPreview);
+        panelPreview.setLayout(panelPreviewLayout);
+        panelPreviewLayout.setHorizontalGroup(
+            panelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelPreviewLayout.setVerticalGroup(
+            panelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(Titulo)
-                .addContainerGap(117, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(correo)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(foto)
-                                .addGap(290, 290, 290))
+                            .addComponent(campo_correo, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(btnLoadImage))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nombre)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(campo_foto, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(campo_correo, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(campo_nombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(90, 90, 90))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(foto1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campo_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(foto2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(foto3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(foto4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(foto5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(foto6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(69, 69, 69))))
+                                .addGap(64, 64, 64)
+                                .addComponent(btn_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Titulo)
+                .addGap(201, 201, 201))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(608, 608, 608)
+                    .addComponent(panelPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(100, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(Titulo)
-                .addGap(28, 28, 28)
-                .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campo_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campo_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(foto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campo_foto, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(foto3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(foto4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(foto5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(foto2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(foto6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(foto1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
+                .addComponent(Titulo)
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(correo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campo_correo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campo_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoadImage, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(383, 383, 383)
+                    .addComponent(panelPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(134, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -322,10 +247,6 @@ public class Modificar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_campo_nombreActionPerformed
 
-    private void campo_fotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_fotoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_fotoActionPerformed
-
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
         dispose();
         PanelTareas abrir = new PanelTareas(conexion,this.nombres,this.fotos,this.correos,this.estados,this.idUser);
@@ -338,11 +259,10 @@ public class Modificar extends javax.swing.JFrame {
     private void campoBucarCorreo(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBucarCorreo
         String email = campo_correo.getText();
        
-        ResultSet resultado = this.conexion.consultarPersonas(email);
+        ResultSet resultado = this.conexion.datos(email);
         try {
             if (resultado.next()) {
                 campo_nombre.setText(resultado.getString("nombre_user"));
-                campo_foto.setText(resultado.getString("Icono"));
             }
         } catch (SQLException e) {
             System.out.println("Error "+e.getMessage());
@@ -352,29 +272,27 @@ public class Modificar extends javax.swing.JFrame {
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         String name = campo_nombre.getText();
         String email = campo_correo.getText();
-        String foto = campo_foto.getText();
+        
         try {
             if(name.length() > 0){
-                int fotoEntero = Integer.parseInt(foto);
+                
                 boolean resultado = validarcorreo(email);
-                if (fotoEntero >= 1 && fotoEntero <= 6){
-                    if(resultado){
-                        this.conexion.actualizarDatos(this.correos,email,name,foto);
-                        JOptionPane.showMessageDialog(null,"Modificado con éxito");
-                        campo_nombre.setText("");
-                        campo_correo.setText("");
-                        campo_foto.setText("");
-                        this.correos = email;
-                        this.nombres = name;
-                        this.fotos = foto;
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Correo Invalido");
-                    }
-
-
+                
+                if(resultado){
+                    this.conexion.actualizarDatos(this.correos,email,name);
+                    JOptionPane.showMessageDialog(null,"Modificado con éxito");
+                    campo_nombre.setText("");
+                    campo_correo.setText("");
+                    this.correos = email;
+                    this.nombres = name;
+                    guardarFoto();
+                    imagenLabel.setIcon(null);
                 }else{
-                    JOptionPane.showMessageDialog(null,"La imagen que selecciono no es correcta");
+                    JOptionPane.showMessageDialog(null,"Correo Invalido");
                 }
+
+
+                
             }else{
                 JOptionPane.showMessageDialog(null,"Todos los campos son obligatorios");
             }
@@ -382,6 +300,26 @@ public class Modificar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Solo numeros en el campo de la Foto");
         }
     }//GEN-LAST:event_btn_modificarActionPerformed
+
+    private void campo_correoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_correoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campo_correoActionPerformed
+
+    private void btnLoadImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadImageActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de Imagen", "jpg", "jpeg", "png", "gif");
+        fileChooser.setFileFilter(filter);
+
+        int seleccion = fileChooser.showOpenDialog(panelPreview);
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            String rutaImagen = fileChooser.getSelectedFile().getAbsolutePath();
+            imagenTemporal = new ImageIcon(rutaImagen);
+            Image imagen = imagenTemporal.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+            imagenTemporal = new ImageIcon(imagen);
+
+            imagenLabel.setIcon(imagenTemporal);
+        }
+    }//GEN-LAST:event_btnLoadImageActionPerformed
     public boolean validarcorreo(String correo){
         boolean validar = false;
         int cont = 0;
@@ -408,30 +346,51 @@ public class Modificar extends javax.swing.JFrame {
         return validar;
         
     }
+    public void guardarFoto(){
+        
+        try {
+            BufferedImage image = createBufferedImage(imagenTemporal);
+            if (image != null) {
+                String outputFilePath = "src/imagenes/"+this.fotos+".png";
+                ImageIO.write(image, "png", new File(outputFilePath));
+
+                System.out.println("La imagen se ha cargado correctamente y se ha guardado en " + outputFilePath);
+            } else {
+                System.out.println("No se pudo cargar la imagen.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private BufferedImage createBufferedImage(ImageIcon temporal){
+        Image imagen = temporal.getImage();
+        
+        BufferedImage bufferedImage = new BufferedImage(
+            imagen.getWidth(null),
+            imagen.getHeight(null),
+            BufferedImage.TYPE_INT_ARGB
+        );
+
+        Graphics2D bGr = bufferedImage.createGraphics();
+        bGr.drawImage(imagen, 0, 0, null);
+        bGr.dispose();
+        
+        return bufferedImage;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
+    private javax.swing.JButton btnLoadImage;
     private javax.swing.JButton btn_modificar;
     private javax.swing.JButton btn_salir;
     private javax.swing.JTextField campo_correo;
-    private javax.swing.JTextField campo_foto;
     private javax.swing.JTextField campo_nombre;
     private javax.swing.JLabel correo;
-    private javax.swing.JLabel foto;
-    private javax.swing.JLabel foto1;
-    private javax.swing.JLabel foto2;
-    private javax.swing.JLabel foto3;
-    private javax.swing.JLabel foto4;
-    private javax.swing.JLabel foto5;
-    private javax.swing.JLabel foto6;
+    private javax.swing.JLabel imagenLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nombre;
+    private javax.swing.JPanel panelPreview;
     // End of variables declaration//GEN-END:variables
 }

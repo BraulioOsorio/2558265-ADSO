@@ -21,12 +21,14 @@ public class Estados extends javax.swing.JFrame {
     String estados;
     String tarea;
     String idUser;
+    
     public Estados(Conexion conexion,String nombre,String foto,String correo,String estado,String tarea,String id) {
         initComponents();
         this.tarea = tarea;
         this.estados = estado;
         this.nombres = nombre;
         this.fotos=foto;
+        
         this.idUser = id;
         this.correos=correo;
         this.conexion = conexion;

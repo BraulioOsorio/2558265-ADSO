@@ -4,16 +4,21 @@ USE app_tareas;
 
 CREATE TABLE usuarios(
     id_usuario INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    cedula VARCHAR(20) UNIQUE,
     nombre_user VARCHAR(60),
     correo VARCHAR(60) UNIQUE,
     pass VARCHAR(255),
-    Fecha_inicio DATE,
-    Fecha_fin DATE,
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
     Icono VARCHAR(255)
 );
 CREATE TABLE tareas(
     id_tarea INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     tarea TEXT,
+    Fecha_inicio DATE,
+    Fecha_fin DATE,
     estado TINYINT
 );
 CREATE TABLE user_tareas(
@@ -24,12 +29,13 @@ CREATE TABLE user_tareas(
     FOREIGN KEY (id_tarea) REFERENCES tareas(id_tarea)
 );
 ALTER TABLE `tareas` CHANGE `estado` `estado` TINYINT(4) NULL DEFAULT '0';
-INSERT INTO `tareas` (`id_tarea`, `tarea`, `estado`) VALUES (NULL, 'hacer ejercicio', '0');
-
 
 ALTER TABLE `tareas` CHANGE `estado` `estado` ENUM("PENDIENTE","PROCESO","CANCELAR","REALIZADO","TIEMPO") NULL;
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> 75db80bba7be71dbadb493d540f7a15e2410ba1d
