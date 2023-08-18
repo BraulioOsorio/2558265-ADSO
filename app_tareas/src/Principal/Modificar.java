@@ -28,11 +28,12 @@ public class Modificar extends javax.swing.JFrame {
     String idUser;
     public Modificar(Conexion conexion,String nombre,String foto,String correo,String estado,String id) {
         initComponents();
+        String imageUrl = "src/imagenes/"+fotos+".png";
         this.estados = estado;
         this.nombres = nombre;
         this.idUser = id;
         this.fotos=foto;
-        this.imagenTemporal = imagenTemporal;
+        this.imagenTemporal = new ImageIcon(getToolkit().createImage("src/imagenes/"+fotos+".png"));
         this.correos=correo;
         this.conexion = conexion;
         initAlter();
@@ -40,6 +41,9 @@ public class Modificar extends javax.swing.JFrame {
     
     public void initAlter(){
         setIconImage( getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icon_app.png")) ); 
+        campo_correo.setText(this.correos);
+        campo_nombre.setText(this.nombres);
+        this.imagenLabel.setIcon(imagenTemporal);
     }
 
     /**
@@ -235,12 +239,7 @@ public class Modificar extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_salirActionPerformed
 
     private void campoBucarCorreo(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBucarCorreo
-        String email = campo_correo.getText();
-        ResultSet resultado = this.conexion.datos(email);
-        try {
-            campo_nombre.setText(resultado.getString("nombre_user"));  
-        } catch (Exception ex) { 
-        }
+        
     }//GEN-LAST:event_campoBucarCorreo
 
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
@@ -252,12 +251,12 @@ public class Modificar extends javax.swing.JFrame {
                 if(resultado){
                     this.conexion.actualizarDatos(this.correos,email,name);
                     JOptionPane.showMessageDialog(null,"Modificado con éxito");
-                    campo_nombre.setText("");
-                    campo_correo.setText("");
+                    //campo_nombre.setText("");
+                    //campo_correo.setText("");
                     this.correos = email;
                     this.nombres = name;
                     guardarFoto();
-                    imagenLabel.setIcon(null);
+                    //imagenLabel.setIcon(null);
                 }else{
                     JOptionPane.showMessageDialog(null,"Correo Invalido");
                 }    
