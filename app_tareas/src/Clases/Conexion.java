@@ -6,6 +6,7 @@ package clases;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Conexion {
     Statement manipularDB;
@@ -32,25 +33,33 @@ public class Conexion {
         }
         
     }
-    
-    
-    
-    
-    
-    public boolean addTasks(String tarea,String fecha,String id){
-        boolean respuesta = false;
-        
+    public void time(){
         try {
-            String consulta = "INSERT INTO tareas (tarea,estado,Fecha_inicio,Fecha_fin) VALUES('"+tarea+"','PENDIENTE',now(),'"+fecha+"')";
+            String uestado = "UPDATE tareas SET estado = 'TIEMPO' WHERE (estado = 'PROCESO' or estado = 'PENDIENTE') and now() > Fecha_fin;";
+            manipularDB.executeUpdate(uestado);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
+    
+    public boolean addTasks(String tarea,String fecha,String id,String hora){
+        boolean respuesta = false;        
+        try {
+            if (hora.equals("24")){
+                hora = "0";
+            }
+            String consulta = "INSERT INTO tareas (tarea,estado,Fecha_inicio,Fecha_fin) VALUES('"+tarea+"','PENDIENTE',now(),'"+fecha+" "+hora+":00:00')";
             int resultado = manipularDB.executeUpdate(consulta);
             String auxiliar = "INSERT INTO user_tareas (id_usuario,id_tarea) VALUES('"+id+"',LAST_INSERT_ID())";
-            manipularDB.executeUpdate(auxiliar);
-            
+            manipularDB.executeUpdate(auxiliar);                        
             if (resultado == 1) {
-                respuesta = true;
+                respuesta = true;                
             }
         } catch (Exception e) {
-            System.out.println("Error al insertar: "+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Solo ingrese la hora en formato 24h");
         }
         
         return respuesta;
@@ -59,8 +68,6 @@ public class Conexion {
     public ResultSet tasksPendientes(String id){
         ResultSet listado = null;
         try {
-            String uestado = "UPDATE tareas SET estado = 'TIEMPO' WHERE (estado = 'PROCESO' or estado = 'PENDIENTE') and now() > Fecha_fin;";
-            manipularDB.executeUpdate(uestado);
             String consulta = "SELECT * FROM tareas  JOIN user_tareas  ON tareas.id_tarea = user_tareas.id_tarea WHERE user_tareas.id_usuario = '"+id+"' AND tareas.estado = 'PENDIENTE' ORDER BY DATEDIFF(tareas.Fecha_fin, NOW()) ASC"; 
             
             listado = manipularDB.executeQuery(consulta);

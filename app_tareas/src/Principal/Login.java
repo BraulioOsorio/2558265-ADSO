@@ -4,9 +4,6 @@ import clases.Conexion;
 import hasdcode.Index;
 import java.sql.ResultSet;
 import java.awt.Image;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -47,16 +44,7 @@ public class Login extends javax.swing.JFrame {
 
         campo_email.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campo_email.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(159, 168, 213), null));
-        campo_email.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                campo_emailvalidateEmail(evt);
-            }
-        });
-        campo_email.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_emailActionPerformed(evt);
-            }
-        });
+        
 
         etq_password.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         etq_password.setForeground(new java.awt.Color(0, 0, 0));
@@ -65,11 +53,7 @@ public class Login extends javax.swing.JFrame {
 
         campo_password.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campo_password.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(159, 168, 213), null));
-        campo_password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_passwordActionPerformed(evt);
-            }
-        });
+        
         campo_password.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 campo_passwordpruebaKey(evt);
@@ -186,47 +170,14 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campo_emailvalidateEmail(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campo_emailvalidateEmail
-
-
-    }//GEN-LAST:event_campo_emailvalidateEmail
-
     private void campo_passwordpruebaKey(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campo_passwordpruebaKey
-
+        if (evt.getKeyChar() == '\n') {
+            init();
+        }   
     }//GEN-LAST:event_campo_passwordpruebaKey
 
     private void btn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresarActionPerformed
-        String email = campo_email.getText();
-        String password = campo_password .getText();
-        String secretKey = "mySecretKey12345";
-        
-        try {
-            ResultSet resultado = this.conexion.datos(email);
-            String nombre = resultado.getString("nombre_user");
-            String foto = resultado.getString("icono");
-            String correo = resultado.getString("correo");
-            String idUser = resultado.getString("id_usuario");
-            String passGuardada = resultado.getString("pass");
-            
-            String passDescrypt = pass.decrypt(passGuardada, secretKey);
-            if (passDescrypt.equalsIgnoreCase(password)) {
-                    PanelTareas ventana = new PanelTareas(conexion,nombre,foto,correo,this.estados,idUser);
-                    ventana.setVisible(true);
-                    ventana.setResizable(false);
-                    ventana.setLocationRelativeTo(null);
-                    campo_email.setText("");
-                    campo_password.setText("");
-                    dispose();
-                
-            }else{
-                JOptionPane.showMessageDialog(null, "Verifique su contraseña");
-            }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Verifique su correo");
-            
-        }
-        
-        
+        init();
     }//GEN-LAST:event_btn_ingresarActionPerformed
 
     private void btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarActionPerformed
@@ -236,14 +187,6 @@ public class Login extends javax.swing.JFrame {
         crear.setResizable(false);
         crear.setLocationRelativeTo(null);
     }//GEN-LAST:event_btn_registrarActionPerformed
-
-    private void campo_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_emailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_emailActionPerformed
-
-    private void campo_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_passwordActionPerformed
 
     private void btn_recuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_recuperarActionPerformed
         dispose();
@@ -256,10 +199,38 @@ public class Login extends javax.swing.JFrame {
     public void initComponents2(){
         setVisible(true);
         setLocationRelativeTo(null);
-        
         Image img_candado = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/img_user.png"));
         img_candado = img_candado.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         etq_imagen.setIcon(new ImageIcon(img_candado));
+    }
+    
+    public void init(){
+        String email = campo_email.getText();
+        String password = campo_password .getText();
+        String secretKey = "mySecretKey12345";
+        try {
+            ResultSet resultado = this.conexion.datos(email);
+            String nombre = resultado.getString("nombre_user");
+            String foto = resultado.getString("icono");
+            String correo = resultado.getString("correo");
+            String idUser = resultado.getString("id_usuario");
+            String passGuardada = resultado.getString("pass");
+            String passDescrypt = pass.decrypt(passGuardada, secretKey);
+            if (passDescrypt.equalsIgnoreCase(password)) {
+                    System.out.println("Dato Foto: "+foto);
+                    PanelTareas ventana = new PanelTareas(conexion,nombre,foto,correo,this.estados,idUser);
+                    ventana.setVisible(true);
+                    ventana.setResizable(false);
+                    ventana.setLocationRelativeTo(null);
+                    campo_email.setText("");
+                    campo_password.setText("");
+                    dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Verifique su contraseña");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Verifique su correo");
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

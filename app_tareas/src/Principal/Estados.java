@@ -57,7 +57,7 @@ public class Estados extends javax.swing.JFrame {
         btn_cancelar = new javax.swing.JButton();
         btn_salir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(248, 239, 230));
 
@@ -187,8 +187,7 @@ public class Estados extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Estado Cambiado con exito");
         } 
     }//GEN-LAST:event_btn_pedienteActionPerformed
-    
-    
+
     private void btn_realizadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_realizadaActionPerformed
         dispose();
         String estado = "REALIZADO";
@@ -200,8 +199,6 @@ public class Estados extends javax.swing.JFrame {
             abrir.setLocationRelativeTo(null);
             JOptionPane.showMessageDialog(null, "Estado Cambiado con exito");
         }
-        
-        
     }//GEN-LAST:event_btn_realizadaActionPerformed
 
     private void btn_procesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_procesoActionPerformed
@@ -236,7 +233,6 @@ public class Estados extends javax.swing.JFrame {
         abrir.setVisible(true);
         abrir.setResizable(false);
         abrir.setLocationRelativeTo(null);
-        
     }//GEN-LAST:event_btn_salirActionPerformed
 
     /**

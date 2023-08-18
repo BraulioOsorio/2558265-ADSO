@@ -7,17 +7,12 @@ import java.sql.*;
 import clases.Conexion;
 import java.awt.Image;
 import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.beans.*;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.text.SimpleDateFormat;
-
-
-
-
 
 public class PanelTareas extends javax.swing.JFrame {
     
@@ -31,15 +26,16 @@ public class PanelTareas extends javax.swing.JFrame {
     String estados;
     String idUser;
     String Fecha;
-    
+    String horas;
     public PanelTareas(Conexion conexion,String nombre,String foto,String correo,String estado,String id) {
         this.conexion = conexion;
         this.estados = estado;
         this.nombres = nombre;
-        
+        this.conexion.time();
         this.idUser = id;
         this.fotos=foto;
         this.correos=correo;
+        this.horas = horas;
         initComponents();
         this.Fecha = Fecha;
         initComponentsAlter();
@@ -70,6 +66,8 @@ public class PanelTareas extends javax.swing.JFrame {
         close = new javax.swing.JButton();
         porcentaje = new javax.swing.JLabel();
         calendario = new com.toedter.calendar.JDateChooser();
+        hora = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(true);
@@ -119,11 +117,7 @@ public class PanelTareas extends javax.swing.JFrame {
         tabla.setRequestFocusEnabled(false);
         tabla.setRowHeight(40);
         tabla.setRowMargin(0);
-        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaMouseClicked(evt);
-            }
-        });
+        
         jScrollPane1.setViewportView(tabla);
         tabla.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
@@ -143,11 +137,7 @@ public class PanelTareas extends javax.swing.JFrame {
         ));
         tablaReali.setEnabled(false);
         tablaReali.setRowHeight(40);
-        tablaReali.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaRealiMouseClicked(evt);
-            }
-        });
+        
         jScrollPane2.setViewportView(tablaReali);
 
         FotoUser.setBackground(new java.awt.Color(102, 204, 255));
@@ -208,11 +198,7 @@ public class PanelTareas extends javax.swing.JFrame {
         tablaPros.setCellSelectionEnabled(true);
         tablaPros.setRowHeight(40);
         tablaPros.setRowMargin(0);
-        tablaPros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablaProsMouseClicked(evt);
-            }
-        });
+        
         jScrollPane3.setViewportView(tablaPros);
         tablaPros.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
@@ -233,14 +219,13 @@ public class PanelTareas extends javax.swing.JFrame {
 
         calendario.setBackground(new java.awt.Color(0, 0, 0));
         calendario.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(155, 168, 213), null));
-        calendario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                calendarioKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                calendarioKeyReleased(evt);
-            }
-        });
+        
+
+        hora.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(154, 168, 213), null));
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel2.setText("Hora Fin :");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -248,12 +233,18 @@ public class PanelTareas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(emailUser)
-                    .addComponent(nombreUser)
-                    .addComponent(FotoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(167, 167, 167)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(FotoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombreUser, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                    .addComponent(emailUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(169, 169, 169)
+                        .addComponent(porcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campo_task, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,16 +255,16 @@ public class PanelTareas extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
-                                .addComponent(jLabel1))
-                            .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_recuperar)
-                        .addGap(88, 88, 88))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
-                        .addComponent(porcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145))))
+                        .addGap(11, 11, 11))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(131, 131, 131)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,7 +275,7 @@ public class PanelTareas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(267, 267, 267)
                         .addComponent(close)))
-                .addContainerGap())
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +302,13 @@ public class PanelTareas extends javax.swing.JFrame {
                                         .addComponent(campo_task, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(14, 14, 14))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btn_recuperar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btn_recuperar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(hora)
+                                        .addGap(7, 7, 7)))
                                 .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btn_add)
@@ -332,51 +329,40 @@ public class PanelTareas extends javax.swing.JFrame {
 
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         String tarea = campo_task.getText();
-
-        
         try {
             DateTimeFormatter formatoOriginal = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             DateTimeFormatter formatoDeseado = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDate fechaLocal = LocalDate.parse(this.Fecha, formatoOriginal);
             String fechaFormateada = fechaLocal.format(formatoDeseado);
+            this.horas = hora.getText();
             if (!tarea.equalsIgnoreCase("")) {
-            boolean response = conexion.addTasks(tarea,fechaFormateada,this.idUser);
-                if (response) {
-                    System.out.println("Se agrego exitosamente");
-                    JOptionPane.showMessageDialog(null, "Tarea agregada");
-                    campo_task.setText("");
-                    campo_task.requestFocus();
-                    
+                if(horas.length() > 0 && horas.length() <= 2){
+                    boolean response = conexion.addTasks(tarea,fechaFormateada,this.idUser,this.horas);
+                    if (response) {
+                        System.out.println("Se agrego exitosamente");
+                        JOptionPane.showMessageDialog(null, "Tarea agregada");
+                        campo_task.setText("");
+                        hora.setText("");
+                        campo_task.requestFocus();
+                        avg();
+                        conexion.time();
+                    }else{
+                        System.out.println("No se pudo agregar");
+                    }
+                    actualizarTablas();
                 }else{
-                    System.out.println("No se pudo agregar");
+                    JOptionPane.showMessageDialog(null, "Solo ingrese la hora en formato 24h");
                 }
-            actualizarTablas();
+            
             }else{
                 JOptionPane.showMessageDialog(null, "No hay nada en el input");
                 campo_task.requestFocus();
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Porfavor Coloquele los / para separar la fecha Gracias");
+            JOptionPane.showMessageDialog(null, "Verifique la fecha");
         }
         //calendario.setDate(null); 
-            
-        
-        
     }//GEN-LAST:event_btn_addActionPerformed
-
-    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-        
-        
-    }//GEN-LAST:event_tablaMouseClicked
-
-    private void tablaRealiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaRealiMouseClicked
-        
-        
-    }//GEN-LAST:event_tablaRealiMouseClicked
-
-    private void tablaProsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProsMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tablaProsMouseClicked
 
     private void closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeActionPerformed
         dispose();
@@ -393,18 +379,8 @@ public class PanelTareas extends javax.swing.JFrame {
         modi.setResizable(false);
         modi.setLocationRelativeTo(null);
     }//GEN-LAST:event_btn_recuperarActionPerformed
-
-    private void calendarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calendarioKeyReleased
-          
-                
-    }//GEN-LAST:event_calendarioKeyReleased
-
-    private void calendarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_calendarioKeyPressed
-         
-    }//GEN-LAST:event_calendarioKeyPressed
     
     public final void initComponentsAlter(){
-        
         setTitle("Welcome "+this.nombres);
         nombreUser.setText(this.nombres);
         emailUser.setText(this.correos);
@@ -412,27 +388,16 @@ public class PanelTareas extends javax.swing.JFrame {
         modelo_two = (DefaultTableModel) tablaReali.getModel();
         modelo_tre = (DefaultTableModel) tablaPros.getModel();
         setIconImage( getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icon_app.png")) );
-        Image img_candado = getToolkit().createImage(ClassLoader.getSystemResource("imagenes/"+fotos+".png"));
+        System.out.println("Url imagen: "+"src/imagenes/"+fotos+".png"  );
+        Image img_candado = getToolkit().createImage("src/imagenes/"+fotos+".png");
         img_candado = img_candado.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
         FotoUser.setIcon(new ImageIcon(img_candado));
         tabla.getTableHeader().setResizingAllowed(false);
         tabla.getTableHeader().setReorderingAllowed(false);
         tablaPros.getTableHeader().setResizingAllowed(false);
         tablaPros.getTableHeader().setReorderingAllowed(false);
-        
-        
-        ResultSet response = conexion.avgTaks(this.idUser);
-        
-        try {
-            float promedio = response.getFloat("promedio");
-            float redondeado = Math.round(promedio * 10.0f) / 10.0f;
-            String etq_prom = String.valueOf(redondeado);
-            porcentaje.setText("Tareas realizadas: "+etq_prom+"%");
-        } catch (SQLException ex) {
-            System.out.println("Error");
-        }
-        
-        
+        avg();
+       
         tabla.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -455,9 +420,9 @@ public class PanelTareas extends javax.swing.JFrame {
                         System.out.println(ex);    
                     }
                 }
-                
             }
         });
+        
         tablaPros.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -483,6 +448,7 @@ public class PanelTareas extends javax.swing.JFrame {
                 
             }
         });
+
         tabla.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -508,7 +474,6 @@ public class PanelTareas extends javax.swing.JFrame {
                     String tarea = (String) tablaReali.getValueAt(row, column);
                     conexion.updateTasks(newValue, tarea);
                     System.out.println("tarea: "+tarea +" modificada a "+newValue);
-                    
                     actualizarTablas();
                 }
             }
@@ -530,12 +495,8 @@ public class PanelTareas extends javax.swing.JFrame {
         
         
     }
-    public void actualizaTarea(boolean estado){
-        
-    }
     
     public final void tareasPendientes(){
-        
         ResultSet listado = conexion.tasksPendientes(this.idUser);
         if (listado != null) {
             try {
@@ -547,7 +508,6 @@ public class PanelTareas extends javax.swing.JFrame {
                     modelo.addRow(fila);
                 } while (listado.next());
             } catch (Exception e) {
-                
             }
             
         }else{
@@ -567,7 +527,6 @@ public class PanelTareas extends javax.swing.JFrame {
                     modelo_two.addRow(fila);
                 } while (listado2.next());
             } catch (Exception e) {
-                
             }
         }else{
             System.out.println("Lista vacia");
@@ -597,7 +556,17 @@ public class PanelTareas extends javax.swing.JFrame {
         tareasProceso();
         
     }
-    
+    public void avg(){
+        ResultSet response = conexion.avgTaks(this.idUser);
+        try {
+            float promedio = response.getFloat("promedio");
+            float redondeado = Math.round(promedio * 10.0f) / 10.0f;
+            String etq_prom = String.valueOf(redondeado);
+            porcentaje.setText("Tareas realizadas: "+etq_prom+"%");
+        } catch (SQLException ex) {
+            System.out.println("Error");
+        }
+    }
   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel FotoUser;
@@ -608,7 +577,9 @@ public class PanelTareas extends javax.swing.JFrame {
     public javax.swing.JTextField campo_task;
     private javax.swing.JButton close;
     private javax.swing.JLabel emailUser;
+    private javax.swing.JTextField hora;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

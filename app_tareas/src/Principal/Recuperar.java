@@ -6,6 +6,7 @@ package Principal;
 import clases.Conexion;
 import javax.swing.JOptionPane;
 import hasdcode.Index;
+
 public class Recuperar extends javax.swing.JFrame {
     Index hasdcode;
     Conexion conexion;
@@ -61,11 +62,7 @@ public class Recuperar extends javax.swing.JFrame {
         passValidar.setText("Validar Nueva Contraseña :");
 
         campo_pass_validar.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(154, 168, 213), null));
-        campo_pass_validar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campo_pass_validarActionPerformed(evt);
-            }
-        });
+        
 
         pass.setBackground(new java.awt.Color(0, 0, 0));
         pass.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -157,16 +154,11 @@ public class Recuperar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campo_pass_validarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_pass_validarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campo_pass_validarActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String email = campo_correo.getText();
         String pass = campo_pass.getText();
         String passValidar = campo_pass_validar.getText();
         try {
-            
             if (!email.equals("") && !pass.equals("") && !passValidar.equals("") ) {
                 if(pass.equals(passValidar)){
                     String passEncript = hasdcode.encrypt(pass,this.secretKey);
