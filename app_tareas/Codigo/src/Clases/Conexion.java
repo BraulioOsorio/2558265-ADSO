@@ -108,10 +108,10 @@ public class Conexion {
         return listado;
     }
     
-    public ResultSet consultarestado(String tarea){
+    public ResultSet consultarestado(int tarea){
         ResultSet listado = null;
         try {
-            String consulta = "SELECT estado FROM tareas WHERE tarea LIKE '%"+tarea+"' LIMIT 1";
+            String consulta = "SELECT estado FROM tareas WHERE id_tarea = '"+tarea+"' LIMIT 1";
             listado = manipularDB.executeQuery(consulta);
         } catch (SQLException e) {
             System.out.println("Error al obtener tareas: "+e.getMessage());
@@ -152,10 +152,10 @@ public class Conexion {
     
     
     
-    public boolean removeTasks(String tarea,String estado){
+    public boolean removeTasks(int tarea,String estado){
         boolean respuesta = false;
         try {
-            String sql = "UPDATE tareas SET estado = '"+estado+"' WHERE tarea LIKE '%"+tarea+"' LIMIT 1";
+            String sql = "UPDATE tareas SET estado = '"+estado+"' WHERE id_tarea = '"+tarea+"' LIMIT 1";
             int resultado = manipularDB.executeUpdate(sql);
             if (resultado == 1) {
                 respuesta = true;

@@ -19,10 +19,10 @@ public class Estados extends javax.swing.JFrame {
     String fotos;
     String correos;
     String estados;
-    String tarea;
+    int tarea;
     String idUser;
     
-    public Estados(Conexion conexion,String nombre,String foto,String correo,String estado,String tarea,String id) {
+    public Estados(Conexion conexion,String nombre,String foto,String correo,String estado,int tarea,String id) {
         initComponents();
         this.tarea = tarea;
         this.estados = estado;

@@ -94,14 +94,14 @@ public class PanelTareas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "TAREAS PENDIENTES", "FECHA FIN"
+                "ID", "TAREAS PENDIENTES", "FECHA"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -193,14 +193,14 @@ public class PanelTareas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "TAREAS EN PROCESO", "FECHA FIN"
+                "ID", "FECHA FIN", "TAREAS EN PROCESO"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -425,7 +425,7 @@ public class PanelTareas extends javax.swing.JFrame {
                 if (SwingUtilities.isRightMouseButton(e)) {
                     int row = tabla.rowAtPoint(e.getPoint());
                     int column = tabla.columnAtPoint(e.getPoint());
-                    String tarea = (String) tabla.getValueAt(row, column);
+                    int tarea = (int) tabla.getValueAt(row, 0);
                     ResultSet resultado = conexion.consultarestado(tarea);
                     try {
                         if (resultado.next()) {
@@ -450,7 +450,7 @@ public class PanelTareas extends javax.swing.JFrame {
                 if (SwingUtilities.isRightMouseButton(e)) {
                     int row = tablaPros.rowAtPoint(e.getPoint());
                     int column = tablaPros.columnAtPoint(e.getPoint());
-                    String tarea = (String) tablaPros.getValueAt(row, column);
+                    int tarea = (int) tablaPros.getValueAt(row, 0);
                     ResultSet resultado = conexion.consultarestado(tarea);
                     try {
                         if (resultado.next()) {
@@ -523,9 +523,10 @@ public class PanelTareas extends javax.swing.JFrame {
             try {
                 modelo.setRowCount(0);
                 do {
+                    int id = listado.getInt("id_tarea");
                     String fecha = listado.getString("Fecha_fin");
                     String tarea = listado.getString("tarea");
-                    Object[] fila = new Object[]{tarea,fecha};
+                    Object[] fila = new Object[]{id,tarea,fecha};
                     modelo.addRow(fila);
                 } while (listado.next());
             } catch (Exception e) {
@@ -542,7 +543,7 @@ public class PanelTareas extends javax.swing.JFrame {
             try {
                 modelo_two.setRowCount(0);
                 do {                
-                    //int id = listado2.getInt("id_tarea");
+                    int id = listado2.getInt("id_tarea");
                     String tarea = listado2.getString("tarea");
                     String est = listado2.getString("estado");
                     Object[] fila = new Object[]{tarea,est};
@@ -560,9 +561,10 @@ public class PanelTareas extends javax.swing.JFrame {
             try {
                 modelo_tre.setRowCount(0);
                 do {                
+                    int id = listado3.getInt("id_tarea");
                     String fecha = listado3.getString("Fecha_fin");
                     String tarea = listado3.getString("tarea");
-                    Object[] fila = new Object[]{tarea,fecha};
+                    Object[] fila = new Object[]{id,tarea,fecha};
                     modelo_tre.addRow(fila);
                 } while (listado3.next());
             } catch (Exception e) {
