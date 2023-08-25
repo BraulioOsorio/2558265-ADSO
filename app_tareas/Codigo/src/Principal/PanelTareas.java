@@ -113,6 +113,7 @@ public class PanelTareas extends javax.swing.JFrame {
             }
         });
         tabla.setCellSelectionEnabled(true);
+        tabla.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabla.setEnabled(false);
         tabla.setRequestFocusEnabled(false);
         tabla.setRowHeight(40);
@@ -124,6 +125,11 @@ public class PanelTareas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
         tabla.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(550);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(150);
+        }
 
         tablaReali.setAutoCreateRowSorter(true);
         tablaReali.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(154, 168, 213), null));
@@ -148,6 +154,9 @@ public class PanelTareas extends javax.swing.JFrame {
             }
         });
         tablaReali.setEnabled(false);
+        tablaReali.setMinimumSize(new java.awt.Dimension(45, 80));
+        tablaReali.setPreferredSize(new java.awt.Dimension(155, 80));
+        tablaReali.setRequestFocusEnabled(false);
         tablaReali.setRowHeight(40);
         tablaReali.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -193,7 +202,7 @@ public class PanelTareas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "FECHA FIN", "TAREAS EN PROCESO"
+                "ID", "TAREAS EN PROCESO", "FECHA FIN"
             }
         ) {
             Class[] types = new Class [] {
@@ -212,6 +221,8 @@ public class PanelTareas extends javax.swing.JFrame {
             }
         });
         tablaPros.setCellSelectionEnabled(true);
+        tablaPros.setEnabled(false);
+        tablaPros.setRequestFocusEnabled(false);
         tablaPros.setRowHeight(40);
         tablaPros.setRowMargin(0);
         tablaPros.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -221,6 +232,11 @@ public class PanelTareas extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tablaPros);
         tablaPros.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        if (tablaPros.getColumnModel().getColumnCount() > 0) {
+            tablaPros.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tablaPros.getColumnModel().getColumn(1).setPreferredWidth(550);
+            tablaPros.getColumnModel().getColumn(2).setPreferredWidth(150);
+        }
 
         close.setBackground(new java.awt.Color(154, 168, 213));
         close.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
