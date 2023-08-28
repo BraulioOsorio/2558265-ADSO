@@ -153,9 +153,9 @@ public class PanelTareas extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tablaReali.setCellSelectionEnabled(true);
         tablaReali.setEnabled(false);
         tablaReali.setMinimumSize(new java.awt.Dimension(45, 80));
-        tablaReali.setPreferredSize(new java.awt.Dimension(155, 80));
         tablaReali.setRequestFocusEnabled(false);
         tablaReali.setRowHeight(40);
         tablaReali.addMouseListener(new java.awt.event.MouseAdapter() {
