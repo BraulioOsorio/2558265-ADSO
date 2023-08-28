@@ -24,13 +24,17 @@ public class CrearUser extends javax.swing.JFrame {
         initComponents();
         this.conexion = conexion;
         this.hasdcode = new Index();
-        this.imagenTemporal = imagenTemporal;
+        this.imagenTemporal = new ImageIcon(getToolkit().createImage("src/imagenes/default.png"));
         this.secretKey = "mySecretKey12345";
-         fotos();
+        fotos();
     }
     
     public void fotos(){
         setIconImage( getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icon_app.png")) ); 
+        
+        Image imagen = imagenTemporal.getImage().getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+        imagenTemporal = new ImageIcon(imagen);
+        imagenLabel.setIcon(imagenTemporal);
         
         
     }
@@ -80,7 +84,11 @@ public class CrearUser extends javax.swing.JFrame {
         nombre.setText("Nombre :");
 
         campo_nombre.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(154, 168, 213), null));
-        
+        campo_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+            }
+        });
 
         pass.setBackground(new java.awt.Color(0, 0, 0));
         pass.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -132,7 +140,7 @@ public class CrearUser extends javax.swing.JFrame {
                 .addComponent(btn_salir, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(246, 246, 246))
+                .addGap(231, 231, 231))
         );
         panelPreviewLayout.setVerticalGroup(
             panelPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +238,7 @@ public class CrearUser extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(campo_pass_validar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(campo_pass, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                    .addComponent(campo_pass))
                 .addGap(18, 18, 18)
                 .addComponent(pass1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -239,9 +247,9 @@ public class CrearUser extends javax.swing.JFrame {
                     .addComponent(btnLoadImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(panelPreview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(215, 215, 215))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,9 +260,7 @@ public class CrearUser extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, Short.MAX_VALUE)
         );
 
         pack();

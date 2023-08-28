@@ -425,7 +425,7 @@ public class PanelTareas extends javax.swing.JFrame {
         modelo_two = (DefaultTableModel) tablaReali.getModel();
         modelo_tre = (DefaultTableModel) tablaPros.getModel();
         setIconImage( getToolkit().createImage(ClassLoader.getSystemResource("imagenes/icon_app.png")) );
-        System.out.println("Url imagen: "+"src/imagenes/"+fotos+".png"  );
+        
         Image img_candado = getToolkit().createImage("src/imagenes/"+fotos+".png");
         img_candado = img_candado.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
         FotoUser.setIcon(new ImageIcon(img_candado));
