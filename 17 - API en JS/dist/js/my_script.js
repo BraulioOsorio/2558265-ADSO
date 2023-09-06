@@ -30,7 +30,7 @@ function PokemonsLoad( endpoint ){
             
         }
         contentButtons.innerHTML = temp;
-        btnBack.setAttribute("onclik",`PokemonsLoad("${data.previus}")`)
-        btnNext.setAttribute("onclik",`PokemonsLoad("${data.next}")`)
+        btnBack.setAttribute("onclik",`PokemonsLoad("${data.previus}")`);
+        btnNext.setAttribute("onclik",`PokemonsLoad("${data.next}")`);
     });
 }
