@@ -1,5 +1,5 @@
 let id_facturaActual = null;
-let selectProducto = null;
+let productoSelect = null;
 let formCrearFactura = null;
 let listaProductos = null;
 
@@ -7,7 +7,7 @@ let listaProductos = null;
 
 
 window.onload = function() {
-    selectProducto = document.getElementById("selectProducto");
+    productoSelect = document.getElementById("productoSelect");
     formCrearFactura = document.getElementById("formCrearFactura");
 
     formCrearFactura.addEventListener("submit", function(event) {
@@ -28,7 +28,7 @@ function getClients(endpoint){
         for (var i= 0; i < data.registros.length ;i++) {
             temp = `<option value = '${data.registros[i].id_producto}'>${data.registros[i].nombre_producto}</option>`
 
-            selectProducto.innerHTML += temp;
+            productoSelect.innerHTML += temp;
         }
         
     });
