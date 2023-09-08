@@ -166,7 +166,7 @@ function eliminarPersona(){
         console.log(data);
         if(data.status){
             formEditarUsuario.reset();
-            modalEditarUsuario.hide();
+            modalEliminarUsuario.hide();
             getClients("http://localhost/APIenPHP/obtener.php");
             swal('Eliminado con Exito','Se a Eliminado el usuario con exito','success');
             
