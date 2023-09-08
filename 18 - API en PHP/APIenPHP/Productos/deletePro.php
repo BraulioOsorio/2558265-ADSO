@@ -3,14 +3,14 @@
     header("Access-Control-Allow-Methods: GET, POST");
     header("Access-Control-Allow-Headers: Content-Type");
     
-    include 'Conexion.php';
+    include '../Conexion.php';
 
-    if (!empty($_POST['cedula'])) {
-        $documento = $_POST['cedula'];
+    if (!empty($_POST['id'])) {
+        $id = $_POST['id'];
         try {
-            $consulta = $base_de_datos->prepare("DELETE FROM personas WHERE cedula = :doc");
+            $consulta = $base_de_datos->prepare("DELETE FROM productos WHERE id_producto = :id");
 
-            $consulta->bindParam(':doc', $documento);
+            $consulta->bindParam(':id', $id);
             
             $proceso = $consulta->execute();
 

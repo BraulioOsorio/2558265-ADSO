@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CONSUMO API - PHP</title>
+		<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="dist/css/estilos.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+		<script src="dist/js/script_pro.js" type="text/javascript" charset="utf-8" async defer></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	</head>
+	<body>
+		
+		<div class="col-12 m-0 p-0 py-3 row justify-content-center vh-100">
+			<div class="col-8 m-0 p-2 pstn-rltv">
+				
+				<div class="col-12 m-0 p-0">
+					<div class="col-12 m-0 p-0 row justify-content-star">
+						<a href="index.html" class="btn btn-primary col-3">PERSONAS</a>
+					</div>
+					<div class="col-12 m-0 p-0 row justify-content-center">
+						<a href="Factura.html" class="btn btn-primary col-3">FACTURAS</a>
+					</div>
+					<div class="col-12 m-0 p-0 row justify-content-end">
+						<button class="col-3 btn btn-primary"  data-bs-toggle="modal" data-bs-target="#modalCrearProducto"><b>CREAR PRODUCTOS</b></button>
+					</div>
+					
+					
+					<div class="col-12 m-0 mt-2 p-0">
+						<table class="table table-bordered">
+							<thead>
+								<tr class="bg-primary text-light">
+									<th class="text-center">#</th>
+									<th class="text-center">NOMBRE</th>
+									<th class="text-center">COSTO</th>
+									<th class="text-center"></th>
+									<th class="text-center"></th>
+								</tr>
+							</thead>
+							<tbody id="contentProduts">
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div id="waitContent" class="waitContent" style="display:none;">
+					<div class="row h-100 justify-content-center">
+						<div class="col-12 m-0 p-0 text-center">
+							<div class="spinner-border m-0 text-primary" role="status">
+								<span class="visually-hidden font-3rem">Loading...</span>
+							</div>
+							<h3 class="m-0 p-0 text-primary">CARGANDO</h3>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="modal fade" id="modalEditarProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form id="formEditarProducto" action="#" method="POST" accept-charset="utf-8">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel"><b>EDITAR PRODUCTO</b></h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="col-12 m-0 p-0 row justify-content-center">
+								<div class="col-8">
+									<label for="campo_id" class="form-label m-0"><b>ID:</b></label>
+									<input id="campo_id" type="text" name="id" class="form-control" readonly>
+									<label for="campo_editar_nombre" class="form-label m-0 mt-2"><b>NOMBRE:</b></label>
+									<input id="campo_editar_nombre" type="text" name="nombre" class="form-control" required>
+
+									<label for="campo_editar_costo" class="form-label m-0 mt-2"><b>COSTO:</b></label>
+									<input id="campo_editar_costo" type="number" name="costo" class="form-control" required>
+
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="col-12 m-0 p-0 row justify-content-end">
+								<button type="button" class="col-3 btn btn-secondary me-1" data-bs-dismiss="modal">CERRAR</button>
+								<button type="submit" class="col-3 btn btn-primary ms-1">GUARDAR</button>
+							</div>
+						</div>
+					</form>
+					<div id="waitContentCEdit" class="waitContent" style="display:none;">
+						<div class="row h-100 justify-content-center">
+							<div class="col-12 m-0 p-0 text-center">
+								<div class="spinner-border m-0 text-primary" role="status">
+									<span class="visually-hidden font-3rem">Loading...</span>
+								</div>
+								<h3 class="m-0 p-0 text-primary">EDITANDO PRODUCTO</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modalEliminarProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form id="formEliminarProducto" action="#" method="POST" accept-charset="utf-8">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel"><b>CONFIRMACIÓN DE ELIMINACION</b></h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="col-12 m-0 p-0 row justify-content-center">
+								<div class="col-8">
+									<label for="campo_id_eli" class="form-label m-0"><b>ID:</b></label>
+									<input id="campo_id_eli" type="text" name="id" class="form-control" readonly>
+									<label for="campo_eliminar_nombre" class="form-label m-0"><b>NOMBRE:</b></label>
+									<input id="campo_eliminar_nombre" type="text" name="nombre" class="form-control" readonly>
+
+									<label for="campo_eliminar_costo" class="form-label m-0 mt-2"><b>COSTO:</b></label>
+									<input id="campo_eliminar_costo" type="number" name="costo" class="form-control" readonly>
+
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="col-12 m-0 p-0 row justify-content-end">
+								<button type="button" class="col-3 btn btn-secondary me-1" data-bs-dismiss="modal">CERRAR</button>
+								<button type="submit" class="col-3 btn btn-primary ms-1">ELIMINAR</button>
+							</div>
+						</div>
+					</form>
+					<div id="waitContentCEdit" class="waitContent" style="display:none;">
+						<div class="row h-100 justify-content-center">
+							<div class="col-12 m-0 p-0 text-center">
+								<div class="spinner-border m-0 text-primary" role="status">
+									<span class="visually-hidden font-3rem">Loading...</span>
+								</div>
+								<h3 class="m-0 p-0 text-primary">EDITANDO PRODUCTO</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modalCrearProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form id="formInsertarProducto" action="#" method="POST" accept-charset="utf-8">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel"><b>CREAR PRODUCTO</b></h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="col-12 m-0 p-0 row justify-content-center">
+								<div class="col-8">
+									<label for="campo_nombre_pro" class="form-label m-0"><b>NOMBRE PRODUCTO</b></label>
+									<input id="campo_nombre_pro" type="text" name="nombre" class="form-control" required>
+
+									<label for="campo_costo" class="form-label m-0 mt-2"><b>COSTO</b></label>
+									<input id="campo_costo" type="number" name="costo" class="form-control" required>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="col-12 m-0 p-0 row justify-content-end">
+								<button type="button" class="col-3 btn btn-secondary me-1" data-bs-dismiss="modal">CERRAR</button>
+								<button type="submit" class="col-3 btn btn-primary ms-1">INSERTAR</button>
+							</div>
+						</div>
+					</form>
+					<div id="waitContentCreate" class="waitContent" style="display:none;">
+						<div class="row h-100 justify-content-center">
+							<div class="col-12 m-0 p-0 text-center">
+								<div class="spinner-border m-0 text-primary" role="status">
+									<span class="visually-hidden font-3rem">Loading...</span>
+								</div>
+								<h3 class="m-0 p-0 text-primary">CARGANDO PRODUCTO</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `personas`
 --
-DROP DATABASE app_java;
 CREATE DATABASE app_java;
 USE app_java;
 CREATE TABLE `personas` (

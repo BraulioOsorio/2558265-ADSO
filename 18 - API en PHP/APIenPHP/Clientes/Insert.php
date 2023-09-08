@@ -3,7 +3,7 @@
     header("Access-Control-Allow-Methods: GET, POST");
     header("Access-Control-Allow-Headers: Content-Type");
     
-    include 'Conexion.php';
+    include '../Conexion.php';
 
     if (!empty($_POST['cedula']) and !empty($_POST['nombres']) and !empty($_POST['apellidos']) ) {
 
@@ -15,7 +15,7 @@
         $email = $_POST['email'];
 
         try {
-            $consulta = $base_de_datos->prepare("UPDATE personas SET nombres = :nom, apellidos = :ape, telefono = :tel, direccion = :dir, email = :ema WHERE cedula = :doc");
+            $consulta = $base_de_datos->prepare("INSERT INTO personas (cedula, nombres, apellidos, telefono, direccion, email) VALUES(:doc, :nom, :ape, :tel, :dir, :ema) ");
 
             $consulta->bindParam(':doc', $documento);
             $consulta->bindParam(':nom', $nombres);
@@ -29,13 +29,13 @@
             if( $proceso ){
                 $respuesta = [
                                 'status' => true,
-                                'mesagge' => "OK##CLIENT##UPDATE"
+                                'mesagge' => "OK##CLIENT##INSERT"
                               ];
                 echo json_encode($respuesta);
             }else{
                 $respuesta = [
                                 'status' => false,
-                                'mesagge' => "ERROR##CLIENT##UPDATE"
+                                'mesagge' => "ERROR##CLIENT##INSERT"
                               ];
                 echo json_encode($respuesta);
             }

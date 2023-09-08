@@ -3,39 +3,31 @@
     header("Access-Control-Allow-Methods: GET, POST");
     header("Access-Control-Allow-Headers: Content-Type");
     
-    include 'Conexion.php';
+    include '../Conexion.php';
 
-    if (!empty($_POST['cedula']) and !empty($_POST['nombres']) and !empty($_POST['apellidos']) ) {
+    if (!empty($_POST['nombre']) and !empty($_POST['costo'])) {
 
-        $documento = $_POST['cedula'];
-        $nombres = $_POST['nombres'];
-        $apellidos = $_POST['apellidos'];
-        $telefono = $_POST['telefono'];
-        $direccion = $_POST['direccion'];
-        $email = $_POST['email'];
+        $nombre = $_POST['nombre'];
+        $costo = $_POST['costo'];
 
         try {
-            $consulta = $base_de_datos->prepare("INSERT INTO personas (cedula, nombres, apellidos, telefono, direccion, email) VALUES(:doc, :nom, :ape, :tel, :dir, :ema) ");
+            $consulta = $base_de_datos->prepare("INSERT INTO productos (nombre_producto, costo_producto) VALUES(:nom, :cos) ");
 
-            $consulta->bindParam(':doc', $documento);
-            $consulta->bindParam(':nom', $nombres);
-            $consulta->bindParam(':ape', $apellidos);
-            $consulta->bindParam(':tel', $telefono);
-            $consulta->bindParam(':dir', $direccion);
-            $consulta->bindParam(':ema', $email);
+            $consulta->bindParam(':nom', $nombre);
+            $consulta->bindParam(':cos', $costo);
             
             $proceso = $consulta->execute();
 
             if( $proceso ){
                 $respuesta = [
                                 'status' => true,
-                                'mesagge' => "OK##CLIENT##INSERT"
+                                'mesagge' => "OK##PRODUCT##INSERT"
                               ];
                 echo json_encode($respuesta);
             }else{
                 $respuesta = [
                                 'status' => false,
-                                'mesagge' => "ERROR##CLIENT##INSERT"
+                                'mesagge' => "ERROR##PRODUCT##INSERT"
                               ];
                 echo json_encode($respuesta);
             }

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CONSUMO API - PHP</title>
+		<link href="dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="dist/css/estilos.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="dist/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	</head>
+	<body>
+		
+		<div class="col-12 m-0 p-0 py-3 row justify-content-center vh-100">
+			<div class="col-8 m-0 p-2 pstn-rltv">
+				
+				<div class="col-12 m-0 p-0">
+					<div class="col-12 m-0 p-0 row justify-content-center">
+						<a href="Factura.html" class="btn btn-primary col-3">CLOSE</a>
+					</div>
+					<form class="row g-3" id="formCrearFactura" action="#" method="POST" accept-charset="utf-8">
+						<div class="col-md-6">
+						  <label for="campo_cedula_cliente" class="form-label">CEDULA CLIENTE:</label>
+						  <input type="number" class="form-control" id="campo_cedula_cliente" name="cedulaCliente" required>
+						</div>
+						<div class="col-md-6">
+							<label for="campo_cedula_vendedor" class="form-label">CEDULA VENDEDOR:</label>
+							<input type="number" class="form-control" id="campo_cedula_vendedor" name="cedulaVendedor" required>
+						  </div>
+						<div class="col-12">
+						  <button type="submit" class="btn btn-primary">Enviar</button>
+						</div>
+					</form>
+				</div>
+				<form class="row g-3" id="formAddProducts" action="#" method="POST" accept-charset="utf-8">
+					<div class="col-md-4">
+						<label for="producto" class="form-label">State</label>
+						<select id="productoSelect" class="form-select">
+						  
+						</select>
+					</div>
+					<div class="col-12">
+					  <button type="submit" class="btn btn-primary">Sign in</button>
+					</div>
+				</form>
+				<div id="waitContent" class="waitContent" style="display:none;">
+					<div class="row h-100 justify-content-center">
+						<div class="col-12 m-0 p-0 text-center">
+							<div class="spinner-border m-0 text-primary" role="status">
+								<span class="visually-hidden font-3rem">Loading...</span>
+							</div>
+							<h3 class="m-0 p-0 text-primary">CARGANDO</h3>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</body>
+	<script src="dist/js/script_fac.js" type="text/javascript" charset="utf-8" async defer></script>
+
+</html>

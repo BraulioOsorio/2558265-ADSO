@@ -42,7 +42,7 @@ window.onload = function(){
         eliminarPersona();
     });
 
-    getClients("http://localhost/APIenPHP/obtener.php");
+    getClients("http://localhost/APIenPHP/Clientes/obtener.php");
 
 
 }
@@ -107,7 +107,7 @@ function crearPersona(){
         },
         body: datos,
     };
-    fetch("http://localhost/APIenPHP/Insert.php",configuracion)
+    fetch("http://localhost/APIenPHP/Clientes/Insert.php",configuracion)
     .then(res => res.json())
     .then(data=>{
         console.log("Se recibe los datos");
@@ -115,7 +115,7 @@ function crearPersona(){
         if(data.status){
             formInsertarUsuario.reset();
             modalCrearUsuario.hide();
-            getClients("http://localhost/APIenPHP/obtener.php");
+            getClients("http://localhost/APIenPHP/Clientes/obtener.php");
             swal('Creado con Exito','Se a creado el usuario con exito','success');
             
         }else{
@@ -133,7 +133,7 @@ function editarPersona(){
         },
         body: datos,
     };
-    fetch("http://localhost/APIenPHP/update.php",configuracion)
+    fetch("http://localhost/APIenPHP/Clientes/update.php",configuracion)
     .then(res => res.json())
     .then(data=>{
         console.log("Se recibe los datos");
@@ -141,7 +141,7 @@ function editarPersona(){
         if(data.status){
             formEditarUsuario.reset();
             modalEditarUsuario.hide();
-            getClients("http://localhost/APIenPHP/obtener.php");
+            getClients("http://localhost/APIenPHP/Clientes/obtener.php");
             swal('Modificado con Exito','Se a modificado el usuario con exito','success');
             
         }else{
@@ -159,7 +159,7 @@ function eliminarPersona(){
         },
         body: datos,
     };
-    fetch("http://localhost/APIenPHP/delete.php",configuracion)
+    fetch("http://localhost/APIenPHP/Clientes/delete.php",configuracion)
     .then(res => res.json())
     .then(data=>{
         console.log("Se recibe los datos");
@@ -167,7 +167,7 @@ function eliminarPersona(){
         if(data.status){
             formEditarUsuario.reset();
             modalEliminarUsuario.hide();
-            getClients("http://localhost/APIenPHP/obtener.php");
+            getClients("http://localhost/APIenPHP/Clientes/obtener.php");
             swal('Eliminado con Exito','Se a Eliminado el usuario con exito','success');
             
         }else{
