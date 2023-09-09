@@ -23,9 +23,11 @@ CREATE TABLE facturas (
   id_facturas int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   cedula_vendedor bigint(20) NOT NULL,
   cedula_cliente bigint(20) NOT NULL,
+  precio_factura float,
   FOREIGN KEY (cedula_vendedor) REFERENCES personas (cedula),
   FOREIGN KEY (cedula_cliente) REFERENCES personas (cedula),
-  fecha timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  fecha timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  estado = ENUM('PENDIENTE','COMPRADO')
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
