@@ -45,7 +45,6 @@ CREATE TABLE items_facturas (
 
 
 DELIMITER //
-
 CREATE TRIGGER before_delete_item_factura
 BEFORE DELETE ON items_facturas FOR EACH ROW
 BEGIN
@@ -64,7 +63,6 @@ BEGIN
   WHERE id_facturas = factura_id;
 END;
 //
-
 DELIMITER ;
 
 
