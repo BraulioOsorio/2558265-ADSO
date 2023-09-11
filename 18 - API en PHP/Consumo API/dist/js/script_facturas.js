@@ -197,6 +197,7 @@ function addProductoDB(){
             if(data.status){
                 
                 swal('Factura con Exito','Se a generado la Factura Exitosamente','success');
+                getClients("http://localhost/APIenPHP/Facturas/ObtenerFa.php");
                 
             }else{
                 swal('Error','No se a podido Crear la Factura','error');
