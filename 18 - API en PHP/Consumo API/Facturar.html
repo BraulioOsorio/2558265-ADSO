@@ -15,7 +15,7 @@
 		<div class="col-12 m-0 p-0 py-3 row justify-content-center vh-100">
 			<div class="col-8 m-0 p-2 pstn-rltv">
 				
-				<div class="col-12 m-0 p-0">
+				<div class="col-12 m-0 p-0 ">
 					<div class="col-12 m-0 p-0 row justify-content-center">
 						<a href="Factura.html" class="btn btn-primary col-3">CLOSE</a>
 					</div>
@@ -28,31 +28,50 @@
 							<label for="campo_cedula_vendedor" class="form-label">CEDULA VENDEDOR:</label>
 							<input type="number" class="form-control" id="campo_cedula_vendedor" name="cedulaVendedor" required>
 						  </div>
-						<div class="col-12">
-						  <button type="submit" class="btn btn-primary">Enviar</button>
+						<div class="col-12 text-center">
+						  <button type="submit" class="btn btn-primary" id="enviar">Enviar</button>
 						</div>
 					</form>
 				</div>
-				<form class="row g-3" id="formAddProducts" action="#" method="POST" accept-charset="utf-8">
-					<div class="col-md-6">
-						<label for="campo_cantidad" class="form-label">CANTIDAD DEL PRODUCTO:</label>
-						<input type="number" class="form-control" id="campo_cantidad" name="cantidadProducto" required>
+				<div id="divFormAddProducts" class="mt-5">
+					<form class="row g-3" id="formAddProducts" action="#" method="POST" accept-charset="utf-8">
+						<div class="col-md-5">
+							<label for="campo_cantidad" class="form-label">CANTIDAD DEL PRODUCTO:</label>
+							<input type="number" class="form-control" id="campo_cantidad" name="cantidadProducto" required>
+						</div>
+						<div class="col-md-5">
+							<label for="producto" class="form-label">Productos</label>
+							<select id="productoSelect" class="form-select">
+							  
+							</select>
+						</div>
+						<div class="col-2 mt-5">
+						  <button type="submit" class="btn btn-primary" id="add" >Add</button>
+						</div>
+					</form>
+	
+					<div class="col-12 text-center mt-5">
+						<button type="submit" class="btn btn-primary" id="finalizar" >Finalizar Compra</button>
 					</div>
-					<div class="col-md-6">
-						<label for="producto" class="form-label">Productos</label>
-						<select id="productoSelect" class="form-select">
-						  
-						</select>
+					<div class="col-12 m-0 mt-2 p-0">
+						<table class="table table-bordered">
+							<thead>
+								<tr class="bg-primary text-light">
+									
+									<th class="text-center">PRODUCTO</th>
+									<th class="text-center">CANTIDAD</th>
+									<th class="text-center"></th>
+								</tr>
+							</thead>
+							<tbody id="facturaContens">
+							
+							</tbody>
+						</table>
 					</div>
-					<div class="col-12">
-					  <button type="submit" class="btn btn-primary" id="add" >Add</button>
-					</div>
-				</form>
-
-				<div class="col-12">
-					<button type="submit" class="btn btn-primary" id="finalizar" >Finalizar Compra</button>
+	
 				</div>
-
+				
+				
 				<div id="waitContent" class="waitContent" style="display:none;">
 					<div class="row h-100 justify-content-center">
 						<div class="col-12 m-0 p-0 text-center">
@@ -66,6 +85,8 @@
 
 			</div>
 		</div>
+
+		
 	</body>
 	<script src="dist/js/script_fac.js" type="text/javascript" charset="utf-8" async defer></script>
 

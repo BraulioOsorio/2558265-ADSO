@@ -3,17 +3,18 @@ let productoSelect = null;
 let formCrearFactura = null;
 let listaProductos = null;
 let temporalProductos = [];
+let facturaContens = null;
 let add = null;
 let final = null;
 let formAddProducts = null; 
-
-
-
+let divFormAddProducts = document.getElementById("divFormAddProducts");
 
 window.onload = function() {
+    facturaContens = document.getElementById("facturaContens");
     productoSelect = document.getElementById("productoSelect");
     formCrearFactura = document.getElementById("formCrearFactura");
     formAddProducts = document.getElementById("formAddProducts");
+    divFormAddProducts.style.display = "none";
     formAddProducts.addEventListener("submit",function(event){
         event.preventDefault();
         addProducto();
@@ -49,6 +50,22 @@ function getClients(endpoint){
     });
 }
 
+function productos(){
+    facturaContens.innerHTML = "";
+    for (var i = 0; i < temporalProductos.length; i++) {
+
+        temp = `<tr>
+            <td>${temporalProductos[i].id}</td>
+            <td>${temporalProductos[i].cantidad}</td>
+            <td>
+                <button class="btn btn-danger" onclick="eliminar(${i})">Eliminar</button
+            </td>
+            
+        </tr>`;
+        facturaContens.innerHTML += temp;
+    }
+}
+
 function crearFactura(){
     let datos = new FormData(formCrearFactura);
     let configuracion = {
@@ -58,6 +75,12 @@ function crearFactura(){
         },
         body: datos,
     };
+
+    document.getElementById("campo_cedula_cliente").disabled = true;
+    document.getElementById("campo_cedula_vendedor").disabled = true;
+    document.getElementById("enviar").disabled = true;
+    document.getElementById("divFormAddProducts").style.display = "block";
+
     fetch("http://localhost/APIenPHP/Facturas/InsertFa.php",configuracion)
     .then(res => res.json())
     .then(data=>{
@@ -65,7 +88,6 @@ function crearFactura(){
         console.log(data);
         id_facturaActual = data.id;
         if(data.status){
-            formCrearFactura.reset();
             getClients("http://localhost/APIenPHP/Productos/obtenerPro.php");
             swal('Creado con Exito','Se a creado la Factura con exito','success');
             
@@ -77,7 +99,10 @@ function crearFactura(){
         }
     });
 }
-
+function eliminar(indice){
+    temporalProductos.splice(indice, 1);
+    productos();
+}
 function addProducto(){
     let id_producto = document.getElementById("productoSelect").value;
     let cantidad = document.getElementById("campo_cantidad").value;
@@ -94,6 +119,7 @@ function addProducto(){
             };
             temporalProductos.push(pro);
             cantidad = document.getElementById("campo_cantidad").value = "";
+            productos();
         }else{
             swal('Error','Primero llenar los campos de arriba antes de agregar productos','error');
         }
