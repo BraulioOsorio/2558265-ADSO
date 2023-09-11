@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="dist/js/bootstrap.bundle.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
-		<script src="dist/js/script_ajax.js" type="text/javascript" charset="utf-8" async defer></script>
+		<script src="dist/js/script_facturas.js" type="text/javascript" charset="utf-8" async defer></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	</head>
 	<body>
@@ -33,17 +33,17 @@
 						<table class="table table-bordered">
 							<thead>
 								<tr class="bg-primary text-light">
-									<th class="text-center">CEDULA</th>
-									<th class="text-center">NOMBRES</th>
-									<th class="text-center">APELLIDOS</th>
-									<th class="text-center">TELEFONO</th>
-									<th class="text-center">DIRECCION</th>
-									<th class="text-center">E-MAIL</th>
+									<th class="text-center">#</th>
+									<th class="text-center">CEDULA VENDEDOR</th>
+									<th class="text-center">CEDULA CLIENTE</th>
+									<th class="text-center">TOTAL</th>
+									<th class="text-center">FECHA</th>
+									<th class="text-center">ESTADO</th>
 									<th class="text-center"></th>
 									<th class="text-center"></th>
 								</tr>
 							</thead>
-							<tbody id="contentClients">
+							<tbody id="contensProducts">
 								
 							</tbody>
 						</table>
@@ -63,115 +63,10 @@
 
 			</div>
 		</div>
-
-		<div class="modal fade" id="modalCrearUsuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal fade" id="modalEliminarFa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-					<form id="formInsertarUsuario" action="#" method="POST" accept-charset="utf-8">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel"><b>CREAR USUARIO</b></h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div class="col-12 m-0 p-0 row justify-content-center">
-								<div class="col-8">
-									<label for="campo_cedula" class="form-label m-0"><b>CEDULA:</b></label>
-									<input id="campo_cedula" type="number" name="cedula" class="form-control" required>
-
-									<label for="campo_nombres" class="form-label m-0 mt-2"><b>NOMBRES:</b></label>
-									<input id="campo_nombres" type="text" name="nombres" class="form-control" required>
-
-									<label for="campo_apellidos" class="form-label m-0 mt-2"><b>APELLIDOS:</b></label>
-									<input id="campo_apellidos" type="text" name="apellidos" class="form-control" required>
-
-									<label for="campo_telefono" class="form-label m-0 mt-2"><b>TELEFONO:</b></label>
-									<input id="campo_telefono" type="text" name="telefono" class="form-control" required>
-
-									<label for="campo_direccion" class="form-label m-0 mt-2"><b>DIRECCION:</b></label>
-									<input id="campo_direccion" type="text" name="direccion" class="form-control" required>
-
-									<label for="campo_email" class="form-label m-0 mt-2 mb-2"><b>E-MAIL:</b></label>
-									<input id="campo_email" type="email" name="email" class="form-control" required>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<div class="col-12 m-0 p-0 row justify-content-end">
-								<button type="button" class="col-3 btn btn-secondary me-1" data-bs-dismiss="modal">CERRAR</button>
-								<button type="submit" class="col-3 btn btn-primary ms-1">INSERTAR</button>
-							</div>
-						</div>
-					</form>
-					<div id="waitContentCreate" class="waitContent" style="display:none;">
-						<div class="row h-100 justify-content-center">
-							<div class="col-12 m-0 p-0 text-center">
-								<div class="spinner-border m-0 text-primary" role="status">
-									<span class="visually-hidden font-3rem">Loading...</span>
-								</div>
-								<h3 class="m-0 p-0 text-primary">CARGANDO PERSONA</h3>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="modalEditarUsuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form id="formEditarUsuario" action="#" method="POST" accept-charset="utf-8">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel"><b>EDITAR USUARIO</b></h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div class="col-12 m-0 p-0 row justify-content-center">
-								<div class="col-8">
-									<label for="campo_editar_cedula" class="form-label m-0"><b>CEDULA:</b></label>
-									<input id="campo_editar_cedula" type="number" name="cedula" class="form-control" readonly>
-
-									<label for="campo_editar_nombres" class="form-label m-0 mt-2"><b>NOMBRES:</b></label>
-									<input id="campo_editar_nombres" type="text" name="nombres" class="form-control" required>
-
-									<label for="campo_editar_apellidos" class="form-label m-0 mt-2"><b>APELLIDOS:</b></label>
-									<input id="campo_editar_apellidos" type="text" name="apellidos" class="form-control" required>
-
-									<label for="campo_editar_telefono" class="form-label m-0 mt-2"><b>TELEFONO:</b></label>
-									<input id="campo_editar_telefono" type="text" name="telefono" class="form-control" required>
-
-									<label for="campo_editar_direccion" class="form-label m-0 mt-2"><b>DIRECCION:</b></label>
-									<input id="campo_editar_direccion" type="text" name="direccion" class="form-control" required>
-
-									<label for="campo_editar_email" class="form-label m-0 mt-2 mb-2"><b>E-MAIL:</b></label>
-									<input id="campo_editar_email" type="email" name="email" class="form-control" required>
-								</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<div class="col-12 m-0 p-0 row justify-content-end">
-								<button type="button" class="col-3 btn btn-secondary me-1" data-bs-dismiss="modal">CERRAR</button>
-								<button type="submit" class="col-3 btn btn-primary ms-1">GUARDAR</button>
-							</div>
-						</div>
-					</form>
-					<div id="waitContentCEdit" class="waitContent" style="display:none;">
-						<div class="row h-100 justify-content-center">
-							<div class="col-12 m-0 p-0 text-center">
-								<div class="spinner-border m-0 text-primary" role="status">
-									<span class="visually-hidden font-3rem">Loading...</span>
-								</div>
-								<h3 class="m-0 p-0 text-primary">EDITANDO PERSONA</h3>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="modalEliminarUsuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<form id="formEliminarUsuario" action="#" method="POST" accept-charset="utf-8">
+					<form id="formEliminarFa" action="#" method="POST" accept-charset="utf-8">
 						<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLabel"><b>CONFIRMACIÓN DE ELIMINACION</b></h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -179,23 +74,17 @@
 						<div class="modal-body">
 							<div class="col-12 m-0 p-0 row justify-content-center">
 								<div class="col-8">
-									<label for="campo_eliminar_cedula" class="form-label m-0"><b>CEDULA:</b></label>
-									<input id="campo_eliminar_cedula" type="number" name="cedula" class="form-control" readonly>
+									<label for="campo_id_eli" class="form-label m-0"><b>ID:</b></label>
+									<input id="campo_id_eli" type="text" name="id" class="form-control" readonly>
+									<label for="campo_eliminar_cedulaV" class="form-label m-0"><b>CEDULA VENDEDOR:</b></label>
+									<input id="campo_eliminar_cedulaV" type="number" name="cedulaV" class="form-control" readonly>
+									<label for="campo_eliminar_cedulaC" class="form-label m-0"><b>CEDULA CLIENTE:</b></label>
+									<input id="campo_eliminar_cedulaC" type="number" name="cedulaC" class="form-control" readonly>
+									<label for="campo_eliminar_costo" class="form-label m-0 mt-2"><b>TOTAL:</b></label>
+									<input id="campo_eliminar_costo" type="number" name="costo" class="form-control" readonly>
+									<label for="campo_eliminar_fecha" class="form-label m-0 mt-2"><b>FECHA REALIZACIÓN:</b></label>
+									<input id="campo_eliminar_fecha" type="text" name="fecha" class="form-control" readonly>
 
-									<label for="campo_eliminar_nombres" class="form-label m-0 mt-2"><b>NOMBRES:</b></label>
-									<input id="campo_eliminar_nombres" type="text" name="nombres" class="form-control" readonly>
-
-									<label for="campo_eliminar_apellidos" class="form-label m-0 mt-2"><b>APELLIDOS:</b></label>
-									<input id="campo_eliminar_apellidos" type="text" name="apellidos" class="form-control" readonly>
-
-									<label for="campo_eliminar_telefono" class="form-label m-0 mt-2"><b>TELEFONO:</b></label>
-									<input id="campo_eliminar_telefono" type="text" name="telefono" class="form-control" readonly>
-
-									<label for="campo_eliminar_direccion" class="form-label m-0 mt-2"><b>DIRECCION:</b></label>
-									<input id="campo_eliminar_direccion" type="text" name="direccion" class="form-control" readonly>
-
-									<label for="campo_eliminar_email" class="form-label m-0 mt-2 mb-2"><b>E-MAIL:</b></label>
-									<input id="campo_eliminar_email" type="email" name="email" class="form-control" readonly>
 								</div>
 							</div>
 						</div>
@@ -212,13 +101,100 @@
 								<div class="spinner-border m-0 text-primary" role="status">
 									<span class="visually-hidden font-3rem">Loading...</span>
 								</div>
-								<h3 class="m-0 p-0 text-primary">EDITANDO PERSONA</h3>
+								<h3 class="m-0 p-0 text-primary">EDITANDO PRODUCTO</h3>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+
+		<div class="modal fade" id="modalEditarFa" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Productos</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+					</div>
+					<div class="modal-body">
+						<div class="col-12 m-0 mt-2 p-0">
+							<table class="table table-bordered">
+								<thead>
+									<tr class="bg-primary text-light">
+										
+										<th class="text-center">NOMBRE PRODUCTO</th>
+										<th class="text-center">CANTIDAD</th>
+										<th class="text-center">VALOR U PRODUCTO</th>
+										<th class="text-center">SUBTOTAL:</th>
+										<th class="text-center"></th>
+										<th class="text-center"></th>
+									</tr>
+								</thead>
+								<tbody id="productosConten">
+								
+								</tbody>
+							</table>
+							<h4>TOTAL FACTURA:</h4>
+							<h4 id="totalFactura"></h4>
+						</div>
+
+						
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary">Guardar Cambios</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="modalEliminarItems" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form id="formEliminarItems" action="#" method="POST" accept-charset="utf-8">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel"><b>CONFIRMACIÓN DE ELIMINACION</b></h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="col-12 m-0 p-0 row justify-content-center">
+								<div class="col-8">
+									<label for="campo_id_Items" class="form-label m-0"><b>ID:</b></label>
+									<input id="campo_id_Items" type="number" name="id" class="form-control" readonly>
+									<label for="campo_nombreProducto" class="form-label m-0"><b>NOMBRE PRODUCTO:</b></label>
+									<input id="campo_nombreProducto" type="text" name="nombreProducto" class="form-control" readonly>
+									<label for="campo_cantidad" class="form-label m-0"><b>CANTIDAD COMPRADA:</b></label>
+									<input id="campo_cantidad" type="number" name="cantidad" class="form-control" readonly>
+									<label for="campo_valorU" class="form-label m-0 mt-2"><b>VALOR U:</b></label>
+									<input id="campo_valorU" type="number" name="valorU" class="form-control" readonly>
+									<label for="campo_subtotal" class="form-label m-0 mt-2"><b>SUBTOTAL:</b></label>
+									<input id="campo_subtotal" type="text" name="subtotal" class="form-control" readonly>
+
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="col-12 m-0 p-0 row justify-content-end">
+								<button type="button" class="col-3 btn btn-secondary me-1" data-bs-dismiss="modal">CERRAR</button>
+								<button type="submit" class="col-3 btn btn-primary ms-1">ELIMINAR</button>
+							</div>
+						</div>
+					</form>
+					<div id="waitContentCEdit" class="waitContent" style="display:none;">
+						<div class="row h-100 justify-content-center">
+							<div class="col-12 m-0 p-0 text-center">
+								<div class="spinner-border m-0 text-primary" role="status">
+									<span class="visually-hidden font-3rem">Loading...</span>
+								</div>
+								<h3 class="m-0 p-0 text-primary">EDITANDO PRODUCTO</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 		
 

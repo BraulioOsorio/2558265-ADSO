@@ -69,8 +69,11 @@ function crearFactura(){
             getClients("http://localhost/APIenPHP/Productos/obtenerPro.php");
             swal('Creado con Exito','Se a creado la Factura con exito','success');
             
+        }else if(data.message ==  "CEDULA"){
+            swal('Error','No se a podido insertar la Factura puede que la cedula del vendedor no exista','error');
         }else{
-            swal('Error','No se a podido insertar la Factura puede que la cedula no exista','error');
+            swal('Error','No se a podido insertar la Factura puede que las cedulas no existaman','error');
+
         }
     });
 }
@@ -111,7 +114,7 @@ function addProductoDB(){
             method: "POST",
             headers:{
                 "Accept":"application/json",
-                "Content-Type": "application/json" 
+                
             },
             body: datos,
         };

@@ -62,6 +62,7 @@ function getClients(endpoint){
                         <td>${data.registros[i].telefono}</td>
                         <td>${data.registros[i].direccion}</td>
                         <td>${data.registros[i].email}</td>
+                        <td>${data.registros[i].rol}</td>
                         <td>
                             <button class="btn btn-primary" onclick="abrirModalEditar(${i})">Editar</button>
                         </td>

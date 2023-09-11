@@ -5,40 +5,24 @@
     
     include '../Conexion.php';
 
-    if (!empty($_POST['cedula']) and !empty($_POST['nombres']) and !empty($_POST['apellidos']) ) {
-
-        $documento = $_POST['cedula'];
-        $nombres = $_POST['nombres'];
-        $apellidos = $_POST['apellidos'];
-        $telefono = $_POST['telefono'];
-        $direccion = $_POST['direccion'];
-        $email = $_POST['email'];
-        $rol = $_POST['rol'];
-
+    if (!empty($_POST['id'])) {
+        $id = $_POST['id'];
         try {
-            $consulta = $base_de_datos->prepare("INSERT INTO personas (cedula, nombres, apellidos, telefono, direccion, email,rol) VALUES(:doc, :nom, :ape, :tel, :dir, :ema,:rol) ");
-
-            $consulta->bindParam(':doc', $documento);
-            $consulta->bindParam(':nom', $nombres);
-            $consulta->bindParam(':ape', $apellidos);
-            $consulta->bindParam(':tel', $telefono);
-            $consulta->bindParam(':dir', $direccion);
-            $consulta->bindParam(':ema', $email);
-            $consulta->bindParam(':rol',$rol);
-            
+            $consulta = $base_de_datos->prepare("DELETE FROM items_facturas WHERE id_items = :id");
+            $consulta->bindParam(':id', $id);
             $proceso = $consulta->execute();
 
             if( $proceso ){
                 $respuesta = [
                                 'status' => true,
-                                'mesagge' => "OK##CLIENT##INSERT"
-                              ];
+                                'mesagge' => "OK##CLIENT##DELETE"
+                                ];
                 echo json_encode($respuesta);
             }else{
                 $respuesta = [
                                 'status' => false,
-                                'mesagge' => "ERROR##CLIENT##INSERT"
-                              ];
+                                'mesagge' => "ERROR##CLIENT##DELETE"
+                                ];
                 echo json_encode($respuesta);
             }
         } catch (Exception $e) {

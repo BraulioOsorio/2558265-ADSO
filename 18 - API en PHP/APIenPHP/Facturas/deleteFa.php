@@ -5,47 +5,33 @@
     
     include '../Conexion.php';
 
-    if (!empty($_POST['cedulaCliente']) and !empty($_POST['cedulaVendedor'])) {
-
-        $nombreC = $_POST['cedulaCliente'];
-        $nombreV = $_POST['cedulaVendedor'];
-        
-
+    if (!empty($_POST['id'])) {
+        $id = $_POST['id'];
         try {
-            $consultaVendedor = $base_de_datos->query("SELECT * FROM personas WHERE cedula = $nombreV AND rol = 'VENDEDOR'");
-            if($consultaVendedor->rowCount() == 1){
-                $consulta = $base_de_datos->prepare("INSERT INTO facturas (cedula_vendedor, cedula_cliente) VALUES(:noV, :noC) ");
+            $consultaEliminarI = $base_de_datos ->prepare("DELETE FROM items_facturas WHERE id_facturas = :id");
+            $consultaEliminarI->bindParam(':id', $id);
+            $procesoItems = $consultaEliminarI->execute();
+            if($procesoItems){
+                $consulta = $base_de_datos->prepare("DELETE FROM facturas WHERE id_facturas = :id");
 
-                $consulta->bindParam(':noV', $nombreV);
-                $consulta->bindParam(':noC', $nombreC);
-                
+                $consulta->bindParam(':id', $id);
                 
                 $proceso = $consulta->execute();
-                $id_generado = $base_de_datos->lastInsertId();
 
                 if( $proceso ){
                     $respuesta = [
                                     'status' => true,
-                                    'mesagge' => "OK##PRODUCT##INSERT",
-                                    'id' => $id_generado
-                                ];
+                                    'mesagge' => "OK##CLIENT##DELETE"
+                                  ];
                     echo json_encode($respuesta);
                 }else{
                     $respuesta = [
                                     'status' => false,
-                                    'mesagge' => "ERROR##PRODUCT##INSERT"
-                                ];
+                                    'mesagge' => "ERROR##CLIENT##DELETE"
+                                  ];
                     echo json_encode($respuesta);
                 }
-            } else {
-                
-                $respuesta = [
-                    'status' => false,
-                    'message' => "CEDULA"
-                ];
-                echo json_encode($respuesta);
             }
-            
         } catch (Exception $e) {
             $respuesta = [
                             'status' => false,

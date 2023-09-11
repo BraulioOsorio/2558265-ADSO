@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $totalPrecioFactura = 0; // Inicializa el total del precio de la factura
 
                 // Prepara una sentencia SQL para insertar información de productos en la tabla items_facturas
-                $stmt = $base_de_datos->prepare("INSERT INTO items_facturas (id_producto, id_facturas) VALUES (?, ?)");
+                $stmt = $base_de_datos->prepare("INSERT INTO items_facturas (cantidad,id_producto, id_facturas) VALUES (?,?, ?)");
 
                 // Itera a través de los productos y realiza las inserciones y cálculos
                 foreach ($data['productos'] as $product) {
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $totalPrecioFactura += $precioTotalProducto;
 
                     // Insertar la relación entre la factura y el producto en la tabla items_facturas
-                    $stmt->execute([$productId, $id_facturaActual]);
+                    $stmt->execute([$cantidad,$productId, $id_facturaActual]);
                 }
 
                 // Actualizar el precio_factura y el estado de la factura a COMPRADO
