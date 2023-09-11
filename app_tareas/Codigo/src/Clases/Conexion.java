@@ -13,11 +13,11 @@ public class Conexion {
     Connection conexion;
     
     public Conexion(){ 
-        String hostname = "3.16.83.65";
+        String hostname = "localhost";
         String puerto = "3306";
         String databasename = "app_tareas";
         String user = "root";
-        String password = "Adso2023!";
+        String password = "";
 
         String url = "jdbc:mysql://"+hostname+":"+puerto+"/"+databasename;
 
