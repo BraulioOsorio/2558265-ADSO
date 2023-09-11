@@ -44,3 +44,28 @@ CREATE TABLE items_facturas (
 
 
 
+DELIMITER //
+
+CREATE TRIGGER before_delete_item_factura
+BEFORE DELETE ON items_facturas FOR EACH ROW
+BEGIN
+  DECLARE precio_producto FLOAT;
+  DECLARE cantidad_eliminar INT;
+  DECLARE factura_id INT;
+
+  SELECT productos.costo_producto, items_facturas.cantidad, items_facturas.id_facturas INTO precio_producto, cantidad_eliminar, factura_id
+  FROM items_facturas
+  JOIN productos ON items_facturas.id_producto = productos.id_producto
+  WHERE items_facturas.id_items = OLD.id_items;
+
+
+  UPDATE facturas
+  SET precio_factura = precio_factura - (precio_producto * cantidad_eliminar)
+  WHERE id_facturas = factura_id;
+END;
+//
+
+DELIMITER ;
+
+
+
