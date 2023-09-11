@@ -98,9 +98,7 @@ function getpro(endpoint, id_facturas) {
                     <td>${data.registros[i].cantidad}</td>
                     <td>${data.registros[i].costo_producto}</td>
                     <td>${data.registros[i].subtotal}</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="abrirModalEditar(${i})">e</button>
-                    </td>
+                    
                     <td>
                         <button class="btn btn-danger" onclick="confirmarEliminacionItemns(${i})">Eliminar</button
                     </td>
@@ -133,31 +131,6 @@ function confirmarEliminacion(indice){
 }
 
 
-function editarPersona(){
-    let datos = new FormData(formEditarUsuario);
-    let configuracion = {
-        method: "POST",
-        headers:{
-            "Accept":"application/json",
-        },
-        body: datos,
-    };
-    fetch("http://localhost/APIenPHP/Clientes/update.php",configuracion)
-    .then(res => res.json())
-    .then(data=>{
-        console.log("Se recibe los datos");
-        console.log(data);
-        if(data.status){
-            formEditarUsuario.reset();
-            modalEditarUsuario.hide();
-            getClients("http://localhost/APIenPHP/Clientes/ObtenerFa.php");
-            swal('Modificado con Exito','Se a modificado el usuario con exito','success');
-            
-        }else{
-            swal('Error','No se a podido modificar el usuario','error');
-        }
-    });
-}
 
 function eliminarFactura(){
     let datos = new FormData(formEliminarFa);
@@ -213,6 +186,7 @@ function eliminarItems(){
         if(data.status){
             modalEliminarItems.hide();
             getpro("http://localhost/APIenPHP/Facturas/ObteneritemsFa.php",itemsActual);
+            getClients("http://localhost/APIenPHP/Facturas/ObtenerFa.php");
             swal('Eliminado con Exito','Se a Eliminado el Items con exito','success');
             
         }else{
