@@ -16,7 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($data['id_factura'])) {
             try {
                 $id_facturaActual = intval($data['id_factura']);
-                $totalPrecioFactura = 0; // Inicializa el total del precio de la factura
+                $consultartotalPrecioFactura = $base_de_datos->prepare("SELECT precio_factura FROM facturas WHERE id_facturas = ?");
+                $consultartotalPrecioFactura->execute([$id_facturaActual]);
+                $totalPrecioFactura = $consultartotalPrecioFactura->fetchColumn();
+                
 
                 // Prepara una sentencia SQL para insertar información de productos en la tabla items_facturas
                 $stmt = $base_de_datos->prepare("INSERT INTO items_facturas (cantidad,id_producto, id_facturas) VALUES (?,?, ?)");
