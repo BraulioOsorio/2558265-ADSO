@@ -11,6 +11,7 @@ public class Principal {
     public static void main(String[] args) {
         
         ConsumoAPI ejemplo = new ConsumoAPI();
+        Gson gson = new Gson();
         
         
         // POST con Datos
@@ -25,28 +26,9 @@ public class Principal {
         
         
         
-        // GET sin datos
-        String datos = ejemplo.consumoGET("http://localhost/02APIenPHP/Obtener.php");
-        Gson gson = new Gson();
-        JsonObject jsonObject = gson.fromJson(datos, JsonObject.class);
-        JsonArray registros = jsonObject.getAsJsonArray("registros");
+      
+      
         
-        for(JsonElement registro : registros){
-            JsonObject registrosOb = registro.getAsJsonObject();
-            int cedula = registrosOb.get("documento").getAsInt();
-            String nombres = registrosOb.get("nombres").getAsString();
-            String apellidos = registrosOb.get("apellidos").getAsString();
-            String telefono = registrosOb.get("telefono").getAsString();
-            String direccion = registrosOb.get("direccion").getAsString();
-            String email = registrosOb.get("email").getAsString();
-            
-            System.out.println("Nombre del usuario: " + nombres + " " + apellidos);
-            System.out.println("Cedula: " + cedula);
-            System.out.println("Telefono: " + telefono);
-            System.out.println("Direccion: " + direccion);
-            System.out.println("Email: " + email);
-            System.out.println();
-        }
         // GET con Datos
         Map<String, String> getData = new HashMap<>();
         getData.put("cedula", "108802");
@@ -76,10 +58,16 @@ public class Principal {
         insertData.put("email", "oscar@mail.com");
         System.out.println("Consumo INSERT: " + ejemplo.consumoPOST("http://localhost/02APIenPHP/Insert.php", insertData));
         
+        
+        String datos = ejemplo.consumoGET("http://localhost/02APIenPHP/Obtener.php");
+        ListaPersonas v1 = new ListaPersonas(datos);
+        v1.setVisible(true);
+        v1.setResizable(false);
+        v1.setLocationRelativeTo(null);
+        
         // POST con Datos
         Map<String, String> deleteData = new HashMap<>();
         deleteData.put("cedula", "102200");
         System.out.println("Consumo DELETE: " + ejemplo.consumoPOST("http://localhost/02APIenPHP/Delete.php", deleteData));
-        
     }    
 }
