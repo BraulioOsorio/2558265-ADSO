@@ -19,10 +19,13 @@ public class ListaPersonas extends javax.swing.JFrame {
     /**
      * Creates new form ListaPersonas
      */
-    String datos;
+    
     DefaultTableModel modelo;
-    public ListaPersonas(String datos) {
-        this.datos = datos;
+    Gson gson;
+    ConsumoAPI ejemplo;
+    public ListaPersonas(ConsumoAPI ejemplo, Gson gson) {
+        this.ejemplo = ejemplo;
+        this.gson = gson;
         initComponents(); // Llama a initComponents() primero para inicializar los componentes
         modelo = (DefaultTableModel) PersonasListado.getModel();
         listado(); // Luego llama a listado()
@@ -39,6 +42,7 @@ public class ListaPersonas extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         PersonasListado = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,26 +79,48 @@ public class ListaPersonas extends javax.swing.JFrame {
             PersonasListado.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(313, 313, 313))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+        Menu menu = new Menu(ejemplo,gson);
+        menu.setVisible(true);
+        menu.setResizable(false);
+        menu.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     public final void listado(){
         modelo.setNumRows(0);
+        String datos = ejemplo.consumoGET("http://localhost/02APIenPHP/Obtener.php");
         if (datos != null) {
             try {
-                
-                Gson gson = new Gson();
                 
                 JsonObject jsonObject = gson.fromJson(datos, JsonObject.class);
                 JsonArray registros = jsonObject.getAsJsonArray("registros");
@@ -122,6 +148,7 @@ public class ListaPersonas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable PersonasListado;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
