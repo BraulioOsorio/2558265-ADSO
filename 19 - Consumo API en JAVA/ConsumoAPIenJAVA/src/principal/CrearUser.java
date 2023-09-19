@@ -22,6 +22,7 @@ public class CrearUser extends javax.swing.JFrame {
         initComponents();
         this.gson = gson;
         this.ejemplo = ejemplo;
+        
     }
 
     /**
