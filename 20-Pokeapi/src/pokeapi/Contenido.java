@@ -18,10 +18,13 @@ public class Contenido extends javax.swing.JPanel {
     Conexion conexion;
     Gson gson = new Gson();
     DefaultTableModel modelo;
+    String urlbase;
     public Contenido(Conexion conexion) {
         this.conexion = conexion;
         initComponents();
-        botones();
+        this.urlbase = "https://pokeapi.co/api/v2/pokemon";
+        
+        botones(urlbase);
         modelo = (DefaultTableModel) tablaHabilidades.getModel();
         contentButtons.setLayout(new BoxLayout(contentButtons, BoxLayout.Y_AXIS));
         pre();
@@ -36,7 +39,7 @@ public class Contenido extends javax.swing.JPanel {
         ImageIcon imageIconn;
         try {
             imageIconn = new ImageIcon(new URL(imageUrlpo));
-            Image imagen = imageIconn.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+            Image imagen = imageIconn.getImage().getScaledInstance(210, 210, Image.SCALE_SMOOTH);
             ImageIcon imagenPokepre = new ImageIcon(imagen);
             fotoPokemon.setIcon(imagenPokepre);
         } catch (MalformedURLException ex) {
@@ -61,6 +64,8 @@ public class Contenido extends javax.swing.JPanel {
     private void initComponents() {
 
         contenInter = new javax.swing.JPanel();
+        atras = new javax.swing.JButton();
+        next = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         contentButtons = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -70,6 +75,26 @@ public class Contenido extends javax.swing.JPanel {
         nombrePokemon = new javax.swing.JLabel();
 
         contenInter.setBackground(new java.awt.Color(255, 255, 255));
+
+        atras.setBackground(new java.awt.Color(51, 51, 255));
+        atras.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        atras.setForeground(new java.awt.Color(0, 0, 0));
+        atras.setText("Anteriores");
+        atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasActionPerformed(evt);
+            }
+        });
+
+        next.setBackground(new java.awt.Color(51, 51, 255));
+        next.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        next.setForeground(new java.awt.Color(0, 0, 0));
+        next.setText("Siguientes");
+        next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextActionPerformed(evt);
+            }
+        });
 
         contentButtons.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -110,14 +135,22 @@ public class Contenido extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tablaHabilidades);
+        if (tablaHabilidades.getColumnModel().getColumnCount() > 0) {
+            tablaHabilidades.getColumnModel().getColumn(0).setResizable(false);
+            tablaHabilidades.getColumnModel().getColumn(0).setPreferredWidth(30);
+            tablaHabilidades.getColumnModel().getColumn(1).setResizable(false);
+            tablaHabilidades.getColumnModel().getColumn(1).setPreferredWidth(230);
+            tablaHabilidades.getColumnModel().getColumn(2).setResizable(false);
+            tablaHabilidades.getColumnModel().getColumn(2).setPreferredWidth(500);
+        }
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
         jLabel1.setText("POKEDEX");
         jLabel1.setOpaque(true);
 
-        nombrePokemon.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        nombrePokemon.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         nombrePokemon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout contenInterLayout = new javax.swing.GroupLayout(contenInter);
@@ -132,34 +165,45 @@ public class Contenido extends javax.swing.JPanel {
                         .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(contenInterLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(contenInterLayout.createSequentialGroup()
-                                .addGap(58, 58, 58)
+                                .addComponent(jLabel1)
+                                .addGap(31, 31, 31))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(contenInterLayout.createSequentialGroup()
+                                        .addGap(54, 54, 54)
+                                        .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(contenInterLayout.createSequentialGroup()
+                                                .addGap(6, 6, 6)
+                                                .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(contenInterLayout.createSequentialGroup()
-                        .addGap(134, 134, 134)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(138, 138, 138)
+                        .addComponent(atras)
+                        .addGap(18, 18, 18)
+                        .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         contenInterLayout.setVerticalGroup(
             contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contenInterLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(contenInterLayout.createSequentialGroup()
                         .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))))
+                        .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37)
+                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(next, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(atras, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -173,9 +217,26 @@ public class Contenido extends javax.swing.JPanel {
             .addComponent(contenInter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-    public void botones() {
+
+    private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
+        String datos = conexion.consumoGET(urlbase);
+        JsonObject jsonObject = gson.fromJson(datos, JsonObject.class);
+        this.urlbase = jsonObject.get("previous").getAsString();
+        botones(this.urlbase);
         
-        String datos = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon");
+    }//GEN-LAST:event_atrasActionPerformed
+
+    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
+        String datos = conexion.consumoGET(urlbase);
+        JsonObject jsonObject = gson.fromJson(datos, JsonObject.class);
+        
+        this.urlbase = jsonObject.get("next").getAsString();
+        botones(this.urlbase);
+        System.out.println("efe");
+    }//GEN-LAST:event_nextActionPerformed
+    public void botones(String urlbase) {
+        contentButtons.removeAll();
+        String datos = conexion.consumoGET(urlbase);
         JsonObject jsonObject = gson.fromJson(datos, JsonObject.class);
         JsonArray registros = jsonObject.getAsJsonArray("results");
         for (JsonElement registro : registros) {
@@ -191,14 +252,19 @@ public class Contenido extends javax.swing.JPanel {
             
             boton.setHorizontalAlignment(SwingConstants.CENTER);
             boton.setPreferredSize(new Dimension(130, 25));
+            boton.setBackground(Color.white);
+            boton.requestFocusInWindow();
 
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     if (ultimoBotonSeleccionado != null) {
+                        ultimoBotonSeleccionado.setBackground(Color.white);
                         ultimoBotonSeleccionado.setForeground(null);
                     }
                     ultimoBotonSeleccionado = boton;
-                    boton.setForeground(Color.BLUE);      
+                    boton.setBackground(Color.BLUE);
+                    boton.setForeground(Color.white);
+                    
                     String nombrePo = boton.getText();
                     String datosPokemon = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon/" + nombrePo);
                     JsonObject pokemonObj = gson.fromJson(datosPokemon, JsonObject.class);
@@ -209,7 +275,8 @@ public class Contenido extends javax.swing.JPanel {
                     ImageIcon imageIcon;
                     try {
                         imageIcon = new ImageIcon(new URL(imageUrl));
-                        Image image = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+                        Image image = imageIcon.getImage().getScaledInstance(210, 210, Image.SCALE_SMOOTH);
+                        
                         ImageIcon imagenPoke = new ImageIcon(image);
                         fotoPokemon.setIcon(imagenPoke);
                     } catch (MalformedURLException ex) {
@@ -227,19 +294,33 @@ public class Contenido extends javax.swing.JPanel {
                         numero++;
                     }
                 }
+               
             });
+            boolean tieneAnterior = !jsonObject.get("previous").isJsonNull();
+            if (!tieneAnterior) {
+                atras.setEnabled(false);
+            }else{
+                atras.setEnabled(true);
+            }
+            
             buttonPanel.add(boton);
-            contentButtons.add(buttonPanel);  
+            contentButtons.add(buttonPanel);
+            contentButtons.revalidate();
+            contentButtons.repaint();
         }
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton atras;
     private javax.swing.JPanel contenInter;
     private javax.swing.JPanel contentButtons;
     private javax.swing.JLabel fotoPokemon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton next;
     private javax.swing.JLabel nombrePokemon;
     private javax.swing.JTable tablaHabilidades;
     // End of variables declaration//GEN-END:variables

@@ -35,7 +35,7 @@ public class Menu extends javax.swing.JFrame {
         );
         contenPrrincipalLayout.setVerticalGroup(
             contenPrrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 459, Short.MAX_VALUE)
+            .addGap(0, 532, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
