@@ -275,7 +275,7 @@ public class Contenido extends javax.swing.JPanel {
             boton.setHorizontalAlignment(SwingConstants.CENTER);
             boton.setPreferredSize(new Dimension(130, 25));
             boton.setBackground(Color.white);
-            boton.requestFocusInWindow();
+            boton.setFocusable(false);
 
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
