@@ -19,10 +19,14 @@ public class Contenido extends javax.swing.JPanel {
     Gson gson = new Gson();
     DefaultTableModel modelo;
     String urlbase;
-    public Contenido(Conexion conexion) {
+    String datoss;
+    int numero;
+    public Contenido(Conexion conexion,String datoss) {
         this.conexion = conexion;
         initComponents();
-        this.urlbase = "https://pokeapi.co/api/v2/pokemon";
+        this.urlbase = "";
+        this.datoss = datoss;
+        this.numero = 1;
         
         botones(urlbase);
         modelo = (DefaultTableModel) tablaHabilidades.getModel();
@@ -31,9 +35,11 @@ public class Contenido extends javax.swing.JPanel {
     }
     
     public void pre(){
-        String datosPokemonPre = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon/1");
+        String datosPokemonPre = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon/"+numero);
         JsonObject pokemonO = gson.fromJson(datosPokemonPre, JsonObject.class);
-        nombrePokemon.setText("BULBASAUR");
+        String nombre = pokemonO.get("name").getAsString();
+        String nombrePoMayusculas = nombre.toUpperCase();
+        nombrePokemon.setText(nombrePoMayusculas);
         String imageUrlpo = pokemonO.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default").getAsString();
       
         ImageIcon imageIconn;
@@ -223,21 +229,37 @@ public class Contenido extends javax.swing.JPanel {
         JsonObject jsonObject = gson.fromJson(datos, JsonObject.class);
         this.urlbase = jsonObject.get("previous").getAsString();
         botones(this.urlbase);
+        this.numero = numero - 20;
+        pre();
         
     }//GEN-LAST:event_atrasActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        String datos = conexion.consumoGET(urlbase);
+        String datos = null;
+        if(urlbase == null || urlbase.isEmpty()){
+           datos = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon");
+        }else{
+            datos = conexion.consumoGET(urlbase);
+        }
+        
         JsonObject jsonObject = gson.fromJson(datos, JsonObject.class);
         
         this.urlbase = jsonObject.get("next").getAsString();
         botones(this.urlbase);
-        System.out.println("efe");
+        
+        this.numero = numero + 20;
+        pre();
     }//GEN-LAST:event_nextActionPerformed
     public void botones(String urlbase) {
         contentButtons.removeAll();
-        String datos = conexion.consumoGET(urlbase);
-        JsonObject jsonObject = gson.fromJson(datos, JsonObject.class);
+        JsonObject jsonObject = null;
+        if(urlbase == null || urlbase.isEmpty()){
+            jsonObject = gson.fromJson(datoss, JsonObject.class);
+        }else{
+            String datos = conexion.consumoGET(this.urlbase);
+            jsonObject = gson.fromJson(datos, JsonObject.class);
+        }
+        
         JsonArray registros = jsonObject.getAsJsonArray("results");
         for (JsonElement registro : registros) {
             JsonObject registrosOb = registro.getAsJsonObject();

@@ -70,8 +70,9 @@ public class Menu extends javax.swing.JFrame {
     
     public void contenido(){
         try {
+            String datos = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon");
             contenPrrincipal.removeAll();
-            Contenido content = new Contenido(conexion);
+            Contenido content = new Contenido(conexion,datos);
             content.setSize(contenPrrincipal.getSize());
             contenPrrincipal.add(content);
             repaint();
