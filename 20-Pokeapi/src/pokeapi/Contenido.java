@@ -63,6 +63,7 @@ public class Contenido extends javax.swing.JPanel {
         String datosPokemonPre = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon/"+numero);
         JsonObject pokemonO = gson.fromJson(datosPokemonPre, JsonObject.class);
         String nombre = pokemonO.get("name").getAsString();
+        pokeActual = "https://pokeapi.co/api/v2/pokemon/" + nombre;
         String nombrePoMayusculas = nombre.toUpperCase();
         nombrePokemon.setText(nombrePoMayusculas);
         String imageUrlpo = pokemonO.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default").getAsString();
