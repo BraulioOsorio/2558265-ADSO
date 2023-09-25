@@ -17,36 +17,30 @@ import javax.swing.table.DefaultTableModel;
 public class Contenido extends javax.swing.JPanel {
 
     private JButton ultimoBotonSeleccionado;
-    private JButton paginadorBoton;
     Conexion conexion;
     Gson gson = new Gson();
     DefaultTableModel modelo;
     String urlbase;
     String datoss;
-    int numero;
     //paginador
     int paginaActual;
     int elementosPorPagina;
     int totalPaginas;
     String pokeActual;
+    String nombrePre;
     private int posicionActual = 0;
     
     
     public Contenido(Conexion conexion,String datoss) {
         this.conexion = conexion;
         initComponents();
+        this.nombrePre = "bulbasaur";
         this.urlbase = "";
         this.datoss = datoss;
-        this.numero = 1;
         this.pokeActual = "https://pokeapi.co/api/v2/pokemon/1";
         this.paginaActual = 1;
         this.elementosPorPagina = 20;
         this.totalPaginas = calcularTotalPaginas(datoss);
-        
-        
-        
-        
-        contenInter.add(paginadorPanel, BorderLayout.SOUTH);
         
         
         botones(urlbase);
@@ -60,14 +54,34 @@ public class Contenido extends javax.swing.JPanel {
     }
     
     public void pre(){
-        String datosPokemonPre = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon/"+numero);
+        String datosPokemonPre = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon/"+nombrePre);
         JsonObject pokemonO = gson.fromJson(datosPokemonPre, JsonObject.class);
         String nombre = pokemonO.get("name").getAsString();
         pokeActual = "https://pokeapi.co/api/v2/pokemon/" + nombre;
         String nombrePoMayusculas = nombre.toUpperCase();
         nombrePokemon.setText(nombrePoMayusculas);
-        String imageUrlpo = pokemonO.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default").getAsString();
-      
+        
+        
+        String imageUrlpo = null;
+        JsonElement imagenUrl = pokemonO.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default");
+
+        if (imagenUrl != null && !imagenUrl.isJsonNull() && imagenUrl.isJsonPrimitive()) {
+            // Accede a la propiedad y conviértela a una cadena si no es nula
+            imageUrlpo = imagenUrl.getAsString();
+        } else {
+            // Si imagenUrl es nulo o no es una propiedad JSON primitiva, intenta la otra ruta
+            JsonElement frontDefault = pokemonO.getAsJsonObject("sprites").get("front_default");
+
+            if (frontDefault != null && frontDefault.isJsonPrimitive()) {
+                imageUrlpo = frontDefault.getAsString();
+            } else {
+                // Si ambas rutas fallan, asigna una URL de imagen predeterminada
+                imageUrlpo = "https://www.pngkey.com/png/detail/119-1192258_faq-comments-emoji-signo-de-pregunta-png.png";
+            }
+        }
+
+        
+        
         ImageIcon imageIconn;
         try {
             imageIconn = new ImageIcon(new URL(imageUrlpo));
@@ -111,10 +125,10 @@ public class Contenido extends javax.swing.JPanel {
 
         contenInter.setBackground(new java.awt.Color(255, 255, 255));
 
-        atras.setBackground(new java.awt.Color(51, 51, 255));
+        atras.setBackground(java.awt.Color.blue);
         atras.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        atras.setForeground(new java.awt.Color(0, 0, 0));
-        atras.setText("Anteriores");
+        atras.setForeground(new java.awt.Color(255, 255, 255));
+        atras.setText("<");
         atras.setFocusable(false);
         atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,10 +136,10 @@ public class Contenido extends javax.swing.JPanel {
             }
         });
 
-        next.setBackground(new java.awt.Color(51, 51, 255));
+        next.setBackground(java.awt.Color.blue);
         next.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        next.setForeground(new java.awt.Color(0, 0, 0));
-        next.setText("Siguientes");
+        next.setForeground(new java.awt.Color(255, 255, 255));
+        next.setText(">");
         next.setFocusable(false);
         next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,6 +195,8 @@ public class Contenido extends javax.swing.JPanel {
             tablaHabilidades.getColumnModel().getColumn(2).setPreferredWidth(500);
         }
 
+        fotoPokemon.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
@@ -204,6 +220,8 @@ public class Contenido extends javax.swing.JPanel {
             }
         });
 
+        paginadorPanel.setBackground(new java.awt.Color(255, 255, 255));
+        paginadorPanel.setForeground(new java.awt.Color(255, 255, 255));
         paginadorPanel.setLayout(new javax.swing.BoxLayout(paginadorPanel, javax.swing.BoxLayout.X_AXIS));
 
         javax.swing.GroupLayout contenInterLayout = new javax.swing.GroupLayout(contenInter);
@@ -218,66 +236,60 @@ public class Contenido extends javax.swing.JPanel {
                         .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(contenInterLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
-                                        .addGap(0, 187, Short.MAX_VALUE)
-                                        .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 120, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane2)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel1)
-                                        .addGap(225, 225, 225)))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addContainerGap())
                             .addGroup(contenInterLayout.createSequentialGroup()
                                 .addGap(40, 40, 40)
                                 .addComponent(postImage, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(81, 81, 81)
-                                .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(49, 49, 49)
+                                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                                 .addComponent(nextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(38, 38, 38))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
-                                .addComponent(atras)
-                                .addGap(18, 18, 18)
-                                .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(217, 217, 217))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
-                                .addComponent(paginadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57))))))
+                        .addComponent(atras)
+                        .addGap(18, 18, 18)
+                        .addComponent(paginadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(next)
+                        .addGap(129, 129, 129))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(171, 171, 171))
         );
         contenInterLayout.setVerticalGroup(
             contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contenInterLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
                 .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(contenInterLayout.createSequentialGroup()
-                        .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(contenInterLayout.createSequentialGroup()
-                                .addGap(71, 71, 71)
+                                .addGap(109, 109, 109)
                                 .addComponent(nextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(contenInterLayout.createSequentialGroup()
-                                .addGap(71, 71, 71)
+                                .addGap(109, 109, 109)
                                 .addComponent(postImage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(contenInterLayout.createSequentialGroup()
+                                .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37)
-                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(next, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(atras, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
-                .addGap(41, 41, 41)
-                .addComponent(paginadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(45, 45, 45)
+                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(next)
+                    .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(paginadorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(atras, javax.swing.GroupLayout.Alignment.TRAILING)))
+                .addGap(56, 56, 56))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -288,7 +300,9 @@ public class Contenido extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contenInter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(contenInter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -297,7 +311,7 @@ public class Contenido extends javax.swing.JPanel {
         JsonObject jsonObject = gson.fromJson(datos, JsonObject.class);
         this.urlbase = jsonObject.get("previous").getAsString();
         botones(this.urlbase);
-        this.numero = numero - 20;
+        
         pre();
         paginaActual--;
         agregarBotonesPaginador();
@@ -318,7 +332,7 @@ public class Contenido extends javax.swing.JPanel {
         this.urlbase = jsonObject.get("next").getAsString();
         botones(this.urlbase);
         
-        this.numero = numero + 20;
+        
         pre();
         paginaActual++;
         agregarBotonesPaginador();
@@ -468,6 +482,7 @@ public class Contenido extends javax.swing.JPanel {
     
     public void botones(String urlbase) {
         contentButtons.removeAll();
+        
         JsonObject jsonObject = null;
         if(urlbase == null || urlbase.isEmpty()){
             jsonObject = gson.fromJson(datoss, JsonObject.class);
@@ -475,13 +490,16 @@ public class Contenido extends javax.swing.JPanel {
             String datos = conexion.consumoGET(this.urlbase);
             jsonObject = gson.fromJson(datos, JsonObject.class);
         }
-        
+        int i = 0;
         JsonArray registros = jsonObject.getAsJsonArray("results");
         for (JsonElement registro : registros) {
             JsonObject registrosOb = registro.getAsJsonObject();
             String nombres = registrosOb.get("name").getAsString();
             JPanel buttonPanel = new JPanel();
-            
+            if(i==0){
+                nombrePre = nombres;
+            }
+            i++;
             FlowLayout flowLayout = new FlowLayout();
             flowLayout.setHgap(0); 
             flowLayout.setVgap(0); 
@@ -509,10 +527,28 @@ public class Contenido extends javax.swing.JPanel {
                     JsonObject pokemonObj = gson.fromJson(datosPokemon, JsonObject.class);
                     String nombrePoMayusculas = nombrePo.toUpperCase();
                     nombrePokemon.setText(nombrePoMayusculas);
-                    String imageUrl = pokemonObj.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default").getAsString();
+                    String imageUrl = null;                    
+                    JsonElement imagenUrl = pokemonObj.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default");
+
+                    if (imagenUrl != null && !imagenUrl.isJsonNull() && imagenUrl.isJsonPrimitive()) {
+                        // Accede a la propiedad y conviértela a una cadena si no es nula
+                        imageUrl = imagenUrl.getAsString();
+                    } else {
+                        // Si imagenUrl es nulo o no es una propiedad JSON primitiva, intenta la otra ruta
+                        JsonElement frontDefault = pokemonObj.getAsJsonObject("sprites").get("front_default");
+
+                        if (frontDefault != null && frontDefault.isJsonPrimitive()) {
+                            imageUrl = frontDefault.getAsString();
+                        } else {
+                            // Si ambas rutas fallan, asigna una URL de imagen predeterminada
+                            imageUrl = "https://www.pngkey.com/png/detail/119-1192258_faq-comments-emoji-signo-de-pregunta-png.png";
+                        }
+                    }
+                    
                     
                     ImageIcon imageIcon;
                     try {
+                        
                         imageIcon = new ImageIcon(new URL(imageUrl));
                         Image image = imageIcon.getImage().getScaledInstance(210, 210, Image.SCALE_SMOOTH);
                         
@@ -555,53 +591,58 @@ public class Contenido extends javax.swing.JPanel {
         paginadorPanel.removeAll();
 
         // Botones de página
-        for (int i = Math.max(1, paginaActual - 2); i <= Math.min(totalPaginas, paginaActual + 2); i++) {
-            JButton botonPagina = new JButton(String.valueOf(i));
+        int inicio = Math.max(1, paginaActual - 2);
+        int fin = Math.min(totalPaginas, paginaActual + 2);
+
+        // Si la página actual es 1 o 2, establece fin en 5
+        if (paginaActual == 1 || paginaActual == 2) {
+            fin = Math.min(5, totalPaginas);
+        }
+        
+        
+        for (int i = inicio; i <= fin; i++) {
+            JButton botonPagina;
+            if(i <= 9){
+                botonPagina = new JButton(String.valueOf("0"+i));
+            }else{
+                botonPagina = new JButton(String.valueOf(i));
+            }
+            
             botonPagina.setBackground(Color.red);
             botonPagina.setForeground(Color.white);
+            botonPagina.setFont(new Font("Arial", Font.BOLD, 16)); // Cambia el tamaño de fuente
+            botonPagina.setFocusable(false);
+            if(paginaActual == i){
+                botonPagina.setBackground(Color.BLUE);
+                botonPagina.setForeground(Color.white);
+            }
             botonPagina.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (paginadorBoton != null) {
-                        paginadorBoton.setBackground(Color.white);
-                        paginadorBoton.setForeground(null);
-                    }
-                    paginadorBoton = botonPagina;
-                    botonPagina.setBackground(Color.BLUE);
-                    botonPagina.setForeground(Color.white);
                     paginaActual = Integer.parseInt(botonPagina.getText());
-                    System.out.println(paginaActual);
+
                     int paginaAmos = 0;
-                    
-                    if(paginaActual == 1){
+
+                    if (paginaActual == 1) {
                         urlbase = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
-                        numero = 1;
                         agregarBotonesPaginador();
-                        
-                    }else{
-                        paginaAmos = (paginaActual-1) * 20;
-                        urlbase = "https://pokeapi.co/api/v2/pokemon?offset="+paginaAmos+"&limit=20";
-                        numero = paginaAmos+1;
+
+                    } else {
+                        paginaAmos = (paginaActual - 1) * 20;
+                        urlbase = "https://pokeapi.co/api/v2/pokemon?offset=" + paginaAmos + "&limit=20";
+                      
                         agregarBotonesPaginador();
                     }
-                    
-                    
-                    System.out.println(paginaAmos);
-                    
+
                     botones(urlbase);
                     pre();
-                    
                 }
             });
-            
+
             paginadorPanel.add(botonPagina);
-            System.out.println("si "+i);
         }
         paginadorPanel.revalidate();
         paginadorPanel.repaint();
-                
-
-       
     }
     
     
