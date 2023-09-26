@@ -34,7 +34,6 @@ public class Contenido extends javax.swing.JPanel {
     public Contenido(Conexion conexion,String datoss) {
         this.conexion = conexion;
         initComponents();
-        this.nombrePre = "bulbasaur";
         this.urlbase = "";
         this.datoss = datoss;
         this.pokeActual = "https://pokeapi.co/api/v2/pokemon/1";
@@ -54,54 +53,61 @@ public class Contenido extends javax.swing.JPanel {
     }
     
     public void pre(){
-        String datosPokemonPre = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon/"+nombrePre);
-        JsonObject pokemonO = gson.fromJson(datosPokemonPre, JsonObject.class);
-        String nombre = pokemonO.get("name").getAsString();
-        pokeActual = "https://pokeapi.co/api/v2/pokemon/" + nombre;
-        String nombrePoMayusculas = nombre.toUpperCase();
-        nombrePokemon.setText(nombrePoMayusculas);
-        
-        
-        String imageUrlpo = null;
-        JsonElement imagenUrl = pokemonO.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default");
-
-        if (imagenUrl != null && !imagenUrl.isJsonNull() && imagenUrl.isJsonPrimitive()) {
-            // Accede a la propiedad y conviértela a una cadena si no es nula
-            imageUrlpo = imagenUrl.getAsString();
-        } else {
-            // Si imagenUrl es nulo o no es una propiedad JSON primitiva, intenta la otra ruta
-            JsonElement frontDefault = pokemonO.getAsJsonObject("sprites").get("front_default");
-
-            if (frontDefault != null && frontDefault.isJsonPrimitive()) {
-                imageUrlpo = frontDefault.getAsString();
-            } else {
-                // Si ambas rutas fallan, asigna una URL de imagen predeterminada
-                imageUrlpo = "https://www.pngkey.com/png/detail/119-1192258_faq-comments-emoji-signo-de-pregunta-png.png";
-            }
-        }
-
-        
-        
-        ImageIcon imageIconn;
         try {
-            imageIconn = new ImageIcon(new URL(imageUrlpo));
-            Image imagen = imageIconn.getImage().getScaledInstance(210, 210, Image.SCALE_SMOOTH);
-            ImageIcon imagenPokepre = new ImageIcon(imagen);
-            fotoPokemon.setIcon(imagenPokepre);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            String datosPokemonPre = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon/"+nombrePre);
+            JsonObject pokemonO = gson.fromJson(datosPokemonPre, JsonObject.class);
+            String nombre = pokemonO.get("name").getAsString();
+            pokeActual = "https://pokeapi.co/api/v2/pokemon/" + nombre;
+            String nombrePoMayusculas = nombre.toUpperCase();
+            nombrePokemon.setText(nombrePoMayusculas);
+
+
+            String imageUrlpo = null;
+            JsonElement imagenUrl = pokemonO.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default");
+
+            if (imagenUrl != null && !imagenUrl.isJsonNull() && imagenUrl.isJsonPrimitive()) {
+                // Accede a la propiedad y conviértela a una cadena si no es nula
+                imageUrlpo = imagenUrl.getAsString();
+            } else {
+                // Si imagenUrl es nulo o no es una propiedad JSON primitiva, intenta la otra ruta
+                JsonElement frontDefault = pokemonO.getAsJsonObject("sprites").get("front_default");
+
+                if (frontDefault != null && frontDefault.isJsonPrimitive()) {
+                    imageUrlpo = frontDefault.getAsString();
+                } else {
+                    // Si ambas rutas fallan, asigna una URL de imagen predeterminada
+                    imageUrlpo = "https://www.pngkey.com/png/detail/119-1192258_faq-comments-emoji-signo-de-pregunta-png.png";
+                }
+            }
+
+
+
+            ImageIcon imageIconn;
+            try {
+                imageIconn = new ImageIcon(new URL(imageUrlpo));
+                Image imagen = imageIconn.getImage().getScaledInstance(210, 210, Image.SCALE_SMOOTH);
+                ImageIcon imagenPokepre = new ImageIcon(imagen);
+                fotoPokemon.setIcon(imagenPokepre);
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            modelo.setNumRows(0);
+            JsonArray habilidadess = pokemonO.getAsJsonArray("abilities");
+            int numero = 1;
+            for (JsonElement registro : habilidadess) {
+                JsonObject registrosOb = registro.getAsJsonObject();
+                String ability = registrosOb.getAsJsonObject("ability").get("name").getAsString();
+                String url = registrosOb.getAsJsonObject("ability").get("url").getAsString();
+                Object[] fila = new Object[]{numero, ability, url};
+                modelo.addRow(fila);
+                numero++;
+            }
+        } catch (Exception e) {
+            buscar.setText("");
+            JOptionPane.showMessageDialog(null, "Ingrese el numero o nombre de un pokemon que exista");
+            
         }
-        modelo.setNumRows(0);
-        JsonArray habilidadess = pokemonO.getAsJsonArray("abilities");
-        int numero = 1;
-        for (JsonElement registro : habilidadess) {
-            JsonObject registrosOb = registro.getAsJsonObject();
-            String ability = registrosOb.getAsJsonObject("ability").get("name").getAsString();
-            String url = registrosOb.getAsJsonObject("ability").get("url").getAsString();
-            Object[] fila = new Object[]{numero, ability, url};
-            modelo.addRow(fila);
-            numero++;
-        }
+        
 
     }
 
@@ -122,6 +128,9 @@ public class Contenido extends javax.swing.JPanel {
         nextImage = new java.awt.Button();
         postImage = new java.awt.Button();
         paginadorPanel = new javax.swing.JPanel();
+        buscar = new javax.swing.JTextField();
+        atrasTodo = new javax.swing.JButton();
+        nextTodo = new javax.swing.JButton();
 
         contenInter.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -206,6 +215,8 @@ public class Contenido extends javax.swing.JPanel {
         nombrePokemon.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         nombrePokemon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        nextImage.setBackground(java.awt.Color.blue);
+        nextImage.setForeground(new java.awt.Color(255, 255, 255));
         nextImage.setLabel(">");
         nextImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,6 +224,8 @@ public class Contenido extends javax.swing.JPanel {
             }
         });
 
+        postImage.setBackground(java.awt.Color.blue);
+        postImage.setForeground(new java.awt.Color(255, 255, 255));
         postImage.setLabel("<");
         postImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,71 +237,111 @@ public class Contenido extends javax.swing.JPanel {
         paginadorPanel.setForeground(new java.awt.Color(255, 255, 255));
         paginadorPanel.setLayout(new javax.swing.BoxLayout(paginadorPanel, javax.swing.BoxLayout.X_AXIS));
 
+        buscar.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.red, java.awt.Color.blue));
+        buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscarKeyReleased(evt);
+            }
+        });
+
+        atrasTodo.setBackground(java.awt.Color.blue);
+        atrasTodo.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        atrasTodo.setForeground(new java.awt.Color(255, 255, 255));
+        atrasTodo.setText("<<");
+        atrasTodo.setFocusable(false);
+        atrasTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atrasTodoActionPerformed(evt);
+            }
+        });
+
+        nextTodo.setBackground(java.awt.Color.blue);
+        nextTodo.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        nextTodo.setForeground(new java.awt.Color(255, 255, 255));
+        nextTodo.setText(">>");
+        nextTodo.setFocusable(false);
+        nextTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextTodoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contenInterLayout = new javax.swing.GroupLayout(contenInter);
         contenInter.setLayout(contenInterLayout);
         contenInterLayout.setHorizontalGroup(
             contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contenInterLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(contenInterLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(contenInterLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(postImage, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
                         .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(contenInterLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addContainerGap())
-                            .addGroup(contenInterLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(postImage, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(49, 49, 49)
-                                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                                .addComponent(nextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(atras)
-                        .addGap(18, 18, 18)
-                        .addComponent(paginadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(next)
-                        .addGap(129, 129, 129))))
+                            .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(nextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))))
+            .addGroup(contenInterLayout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(171, 171, 171))
+                .addComponent(atrasTodo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(atras)
+                .addGap(18, 18, 18)
+                .addComponent(paginadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(next)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nextTodo)
+                .addGap(34, 34, 34))
         );
         contenInterLayout.setVerticalGroup(
             contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
+                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)))
                 .addGap(26, 26, 26)
                 .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(contenInterLayout.createSequentialGroup()
                         .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(contenInterLayout.createSequentialGroup()
-                                .addGap(109, 109, 109)
-                                .addComponent(nextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(contenInterLayout.createSequentialGroup()
-                                .addGap(109, 109, 109)
-                                .addComponent(postImage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(contenInterLayout.createSequentialGroup()
                                 .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(contenInterLayout.createSequentialGroup()
+                                .addGap(109, 109, 109)
+                                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(postImage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(45, 45, 45)
                 .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(next)
+                    .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(next)
+                        .addComponent(nextTodo))
                     .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(paginadorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(atras, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(atras)
+                            .addComponent(atrasTodo))))
                 .addGap(56, 56, 56))
         );
 
@@ -300,43 +353,31 @@ public class Contenido extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(contenInter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(contenInter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasActionPerformed
-        String datos = conexion.consumoGET(urlbase);
-        JsonObject jsonObject = gson.fromJson(datos, JsonObject.class);
-        this.urlbase = jsonObject.get("previous").getAsString();
-        botones(this.urlbase);
-        
-        pre();
-        paginaActual--;
-        agregarBotonesPaginador();
+
+        if(paginaActual <= 5){
+            paginaActual = 1;
+            agregarBotonesPaginador();
+        }else{
+            paginaActual = paginaActual - 5;
+            agregarBotonesPaginador();
+        }
         
         
     }//GEN-LAST:event_atrasActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        String datos = null;
-        if(urlbase == null || urlbase.isEmpty()){
-           datos = conexion.consumoGET("https://pokeapi.co/api/v2/pokemon");
+        if(paginaActual >= 61){
+            paginaActual = 65;
+            agregarBotonesPaginador();
         }else{
-            datos = conexion.consumoGET(urlbase);
+            paginaActual = paginaActual + 5;
+            agregarBotonesPaginador();
         }
-        
-        JsonObject jsonObject = gson.fromJson(datos, JsonObject.class);
-        
-        this.urlbase = jsonObject.get("next").getAsString();
-        botones(this.urlbase);
-        
-        
-        pre();
-        paginaActual++;
-        agregarBotonesPaginador();
-        
         
     }//GEN-LAST:event_nextActionPerformed
 
@@ -461,6 +502,26 @@ public class Contenido extends javax.swing.JPanel {
       
     }//GEN-LAST:event_postImageActionPerformed
 
+    private void buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarKeyReleased
+        if (evt.getKeyChar() == '\n') {
+            
+            this.nombrePre =  buscar.getText().toLowerCase();
+            pre();
+            buscar.setText("");
+        }  
+    }//GEN-LAST:event_buscarKeyReleased
+
+    private void atrasTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasTodoActionPerformed
+        paginaActual = 1;
+        agregarBotonesPaginador();
+        
+    }//GEN-LAST:event_atrasTodoActionPerformed
+
+    private void nextTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextTodoActionPerformed
+        paginaActual = 65;
+        agregarBotonesPaginador();
+    }//GEN-LAST:event_nextTodoActionPerformed
+
 
     private void cargarImagen(String imageUrl) {
          try {
@@ -496,10 +557,6 @@ public class Contenido extends javax.swing.JPanel {
             JsonObject registrosOb = registro.getAsJsonObject();
             String nombres = registrosOb.get("name").getAsString();
             JPanel buttonPanel = new JPanel();
-            if(i==0){
-                nombrePre = nombres;
-            }
-            i++;
             FlowLayout flowLayout = new FlowLayout();
             flowLayout.setHgap(0); 
             flowLayout.setVgap(0); 
@@ -510,6 +567,14 @@ public class Contenido extends javax.swing.JPanel {
             boton.setPreferredSize(new Dimension(130, 25));
             boton.setBackground(Color.white);
             boton.setFocusable(false);
+            if(i==0){
+                nombrePre = nombres;
+                ultimoBotonSeleccionado = boton;
+                boton.setBackground(Color.BLUE);
+                boton.setForeground(Color.white);
+            }
+            i++;
+            
 
             boton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -571,13 +636,7 @@ public class Contenido extends javax.swing.JPanel {
                 }
                
             });
-            boolean tieneAnterior = !jsonObject.get("previous").isJsonNull();
-            if (!tieneAnterior) {
-                atras.setEnabled(false);
-            }else{
-                atras.setEnabled(true);
-            }
-            
+
             buttonPanel.add(boton);
             contentButtons.add(buttonPanel);
             contentButtons.revalidate();
@@ -588,6 +647,13 @@ public class Contenido extends javax.swing.JPanel {
     }
     
     public void agregarBotonesPaginador() {
+        int paginaPor = (paginaActual - 1) * 20;
+        urlbase = "https://pokeapi.co/api/v2/pokemon?offset=" + paginaPor + "&limit=20";
+        
+        botones(urlbase);
+        pre();
+
+        
         paginadorPanel.removeAll();
 
         // Botones de página
@@ -597,6 +663,10 @@ public class Contenido extends javax.swing.JPanel {
         // Si la página actual es 1 o 2, establece fin en 5
         if (paginaActual == 1 || paginaActual == 2) {
             fin = Math.min(5, totalPaginas);
+        }
+        
+        if(paginaActual == 65 || paginaActual == 64){
+            inicio = Math.max(60, totalPaginas - 4);
         }
         
         
@@ -641,6 +711,21 @@ public class Contenido extends javax.swing.JPanel {
 
             paginadorPanel.add(botonPagina);
         }
+        if(paginaActual == 65){
+            next.setEnabled(false);
+            nextTodo.setEnabled(false);
+        }else{
+            next.setEnabled(true);
+            nextTodo.setEnabled(true);
+        }
+        
+        if(paginaActual == 1){
+            atras.setEnabled(false);
+            atrasTodo.setEnabled(false);
+        }else{
+            atras.setEnabled(true);
+            atrasTodo.setEnabled(true);
+        }
         paginadorPanel.revalidate();
         paginadorPanel.repaint();
     }
@@ -649,6 +734,8 @@ public class Contenido extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atras;
+    private javax.swing.JButton atrasTodo;
+    private javax.swing.JTextField buscar;
     private javax.swing.JPanel contenInter;
     private javax.swing.JPanel contentButtons;
     private javax.swing.JLabel fotoPokemon;
@@ -657,6 +744,7 @@ public class Contenido extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton next;
     private java.awt.Button nextImage;
+    private javax.swing.JButton nextTodo;
     private javax.swing.JLabel nombrePokemon;
     private javax.swing.JPanel paginadorPanel;
     private java.awt.Button postImage;
