@@ -162,7 +162,7 @@ public class Contenido extends javax.swing.JPanel {
         contentButtons.setLayout(contentButtonsLayout);
         contentButtonsLayout.setHorizontalGroup(
             contentButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 181, Short.MAX_VALUE)
+            .addGap(0, 191, Short.MAX_VALUE)
         );
         contentButtonsLayout.setVerticalGroup(
             contentButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,6 +205,7 @@ public class Contenido extends javax.swing.JPanel {
         }
 
         fotoPokemon.setBackground(new java.awt.Color(255, 255, 255));
+        fotoPokemon.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
@@ -212,7 +213,9 @@ public class Contenido extends javax.swing.JPanel {
         jLabel1.setText("POKEDEX");
         jLabel1.setOpaque(true);
 
-        nombrePokemon.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        nombrePokemon.setBackground(new java.awt.Color(0, 0, 0));
+        nombrePokemon.setFont(new java.awt.Font("Arial Black", 1, 20)); // NOI18N
+        nombrePokemon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nombrePokemon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         nextImage.setBackground(java.awt.Color.blue);
@@ -270,30 +273,6 @@ public class Contenido extends javax.swing.JPanel {
         contenInter.setLayout(contenInterLayout);
         contenInterLayout.setHorizontalGroup(
             contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contenInterLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(contenInterLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(contenInterLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(postImage, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                        .addComponent(nextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))))
-            .addGroup(contenInterLayout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(atrasTodo)
@@ -306,6 +285,34 @@ public class Contenido extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(nextTodo)
                 .addGap(34, 34, 34))
+            .addGroup(contenInterLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contenInterLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(contenInterLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(contenInterLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addContainerGap())
+                            .addGroup(contenInterLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(contenInterLayout.createSequentialGroup()
+                                        .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(contenInterLayout.createSequentialGroup()
+                                        .addComponent(postImage, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(11, 11, 11)
+                                        .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(nextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(38, 38, 38))))))))
         );
         contenInterLayout.setVerticalGroup(
             contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,13 +327,12 @@ public class Contenido extends javax.swing.JPanel {
                 .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(contenInterLayout.createSequentialGroup()
+                        .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(contenInterLayout.createSequentialGroup()
-                                .addComponent(nombrePokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(contenInterLayout.createSequentialGroup()
-                                .addGap(109, 109, 109)
+                                .addGap(71, 71, 71)
                                 .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(postImage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -518,7 +524,7 @@ public class Contenido extends javax.swing.JPanel {
     }//GEN-LAST:event_atrasTodoActionPerformed
 
     private void nextTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextTodoActionPerformed
-        paginaActual = 65;
+        paginaActual = totalPaginas;
         agregarBotonesPaginador();
     }//GEN-LAST:event_nextTodoActionPerformed
 
@@ -557,16 +563,18 @@ public class Contenido extends javax.swing.JPanel {
             JsonObject registrosOb = registro.getAsJsonObject();
             String nombres = registrosOb.get("name").getAsString();
             JPanel buttonPanel = new JPanel();
-            FlowLayout flowLayout = new FlowLayout();
+            
+            FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
             flowLayout.setHgap(0); 
             flowLayout.setVgap(0); 
             buttonPanel.setLayout(flowLayout);
             JButton boton = new JButton(nombres);
             
             boton.setHorizontalAlignment(SwingConstants.CENTER);
-            boton.setPreferredSize(new Dimension(130, 25));
+            boton.setPreferredSize(new Dimension(190, 32));
             boton.setBackground(Color.white);
             boton.setFocusable(false);
+            boton.setFont(new Font("Arial", Font.PLAIN, 12));
             if(i==0){
                 nombrePre = nombres;
                 ultimoBotonSeleccionado = boton;
