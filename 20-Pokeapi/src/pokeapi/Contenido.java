@@ -66,17 +66,16 @@ public class Contenido extends javax.swing.JPanel {
             JsonElement imagenUrl = pokemonO.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default");
 
             if (imagenUrl != null && !imagenUrl.isJsonNull() && imagenUrl.isJsonPrimitive()) {
-                // Accede a la propiedad y conviértela a una cadena si no es nula
                 imageUrlpo = imagenUrl.getAsString();
             } else {
-                // Si imagenUrl es nulo o no es una propiedad JSON primitiva, intenta la otra ruta
+   
                 JsonElement frontDefault = pokemonO.getAsJsonObject("sprites").get("front_default");
 
                 if (frontDefault != null && frontDefault.isJsonPrimitive()) {
                     imageUrlpo = frontDefault.getAsString();
                 } else {
-                    // Si ambas rutas fallan, asigna una URL de imagen predeterminada
-                    imageUrlpo = "https://www.pngkey.com/png/detail/119-1192258_faq-comments-emoji-signo-de-pregunta-png.png";
+
+                    imageUrlpo = "https://i.pinimg.com/originals/46/e7/7e/46e77e3db6a6cdce8c63a9de331f31ff.png";
                 }
             }
 
@@ -388,120 +387,120 @@ public class Contenido extends javax.swing.JPanel {
     }//GEN-LAST:event_nextActionPerformed
 
     private void nextImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextImageActionPerformed
-        // Incrementar la posición actual
-        posicionActual++;
-        String[] datos = {
-            "back_default",
-            "back_female",
-            "back_shiny",
-            "back_shiny_female",
-            "front_default",
-            "front_female",
-            "front_shiny",
-            "front_shiny_female"
-        };
+        try {
+            posicionActual++;
+            String[] datos = {
+                "back_default",
+                "back_female",
+                "back_shiny",
+                "back_shiny_female",
+                "front_default",
+                "front_female",
+                "front_shiny",
+                "front_shiny_female"
+            };
 
-        // Verificar si la posición actual es válida
-        if (posicionActual >= datos.length) {
-            // Si llegamos al final, volver al principio (circular)
-            posicionActual = 0;
-        }
+            if (posicionActual >= datos.length) {
 
-        // Obtener el nombre del sprite en la posición actual del arreglo
-        String imagenActual = datos[posicionActual];
-        String datosPokemon = conexion.consumoGET(this.pokeActual);
-        
+                posicionActual = 0;
+            }
 
-        if(posicionActual == 0){
-            JsonObject pokemonObj = gson.fromJson(datosPokemon, JsonObject.class);
-            String imageUrl = pokemonObj.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default").getAsString();
-            cargarImagen(imageUrl);
-        }else{
-            
-            if (datosPokemon != null && !datosPokemon.isEmpty()) {
-            JsonObject pokemonObj = gson.fromJson(datosPokemon, JsonObject.class);
 
-            // Verificar si el objeto JSON es nulo
-            if (pokemonObj != null && pokemonObj.getAsJsonObject("sprites") != null) {
-                // Obtener el valor del sprite actual
-                JsonElement spriteElement = pokemonObj.getAsJsonObject("sprites").get(imagenActual);
+            String imagenActual = datos[posicionActual];
+            String datosPokemon = conexion.consumoGET(this.pokeActual);
 
-                // Verificar si el valor en el JSON no es nulo y es un elemento primitivo
-                if (!spriteElement.isJsonNull() ) {
-                    String imageUrl = spriteElement.getAsString();
-                    cargarImagen(imageUrl);
+
+            if(posicionActual == 0){
+                JsonObject pokemonObj = gson.fromJson(datosPokemon, JsonObject.class);
+                String imageUrl = pokemonObj.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default").getAsString();
+                cargarImagen(imageUrl);
+            }else{
+
+                if (datosPokemon != null && !datosPokemon.isEmpty()) {
+                JsonObject pokemonObj = gson.fromJson(datosPokemon, JsonObject.class);
+
+                    if (pokemonObj != null && pokemonObj.getAsJsonObject("sprites") != null) {
+
+                        JsonElement spriteElement = pokemonObj.getAsJsonObject("sprites").get(imagenActual);
+
+
+                        if (!spriteElement.isJsonNull() ) {
+                            String imageUrl = spriteElement.getAsString();
+                            cargarImagen(imageUrl);
+                        } else {
+
+                            nextImageActionPerformed(evt);
+                        }
+                    } else {
+
+                        nextImageActionPerformed(evt);
+                    }
                 } else {
-                    // Si el valor en el JSON no es válido, intentar cargar la siguiente imagen
+
                     nextImageActionPerformed(evt);
                 }
-            } else {
-                // Si el objeto JSON es nulo, intentar cargar la siguiente imagen
-                nextImageActionPerformed(evt);
             }
-        } else {
-            // Si los datos del Pokémon son nulos o vacíos, intentar cargar la siguiente imagen
-            nextImageActionPerformed(evt);
+        } catch (Exception e) {
         }
-        }
+        
         
     }//GEN-LAST:event_nextImageActionPerformed
     
     private void postImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postImageActionPerformed
-        // Decrementar la posición actual
-      posicionActual--;
-      String[] datos = {
-            "back_default",
-            "back_female",
-            "back_shiny",
-            "back_shiny_female",
-            "front_default",
-            "front_female",
-            "front_shiny",
-            "front_shiny_female"
-        };
+        try {
+            posicionActual--;
+            String[] datos = {
+                "back_default",
+                "back_female",
+                "back_shiny",
+                "back_shiny_female",
+                "front_default",
+                "front_female",
+                "front_shiny",
+                "front_shiny_female"
+            };
 
-    // Verificar si la posición actual es válida
-        if (posicionActual < 0) {
-            // Si llegamos al principio, ir al final (circular)
-            posicionActual = datos.length - 1;
-        }
 
-        // Obtener el nombre del sprite en la posición actual del arreglo
-        String imagenActual = datos[posicionActual];
-        String datosPokemon = conexion.consumoGET(this.pokeActual);
-        
+            if (posicionActual < 0) {
+                posicionActual = datos.length - 1;
+            }
 
-        if (posicionActual == 0) {
-            JsonObject pokemonObj = gson.fromJson(datosPokemon, JsonObject.class);
-            String imageUrl = pokemonObj.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default").getAsString();
-            cargarImagen(imageUrl);
-        }else{
-            
-            if (datosPokemon != null && !datosPokemon.isEmpty()) {
-            JsonObject pokemonObj = gson.fromJson(datosPokemon, JsonObject.class);
+            String imagenActual = datos[posicionActual];
+            String datosPokemon = conexion.consumoGET(this.pokeActual);
 
-            // Verificar si el objeto JSON es nulo
-                if (pokemonObj != null && pokemonObj.getAsJsonObject("sprites") != null) {
-                    // Obtener el valor del sprite actual
-                    JsonElement spriteElement = pokemonObj.getAsJsonObject("sprites").get(imagenActual);
 
-                    // Verificar si el valor en el JSON no es nulo y es un elemento primitivo
-                    if (spriteElement != null && !spriteElement.isJsonNull() && spriteElement.isJsonPrimitive()) {
-                        String imageUrl = spriteElement.getAsString();
-                        cargarImagen(imageUrl);
+            if (posicionActual == 0) {
+                JsonObject pokemonObj = gson.fromJson(datosPokemon, JsonObject.class);
+                String imageUrl = pokemonObj.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default").getAsString();
+                cargarImagen(imageUrl);
+            }else{
+
+                if (datosPokemon != null && !datosPokemon.isEmpty()) {
+                JsonObject pokemonObj = gson.fromJson(datosPokemon, JsonObject.class);
+
+                    if (pokemonObj != null && pokemonObj.getAsJsonObject("sprites") != null) {
+
+                        JsonElement spriteElement = pokemonObj.getAsJsonObject("sprites").get(imagenActual);
+
+                        if (spriteElement != null && !spriteElement.isJsonNull() && spriteElement.isJsonPrimitive()) {
+                            String imageUrl = spriteElement.getAsString();
+                            cargarImagen(imageUrl);
+                        } else {
+
+                            postImageActionPerformed(evt);
+                        }
                     } else {
-                        // Si el valor en el JSON no es válido, intentar cargar la imagen anterior
+
                         postImageActionPerformed(evt);
                     }
                 } else {
-                    // Si el objeto JSON es nulo, intentar cargar la imagen anterior
-                    postImageActionPerformed(evt);
+
+                        postImageActionPerformed(evt);
                 }
-            } else {
-                    // Si los datos del Pokémon son nulos o vacíos, intentar cargar la imagen anterior
-                    postImageActionPerformed(evt);
             }
+        } catch (Exception e) {
         }
+        
             
 
     
@@ -537,7 +536,7 @@ public class Contenido extends javax.swing.JPanel {
             ImageIcon imagenPoke = new ImageIcon(image);
             fotoPokemon.setIcon(imagenPoke);
         } catch (MalformedURLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         }
     public int calcularTotalPaginas(String datos) {
@@ -604,17 +603,17 @@ public class Contenido extends javax.swing.JPanel {
                     JsonElement imagenUrl = pokemonObj.getAsJsonObject("sprites").getAsJsonObject("other").getAsJsonObject("home").get("front_default");
 
                     if (imagenUrl != null && !imagenUrl.isJsonNull() && imagenUrl.isJsonPrimitive()) {
-                        // Accede a la propiedad y conviértela a una cadena si no es nula
+
                         imageUrl = imagenUrl.getAsString();
                     } else {
-                        // Si imagenUrl es nulo o no es una propiedad JSON primitiva, intenta la otra ruta
+     
                         JsonElement frontDefault = pokemonObj.getAsJsonObject("sprites").get("front_default");
 
                         if (frontDefault != null && frontDefault.isJsonPrimitive()) {
                             imageUrl = frontDefault.getAsString();
                         } else {
-                            // Si ambas rutas fallan, asigna una URL de imagen predeterminada
-                            imageUrl = "https://www.pngkey.com/png/detail/119-1192258_faq-comments-emoji-signo-de-pregunta-png.png";
+       
+                            imageUrl = "https://i.pinimg.com/originals/46/e7/7e/46e77e3db6a6cdce8c63a9de331f31ff.png";
                         }
                     }
                     
@@ -664,11 +663,11 @@ public class Contenido extends javax.swing.JPanel {
         
         paginadorPanel.removeAll();
 
-        // Botones de página
+
         int inicio = Math.max(1, paginaActual - 2);
         int fin = Math.min(totalPaginas, paginaActual + 2);
 
-        // Si la página actual es 1 o 2, establece fin en 5
+
         if (paginaActual == 1 || paginaActual == 2) {
             fin = Math.min(5, totalPaginas);
         }
