@@ -32,7 +32,7 @@ public class Menu extends javax.swing.JFrame {
         contenPrrincipal.setLayout(contenPrrincipalLayout);
         contenPrrincipalLayout.setHorizontalGroup(
             contenPrrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 602, Short.MAX_VALUE)
+            .addGap(0, 658, Short.MAX_VALUE)
         );
         contenPrrincipalLayout.setVerticalGroup(
             contenPrrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -43,7 +43,9 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contenPrrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(contenPrrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -130,13 +130,15 @@ public class Contenido extends javax.swing.JPanel {
         buscar = new javax.swing.JTextField();
         atrasTodo = new javax.swing.JButton();
         nextTodo = new javax.swing.JButton();
+        past1 = new javax.swing.JButton();
+        next1 = new javax.swing.JButton();
 
         contenInter.setBackground(new java.awt.Color(255, 255, 255));
 
         atras.setBackground(java.awt.Color.blue);
         atras.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
         atras.setForeground(new java.awt.Color(255, 255, 255));
-        atras.setText("<");
+        atras.setText("<<");
         atras.setFocusable(false);
         atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +149,7 @@ public class Contenido extends javax.swing.JPanel {
         next.setBackground(java.awt.Color.blue);
         next.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
         next.setForeground(new java.awt.Color(255, 255, 255));
-        next.setText(">");
+        next.setText(">>");
         next.setFocusable(false);
         next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,7 +251,7 @@ public class Contenido extends javax.swing.JPanel {
         atrasTodo.setBackground(java.awt.Color.blue);
         atrasTodo.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
         atrasTodo.setForeground(new java.awt.Color(255, 255, 255));
-        atrasTodo.setText("<<");
+        atrasTodo.setText("<<<");
         atrasTodo.setFocusable(false);
         atrasTodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,7 +262,7 @@ public class Contenido extends javax.swing.JPanel {
         nextTodo.setBackground(java.awt.Color.blue);
         nextTodo.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
         nextTodo.setForeground(new java.awt.Color(255, 255, 255));
-        nextTodo.setText(">>");
+        nextTodo.setText(">>>");
         nextTodo.setFocusable(false);
         nextTodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,30 +270,35 @@ public class Contenido extends javax.swing.JPanel {
             }
         });
 
+        past1.setBackground(java.awt.Color.blue);
+        past1.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        past1.setForeground(new java.awt.Color(255, 255, 255));
+        past1.setText("<");
+        past1.setFocusable(false);
+        past1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                past1ActionPerformed(evt);
+            }
+        });
+
+        next1.setBackground(java.awt.Color.blue);
+        next1.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        next1.setForeground(new java.awt.Color(255, 255, 255));
+        next1.setText(">");
+        next1.setFocusable(false);
+        next1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                next1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout contenInterLayout = new javax.swing.GroupLayout(contenInter);
         contenInter.setLayout(contenInterLayout);
         contenInterLayout.setHorizontalGroup(
             contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(atrasTodo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(atras)
-                .addGap(18, 18, 18)
-                .addComponent(paginadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(next)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nextTodo)
-                .addGap(34, 34, 34))
             .addGroup(contenInterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contenInterLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
                     .addGroup(contenInterLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,9 +316,30 @@ public class Contenido extends javax.swing.JPanel {
                                         .addComponent(postImage, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(11, 11, 11)
                                         .addComponent(fotoPokemon, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                                         .addComponent(nextImage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(38, 38, 38))))))))
+                                        .addGap(38, 38, 38))))))
+                    .addGroup(contenInterLayout.createSequentialGroup()
+                        .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(contenInterLayout.createSequentialGroup()
+                                .addComponent(atrasTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(atras, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(past1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(paginadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(next1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nextTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(contenInterLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         contenInterLayout.setVerticalGroup(
             contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,16 +366,21 @@ public class Contenido extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(45, 45, 45)
-                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(next)
-                        .addComponent(nextTodo))
-                    .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(paginadorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(atras)
-                            .addComponent(atrasTodo))))
-                .addGap(56, 56, 56))
+                .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contenInterLayout.createSequentialGroup()
+                        .addComponent(paginadorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                        .addGap(56, 56, 56))
+                    .addGroup(contenInterLayout.createSequentialGroup()
+                        .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(atras)
+                                .addComponent(atrasTodo)
+                                .addComponent(past1))
+                            .addGroup(contenInterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(next)
+                                .addComponent(nextTodo)
+                                .addComponent(next1)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -526,6 +559,18 @@ public class Contenido extends javax.swing.JPanel {
         paginaActual = totalPaginas;
         agregarBotonesPaginador();
     }//GEN-LAST:event_nextTodoActionPerformed
+
+    private void past1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_past1ActionPerformed
+        
+        paginaActual--;
+        agregarBotonesPaginador();
+        
+    }//GEN-LAST:event_past1ActionPerformed
+
+    private void next1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_next1ActionPerformed
+        paginaActual++;
+        agregarBotonesPaginador();
+    }//GEN-LAST:event_next1ActionPerformed
 
 
     private void cargarImagen(String imageUrl) {
@@ -721,17 +766,21 @@ public class Contenido extends javax.swing.JPanel {
         if(paginaActual == 65){
             next.setEnabled(false);
             nextTodo.setEnabled(false);
+            next1.setEnabled(false);
         }else{
             next.setEnabled(true);
             nextTodo.setEnabled(true);
+            next1.setEnabled(true);
         }
         
         if(paginaActual == 1){
             atras.setEnabled(false);
             atrasTodo.setEnabled(false);
+            past1.setEnabled(false);
         }else{
             atras.setEnabled(true);
             atrasTodo.setEnabled(true);
+            past1.setEnabled(true);
         }
         paginadorPanel.revalidate();
         paginadorPanel.repaint();
@@ -750,10 +799,12 @@ public class Contenido extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton next;
+    private javax.swing.JButton next1;
     private java.awt.Button nextImage;
     private javax.swing.JButton nextTodo;
     private javax.swing.JLabel nombrePokemon;
     private javax.swing.JPanel paginadorPanel;
+    private javax.swing.JButton past1;
     private java.awt.Button postImage;
     private javax.swing.JTable tablaHabilidades;
     // End of variables declaration//GEN-END:variables
