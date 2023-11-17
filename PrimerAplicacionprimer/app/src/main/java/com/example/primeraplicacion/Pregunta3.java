@@ -46,6 +46,9 @@ public class Pregunta3 extends AppCompatActivity {
             startActivity(intencion);
             finish();
 
+        }else{
+            TextView alerta = findViewById(R.id.alerta);
+            alerta.setText("Debe seleccionar una de las opciones para continuar ");
         }
 
     }

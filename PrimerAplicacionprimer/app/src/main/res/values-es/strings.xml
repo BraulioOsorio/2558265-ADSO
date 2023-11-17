@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <string name="app_name">Primera Aplicacion</string>
-    <string name="title">Titulo</string>
+    <string name="app_name">Pregunta 1</string>
+    <string name="title">Pregunta 1</string>
     <string name="id">Id:</string>
     <string name="name">Nombre:</string>
     <string name="email">Correo:</string>

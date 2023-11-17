@@ -80,7 +80,7 @@
             android:id="@+id/opcion_4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="d) Aluminio"
+            android:text="Aluminio"
             android:textSize="25dp"
             />
 
@@ -95,6 +95,17 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:onClick="Preguntaa4"
+        />
+    <TextView
+        android:id="@+id/alerta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold"
+
         />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
