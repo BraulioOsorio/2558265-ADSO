@@ -555,10 +555,10 @@ public class Contenido extends javax.swing.JPanel {
         
     }//GEN-LAST:event_atrasTodoActionPerformed
 
-    private void nextTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextTodoActionPerformed
+    private void nextTodoActionPerformed(java.awt.event.ActionEvent evt) {                                         
         paginaActual = totalPaginas;
         agregarBotonesPaginador();
-    }//GEN-LAST:event_nextTodoActionPerformed
+    }                                               
 
     private void past1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_past1ActionPerformed
         
@@ -661,6 +661,7 @@ public class Contenido extends javax.swing.JPanel {
                             imageUrl = "https://i.pinimg.com/originals/46/e7/7e/46e77e3db6a6cdce8c63a9de331f31ff.png";
                         }
                     }
+                    
                     
                     
                     ImageIcon imageIcon;

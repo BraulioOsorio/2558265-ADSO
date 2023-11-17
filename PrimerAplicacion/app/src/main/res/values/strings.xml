@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">First Application</string>
-    <string name="title">Title</string>
+    <string name="app_name">Question 1</string>
+    <string name="title">Question 1</string>
     <string name="id">Id:</string>
     <string name="name">Name:</string>
     <string name="email">Email:</string>

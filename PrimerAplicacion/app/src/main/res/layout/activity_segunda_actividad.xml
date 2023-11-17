@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pregunta 2"
+        android:textSize="50sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripcion:"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¿En qué año se celebró la independencia de Estados Unidos?"
+        android:textSize="30sp"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Opciones:"
+        android:textSize="35sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+
+        />
+
+
+
+    <RadioGroup
+        android:id="@+id/respuesta_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/opcion_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1776"
+            android:textSize="25dp"
+            />
+        <RadioButton
+            android:id="@+id/opcion_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1789"
+            android:textSize="25dp"
+            />
+        <RadioButton
+            android:id="@+id/opcion_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1804"
+            android:textSize="25dp"
+            />
+        <RadioButton
+            android:id="@+id/opcion_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1792"
+            android:textSize="25dp"
+            />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/respuesta2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Responder"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:onClick="Pregunta2"
+        />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

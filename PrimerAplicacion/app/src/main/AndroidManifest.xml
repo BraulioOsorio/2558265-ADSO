@@ -13,6 +13,36 @@
         android:theme="@style/Theme.PrimerAplicacion"
         tools:targetApi="31">
         <activity
+            android:name=".Respuestas"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta10"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta9"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta8"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta7"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta6"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta5"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta4"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta3"
+            android:exported="false" />
+        <activity
+            android:name=".SegundaActividad"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
