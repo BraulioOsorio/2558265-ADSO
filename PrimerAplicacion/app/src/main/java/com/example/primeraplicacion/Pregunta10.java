@@ -31,12 +31,6 @@ public class Pregunta10 extends AppCompatActivity {
         radioGroup = findViewById(R.id.respuesta_10);
     }
     public void Preguntaa10(View vista){
-
-
-
-
-
-
         Intent intencion;
         if (actividades.isEmpty()) {
             intencion = new Intent(getApplicationContext(), Respuestas.class);

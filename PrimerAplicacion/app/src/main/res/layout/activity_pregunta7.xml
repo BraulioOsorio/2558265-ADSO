@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -67,6 +72,22 @@
             android:text="Pablo Neruda"
             android:textSize="25dp"
             />
+        <RadioButton
+            android:id="@+id/opcion_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mario Vargas Llosa"
+            android:textSize="25dp"
+            />
+        <RadioButton
+            android:id="@+id/opcion_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Isabel Allende"
+            android:textSize="25dp"
+            />
+
+
 
 
     </RadioGroup>
@@ -94,3 +115,4 @@
         />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>

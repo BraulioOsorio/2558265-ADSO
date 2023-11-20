@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Respuestas extends AppCompatActivity {
 
     String[] respuestas = new String[10];
-    String[] respuestasCorrectas = {"No","1776","Amazonas","Oxígeno","África","Tokio","Gabriel García","8","Vincent van Gogh","1917"};
+    String[] respuestasCorrectas = {"No","1776","Amazonas","Oxígeno","África","Tokio","Gabriel García Márquez","8","Vincent van Gogh","1917"};
 
 
     @Override
@@ -27,7 +27,9 @@ public class Respuestas extends AppCompatActivity {
             }
         }
         int puntaje = 0;
+
         for (int i = 1; i <= 10; i++) {
+            boolean correcta = false;
             int idTextView = getResources().getIdentifier("respuesta" + i, "id", getPackageName());
 
 
@@ -38,13 +40,16 @@ public class Respuestas extends AppCompatActivity {
                 for(int f = 1; f <= 10; f++){
                     String soluciones = respuestasCorrectas[f - 1];
                     if(respuesta.equals(soluciones)){
-                        //"\n"
-                        puntaje = puntaje + 1;
-                        etiquetaResultado.setText("Pregunta "+i+": "+respuesta+". \n La respuesta es correcta\n ");
-
-                    }else{
-                        etiquetaResultado.setText("Pregunta "+i+": "+respuesta+". \n La respuesta es incorrecta \n");
+                        correcta = true;
+                        break;
                     }
+                }
+                if(correcta){
+                    puntaje = puntaje + 1;
+                    etiquetaResultado.setText("Pregunta "+i+": "+respuesta+". \n La respuesta es correcta\n ");
+
+                }else{
+                    etiquetaResultado.setText("Pregunta "+i+": "+respuesta+". \n La respuesta es incorrecta \n");
                 }
 
 
