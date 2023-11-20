@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".Pregunta1">
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/imagen10"
+
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descripcion:"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¿En qué año se llevó a cabo la Revolución Rusa?"
+        android:textSize="30sp"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Opciones:"
+        android:textSize="35sp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+
+        />
+
+
+
+    <RadioGroup
+        android:id="@+id/respuesta_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/opcion_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1917"
+            android:textSize="25dp"
+            />
+
+        <RadioButton
+            android:id="@+id/opcion_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1933"
+            android:textSize="25dp"
+            />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/respuesta10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Responder"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:onClick="Preguntaa10"
+        />
+    <TextView
+        android:id="@+id/alerta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="15sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold"
+
+        />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
