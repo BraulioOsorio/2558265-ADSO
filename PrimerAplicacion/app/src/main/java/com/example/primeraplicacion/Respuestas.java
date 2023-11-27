@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Respuestas extends AppCompatActivity {
 
     String[] respuestas = new String[10];
-    String[] respuestasCorrectas = {"No","1776","Amazonas","Oxígeno","África","Tokio","Gabriel García Márquez","8","Vincent van Gogh","1917"};
+    String[] respuestasCorrectas = {"No","1776","Amazonas","OxIgeno","Africa","Tokio","Gabriel García Marquez","8","Vincent van Gogh","1917"};
 
 
     @Override
@@ -20,47 +20,47 @@ public class Respuestas extends AppCompatActivity {
         setContentView(R.layout.activity_respuestas);
         ArrayList<String> opciones = getIntent().getStringArrayListExtra("opciones");
 
-        for (int i = 0; i < opciones.size(); i++) {
-            if (i < respuestas.length) {
-
-                respuestas[i] = opciones.get(i);
-            }
+        for (int i = 0; i < opciones.size() && i < respuestas.length; i++) {
+            respuestas[i] = opciones.get(i);
         }
+
         int puntaje = 0;
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 0; i < respuestas.length; i++) {
             boolean correcta = false;
-            int idTextView = getResources().getIdentifier("respuesta" + i, "id", getPackageName());
 
+            if (respuestas[i] != null) {
+                String respuesta = respuestas[i];
 
-            if (idTextView != 0) {
-                TextView etiquetaResultado = findViewById(idTextView);
-                String respuesta = respuestas[i - 1];
+                for (int f = 0; f < respuestasCorrectas.length; f++) {
+                    String solucion = respuestasCorrectas[f];
 
-                for(int f = 1; f <= 10; f++){
-                    String soluciones = respuestasCorrectas[f - 1];
-                    if(respuesta.equals(soluciones)){
+                    if (respuesta.equals(solucion)) {
                         correcta = true;
                         break;
                     }
                 }
-                if(correcta){
-                    puntaje = puntaje + 1;
-                    etiquetaResultado.setText("Pregunta "+i+": "+respuesta+". \n La respuesta es correcta\n ");
 
-                }else{
-                    etiquetaResultado.setText("Pregunta "+i+": "+respuesta+". \n La respuesta es incorrecta \n");
+                TextView etiquetaResultado = findViewById(getResources().getIdentifier("respuesta" + (i + 1), "id", getPackageName()));
+
+                if (etiquetaResultado != null) {
+                    if (correcta) {
+                        puntaje = puntaje + 1;
+                        etiquetaResultado.setText("Pregunta " + (i + 1) + ": " + respuesta + ". \n La respuesta es correcta\n ");
+                    } else {
+                        etiquetaResultado.setText("Pregunta " + (i + 1) + ": " + respuesta + ". \n La respuesta es incorrecta \n");
+                    }
                 }
-
-
-
             }
         }
+
         TextView puntajes = findViewById(R.id.puntaje);
-        if (puntaje >= 5){
-            puntajes.setText("Usted gano con un puntaje de: "+puntaje);
-        }else if(puntaje < 5){
-            puntajes.setText("Usted perdio con un puntaje de: "+puntaje);
+
+        if (puntaje >= 5) {
+            puntajes.setText("Usted ganó con un puntaje de: " + puntaje);
+        } else {
+            puntajes.setText("Usted perdió con un puntaje de: " + puntaje);
         }
     }
+
 }

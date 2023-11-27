@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/imagen4"
+        android:src="@drawable/imagen5"
 
 
         />
