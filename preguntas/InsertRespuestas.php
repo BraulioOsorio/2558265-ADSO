@@ -23,19 +23,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($resultadoUsuario) {
                 $idUsuario = $resultadoUsuario['id_usuario'];
 
-                // Insertar en la tabla puntajes
-                $consultaPuntaje = $base_de_datos->prepare("INSERT INTO puntajes (id_usuario, puntaje, fecha) VALUES (:idUsuario, :puntaje, CURDATE())");
+                $consultaPuntaje = $base_de_datos->prepare("INSERT INTO puntajes (id_usuario, puntaje, fecha) VALUES (:idUsuario, :puntaje, NOW())");
                 $consultaPuntaje->bindParam(':idUsuario', $idUsuario);
                 $consultaPuntaje->bindParam(':puntaje', $puntaje);
                 $consultaPuntaje->execute();
+                $idIntentos = $base_de_datos->lastInsertId();
 
-                // Insertar en la tabla respuestas_usuarios
                 foreach ($respuestas as $opcion => $respuesta) {
                     if ($respuesta !== "null") {
-                        $consultaRespuestas = $base_de_datos->prepare("INSERT INTO respuestas_usuarios (id_pregunta, respuesta, id_usuario) VALUES (:idPregunta, :respuesta, :idUsuario)");
-                        $consultaRespuestas->bindParam(':idPregunta', $opcion);
+
+                        $consultaBuscarPregunta = $base_de_datos->prepare("SELECT id_pregunta FROM preguntas WHERE opcion1 = :opcion OR opcion2 = :opcion OR opcion3 = :opcion OR opcion4 = :opcion ");
+                        $consultaBuscarPregunta->bindParam(':opcion', $respuesta);
+                        $consultaBuscarPregunta->execute();
+                        $resultadoBuscarPregunta = $consultaBuscarPregunta->fetch(PDO::FETCH_ASSOC);
+                        $idPregunta = $resultadoBuscarPregunta['id_pregunta'];
+
+
+                        $consultaRespuestas = $base_de_datos->prepare("INSERT INTO respuestas_usuarios (id_pregunta, respuesta, id_usuario,intento) VALUES (:idPregunta, :respuesta, :idUsuario,:intentos)");
+                        $consultaRespuestas->bindParam(':idPregunta', $idPregunta);
                         $consultaRespuestas->bindParam(':respuesta', $respuesta);
                         $consultaRespuestas->bindParam(':idUsuario', $idUsuario);
+                        $consultaRespuestas->bindParam(':intentos', $idIntentos);
                         $consultaRespuestas->execute();
                     }
                 }

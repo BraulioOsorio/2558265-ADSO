@@ -23,7 +23,7 @@ import java.util.Map;
 public class Respuestas extends AppCompatActivity {
 
     String[] respuestas = new String[10];
-    String[] respuestasCorrectas = {"No","1776","Amazonas","OxIgeno","Africa","Tokio","Gabriel García Marquez","8","Vincent van Gogh","1917"};
+    String[] respuestasCorrectas = {"No","1776","Amazonas","Hierro","Africa","Tokio","Gabriel García Marquez","8","Vincent van Gogh","1917"};
     String nombre;
     String cedula;
 
@@ -96,7 +96,7 @@ public class Respuestas extends AppCompatActivity {
 
     public void enviarRespuestasYPuntaje(String cedula, Map<String, String> respuestas, int puntaje) {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url = "http://192.168.143.31/preguntas/InsertRespuestas.php";
+        String url = "http://192.168.1.7/preguntas/InsertRespuestas.php";
 
         JSONObject jsonBody = new JSONObject();
         try {

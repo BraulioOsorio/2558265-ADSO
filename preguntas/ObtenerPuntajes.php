@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Content-Type");
 
 include 'Conexion.php';
 
-$sql = "SELECT puntajes.puntaje, puntajes.fecha, usuarios.nombre FROM puntajes JOIN usuarios ON puntajes.id_usuario = usuarios.id_usuario ORDER BY puntajes.puntaje DESC";
+$sql = "SELECT puntajes.id_puntaje, puntajes.puntaje, puntajes.fecha, usuarios.nombre FROM puntajes JOIN usuarios ON puntajes.id_usuario = usuarios.id_usuario ORDER BY puntajes.puntaje DESC";
 
 $consulta = $base_de_datos->query($sql);
 $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);

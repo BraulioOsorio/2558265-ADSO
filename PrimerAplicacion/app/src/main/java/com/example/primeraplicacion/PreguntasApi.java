@@ -68,7 +68,7 @@ public class PreguntasApi extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         //Sena 192.168.143.31
         //Casa 192.168.1.7
-        String url = "http://192.168.143.31/preguntas/ObtenerPregunta.php";
+        String url = "http://192.168.1.7/preguntas/ObtenerPregunta.php";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
