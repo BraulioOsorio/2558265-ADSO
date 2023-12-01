@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,12 +30,14 @@ import java.util.List;
 
 public class PreguntasApi extends AppCompatActivity {
 
-    private TextView TextoDescripcion;
-    private RadioGroup Respuesta;
-    private Button buttonResponder;
-    private List<Pregunta> preguntas;
-    private int preguntaActualIndex;
-    private ArrayList<String> respuestasUsuario;
+    TextView TextoDescripcion;
+    RadioGroup Respuesta;
+    Button buttonResponder;
+    List<Pregunta> preguntas;
+    int preguntaActualIndex;
+    ArrayList<String> respuestasUsuario;
+    String nombre;
+    String cedula;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,10 @@ public class PreguntasApi extends AppCompatActivity {
         preguntas = new ArrayList<>();
         respuestasUsuario = new ArrayList<>();
         cargarPreguntasAleatorias();
+        Bundle datosUsuario = getIntent().getExtras();
+        nombre = datosUsuario.getString("nombreUsuario");
+        cedula = datosUsuario.getString("cedulaUsuario");
+
 
         buttonResponder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +66,9 @@ public class PreguntasApi extends AppCompatActivity {
 
     private void cargarPreguntasAleatorias() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.1.7/preguntas/ObtenerPregunta.php";
+        //Sena 192.168.143.31
+        //Casa 192.168.1.7
+        String url = "http://192.168.143.31/preguntas/ObtenerPregunta.php";
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -121,6 +130,9 @@ public class PreguntasApi extends AppCompatActivity {
             for (String respuesta : preguntaActual.getRespuestas()) {
                 if(!respuesta.equals("null")){
                     RadioButton radioButton = new RadioButton(getApplicationContext());
+                    radioButton.setTextColor(getResources().getColor(R.color.black));
+                    radioButton.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+
                     radioButton.setText(respuesta);
                     Respuesta.addView(radioButton);
                 }
@@ -134,6 +146,8 @@ public class PreguntasApi extends AppCompatActivity {
     private void irARespuestas() {
         Intent intencion = new Intent(getApplicationContext(), Respuestas.class);
         intencion.putStringArrayListExtra("opciones", respuestasUsuario);
+        intencion.putExtra("nombreUsuario", nombre);
+        intencion.putExtra("cedulaUsuario", cedula);
         startActivity(intencion);
         finish();
     }
@@ -146,10 +160,16 @@ public class PreguntasApi extends AppCompatActivity {
             String opcionSeleccionada = respuesta.getText().toString();
             respuestasUsuario.add(opcionSeleccionada);
             preguntaActualIndex++;
+            System.out.println("Seleccionada: "+opcionSeleccionada);
             mostrarPreguntaActual();
         } else {
             TextView alerta = findViewById(R.id.alerta);
             alerta.setText("Debe seleccionar una de las opciones para continuar ");
         }
     }
+
+
+
+
+
 }

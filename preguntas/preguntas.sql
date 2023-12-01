@@ -8,6 +8,28 @@ CREATE TABLE preguntas (
     opcion3 TEXT,
     opcion4 TEXT
 );
+CREATE TABLE usuarios (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    numero_cedula VARCHAR(20) NOT NULL UNIQUE,
+    nombre VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE respuestas_usuarios (
+    id_respuesta INT PRIMARY KEY AUTO_INCREMENT,
+    id_pregunta INT,
+    respuesta TEXT,
+    id_usuario INT,
+    FOREIGN KEY (id_pregunta) REFERENCES preguntas(id_pregunta),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE puntajes (
+    id_puntaje INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT,
+    puntaje INT,
+    fecha DATE,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
 
 INSERT INTO preguntas (id_pregunta, descripcion, opcion1, opcion2, opcion3, opcion4)
 VALUES
