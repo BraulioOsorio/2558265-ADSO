@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $postData['id_puntaje'];
         try {
             // Evita la inyección SQL usando prepared statements
-            $consulta = $base_de_datos->prepare("SELECT p.descripcion,ru.respuesta FROM respuestas_usuarios ru JOIN preguntas p ON ru.id_pregunta = p.id_pregunta WHERE ru.intento = :id");
+            $consulta = $base_de_datos->prepare("SELECT p.descripcion,ru.respuesta FROM respuestas_usuarios ru JOIN preguntas p ON ru.id_pregunta = p.id_pregunta WHERE ru.intento = :id ORDER BY p.id_pregunta");
             $consulta->bindParam(':id', $id);
             if ($consulta->execute()) {
                 $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);

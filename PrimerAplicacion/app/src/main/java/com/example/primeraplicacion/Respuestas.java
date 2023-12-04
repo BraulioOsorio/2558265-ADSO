@@ -96,7 +96,7 @@ public class Respuestas extends AppCompatActivity {
 
     public void enviarRespuestasYPuntaje(String cedula, Map<String, String> respuestas, int puntaje) {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url = "http://192.168.1.7/preguntas/InsertRespuestas.php";
+        String url = "http://192.168.143.31/preguntas/InsertRespuestas.php";
 
         JSONObject jsonBody = new JSONObject();
         try {

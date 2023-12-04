@@ -54,7 +54,7 @@ public class Login extends AppCompatActivity {
         System.out.println("Iniciando consumo");
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url = "http://192.168.1.7/preguntas/InsertUser.php";
+        String url = "http://192.168.143.31/preguntas/InsertUser.php";
 
         StringRequest solicitud =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
