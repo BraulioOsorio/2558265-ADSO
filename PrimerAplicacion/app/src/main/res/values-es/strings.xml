@@ -1,9 +1,0 @@
-
-<resources>
-    <string name="app_name">Pregunta 1</string>
-    <string name="title">Pregunta 1</string>
-    <string name="id">Id:</string>
-    <string name="name">Nombre:</string>
-    <string name="email">Correo:</string>
-    <string name="boton">REGISTRAR</string>
-</resources>
