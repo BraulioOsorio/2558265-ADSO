@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:context=".DetallePreguntas">
+
+        <TableLayout
+            android:id="@+id/tableLayoutDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp">
+
+            <TableRow>
+                <TextView
+                    android:text="Enunciado"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="8dp" />
+                <TextView
+                    android:text="Respuesta"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="8dp" />
+                <TextView
+                    android:text="Solución"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </TableRow>
+
+            <!-- Filas dinámicas con los detalles del puntaje -->
+            <TableRow
+                android:id="@+id/tableRowDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+                <TextView
+                    android:id="@+id/textViewDescripcion"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="8dp" />
+                <TextView
+                    android:id="@+id/textViewRespuesta"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:padding="8dp" />
+                <TextView
+                    android:id="@+id/textViewSolucion"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:padding="8dp" />
+            </TableRow>
+        </TableLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</ScrollView>
