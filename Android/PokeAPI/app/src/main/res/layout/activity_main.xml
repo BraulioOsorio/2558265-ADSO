@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#FFF6FE"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/titulo_pokemon"
+
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerPersonas"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginTop="15dp"></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/pre"
+            android:layout_width="206dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bordes"
+            app:backgroundTint="#003267"
+            android:onClick="pre"
+            android:text="ANTERIOR" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bordes"
+            android:onClick="next"
+            app:backgroundTint="#003267"
+            android:text="SIGUIENTE" />
+
+    </LinearLayout>
+
+</FrameLayout>
