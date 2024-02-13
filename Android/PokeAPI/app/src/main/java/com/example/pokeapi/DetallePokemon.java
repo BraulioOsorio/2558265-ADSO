@@ -122,7 +122,7 @@ public class DetallePokemon extends AppCompatActivity {
                         String innerKey = innerKeys.next();
                         String url = innerObject.optString(innerKey, null);
 
-                        if (url != null && !url.equalsIgnoreCase("null") && !url.endsWith(".gif") && !url.endsWith(".svg")) {
+                        if (url != null && !url.equalsIgnoreCase("null") && !url.endsWith(".svg")) {
                             imagenes.add(url);
                         }
                     }

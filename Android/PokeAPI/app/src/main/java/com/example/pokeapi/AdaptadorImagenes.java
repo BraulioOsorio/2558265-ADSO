@@ -16,6 +16,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.target.ImageViewTarget;
 
 import java.util.List;
 
@@ -57,26 +59,43 @@ public class AdaptadorImagenes extends RecyclerView.Adapter<AdaptadorImagenes.Vi
 
         public void consumoImagen(String url){
             RequestQueue queue = Volley.newRequestQueue(mContext.getApplicationContext());
-
-            ImageRequest solicitud = new ImageRequest(
-                    url,
-                    new Response.Listener<Bitmap>() {
-                        @Override
-                        public void onResponse(Bitmap bitmap) {
-                            // Set the image in the ImageView.
-                            imgPokemon.setImageBitmap(bitmap);
-
+            if(url.endsWith(".gif")){
+                Glide.with(mContext)
+                .asGif()
+                .load(url)
+                .into(new ImageViewTarget<GifDrawable>(imgPokemon) {
+                    @Override
+                    protected void setResource(GifDrawable resource) {
+                        if (resource != null){
+                            imgPokemon.setImageDrawable(resource);
+                            resource.start(); // Inicia la animación del GIF
+                        }else{
+                            System.out.println("resource es nulo");
                         }
-                    },
-                    0, 0, null, // maxWidth, maxHeight, decodeConfig;
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // Handle the error.
-                        }
-                    });
+                    }
+                });
+            }else{
+                ImageRequest solicitud = new ImageRequest(
+                        url,
+                        new Response.Listener<Bitmap>() {
+                            @Override
+                            public void onResponse(Bitmap bitmap) {
+                                // Set the image in the ImageView.
+                                imgPokemon.setImageBitmap(bitmap);
 
-            queue.add(solicitud);
+                            }
+                        },
+                        0, 0, null, // maxWidth, maxHeight, decodeConfig;
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // Handle the error.
+                            }
+                        });
+
+                queue.add(solicitud);
+
+            }
         }
     }
 }
