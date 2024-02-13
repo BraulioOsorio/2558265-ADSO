@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="50dp">
 
             <TextView
                 android:layout_marginLeft="30dp"
@@ -18,14 +18,16 @@
                 android:layout_height="wrap_content"
                 android:text="Altura:"
                 android:layout_marginTop="5dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textSize="20sp"/>
             <TextView
                 android:id="@+id/etqAltura"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textStyle="bold"
-                android:text="XXXXXX"
+                android:textSize="20sp"
+                android:text="XXX"
                 />
 
             <TextView
@@ -34,14 +36,16 @@
                 android:layout_height="wrap_content"
                 android:text="Peso:"
                 android:layout_marginTop="5dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textSize="20sp"/>
             <TextView
                 android:id="@+id/etqPeso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textStyle="bold"
-                android:text="XXXXXX"
+                android:textSize="20sp"
+                android:text="XX"
                 />
 
 
@@ -60,21 +64,17 @@
             android:textSize="20sp"/>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:id="@+id/containerHabilidades"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="30dp">
-
-        <TextView
-            android:id="@+id/etqHabiliti"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="XXXX"
-            android:background="#FFCFCF"
-            android:textSize="25sp"/>
+        android:background="#FFFFFF"
+        android:layout_marginTop="30dp"
+        >
     </LinearLayout>
 
 
 
 
-</LinearLayout>
+
+    </LinearLayout>

@@ -6,28 +6,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#FFF6FE"
-    >
+    android:background="#FFF6FE">
 
+    <!-- Contenido principal de tu actividad -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:src="@drawable/titulo_pokemon"
-
-            />
+            android:src="@drawable/titulo_pokemon"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerPersonas"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginTop="15dp"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"/>
+
     </LinearLayout>
 
+    <!-- Pantalla de carga -->
+    <RelativeLayout
+        android:id="@+id/loadingScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/loadingImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/loading_pokeball" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +56,7 @@
             android:layout_width="206dp"
             android:layout_height="wrap_content"
             android:background="@drawable/bordes"
-            app:backgroundTint="#003267"
+            app:backgroundTint="#0000ff"
             android:onClick="pre"
             android:text="ANTERIOR" />
 
@@ -50,7 +66,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bordes"
             android:onClick="next"
-            app:backgroundTint="#003267"
+            app:backgroundTint="#0000ff"
             android:text="SIGUIENTE" />
 
     </LinearLayout>

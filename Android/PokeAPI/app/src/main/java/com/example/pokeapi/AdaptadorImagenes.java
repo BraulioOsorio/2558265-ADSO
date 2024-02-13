@@ -1,65 +1,85 @@
 package com.example.pokeapi;
 
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.Instant;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class AdaptadorImagenes extends RecyclerView.Adapter<AdaptadorImagenes.ViewHolder> {
-    List<Habilidades> listahabilidades;
-    private Instant Glide;
+    List<String> imagenes;
+    Context mContext;
 
-    public AdaptadorImagenes(List<Habilidades> listahabilidades) {
-        this.listahabilidades = listahabilidades;
+    public AdaptadorImagenes(List<String> imagenes) {
+        this.imagenes = imagenes;
+
     }
-
 
     @NonNull
     @Override
-    public AdaptadorImagenes.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_habilidades,parent,false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_imagenes, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdaptadorImagenes.ViewHolder holder, int position) {
-        Habilidades temporal = listahabilidades.get(position);
-        //holder.cargarPokemones(temporal);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        String url = imagenes.get(position);
+        holder.consumoImagen(url);
     }
 
     @Override
     public int getItemCount() {
-        return listahabilidades.size();
+        return imagenes.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView etqNumeroPokemon;
-        TextView etqNombre;
-        ImageView btnPropiedades;
-
-        Context contexto;
-
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imgPokemon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            etqNombre = itemView.findViewById(R.id.etqNombre);
-            etqNumeroPokemon = itemView.findViewById(R.id.etqNumeroPokemon);
-            btnPropiedades = itemView.findViewById(R.id.btnPropiedades);
-            contexto = itemView.getContext();
-
-
+            imgPokemon = itemView.findViewById(R.id.imgPokemon);
+            mContext = itemView.getContext();
         }
 
+        public void consumoImagen(String url){
+            RequestQueue queue = Volley.newRequestQueue(mContext.getApplicationContext());
 
+            ImageRequest solicitud = new ImageRequest(
+                    url,
+                    new Response.Listener<Bitmap>() {
+                        @Override
+                        public void onResponse(Bitmap bitmap) {
+                            // Set the image in the ImageView.
+                            imgPokemon.setImageBitmap(bitmap);
+
+                        }
+                    },
+                    0, 0, null, // maxWidth, maxHeight, decodeConfig;
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // Handle the error.
+                        }
+                    });
+
+            queue.add(solicitud);
+        }
     }
 }
+
+
+

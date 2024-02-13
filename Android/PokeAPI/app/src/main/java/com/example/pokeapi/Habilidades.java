@@ -1,31 +1,25 @@
 package com.example.pokeapi;
 
+import java.util.List;
+
 public class Habilidades {
-    String url;
-    String nombre;
+
+    List<String> nombresHabilidades;
+
     String altura;
     String peso;
-    public Habilidades(String nombre, String url,String peso,String altura) {
-        this.nombre = nombre;
-        this.url = url;
+    public Habilidades(  List<String> nombresHabilidades,String peso,String altura) {
+
+        this.nombresHabilidades = nombresHabilidades;
         this.altura = altura;
         this.peso = peso;
     }
-
-    public String getUrl() {
-        return url;
+    public List<String> getNombresHabilidades() {
+        return nombresHabilidades;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombresHabilidades(List<String> nombresHabilidades) {
+        this.nombresHabilidades = nombresHabilidades;
     }
 
     public String getAltura() {

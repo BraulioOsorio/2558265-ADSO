@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:orientation="vertical"
+    tools:context=".DetalleCuestionario">
+
+    <TextView
+        android:id="@+id/etq_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Nombre completo"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <GridLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:columnCount="2"
+        android:rowCount="5"
+        >
+
+
+        <TextView
+            android:layout_width="135dp"
+            android:layout_height="26dp"
+            android:text="Fecha Inicio: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+             />
+
+        <TextView
+            android:id="@+id/etq_fecha_incio"
+            android:layout_width="218dp"
+            android:layout_height="25dp"
+            android:text="24/02/02"
+            android:textSize="20sp"
+             />
+
+        <TextView
+            android:layout_width="135dp"
+            android:layout_height="26dp"
+            android:text="Fecha Fin: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+             />
+
+        <TextView
+            android:id="@+id/etq_fecha_fin"
+            android:layout_width="218dp"
+            android:layout_height="25dp"
+            android:text=""
+            android:textSize="20sp"
+             />
+
+        <TextView
+            android:layout_width="136dp"
+            android:layout_height="25dp"
+            android:text="Preguntas: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+
+             />
+
+        <TextView
+            android:id="@+id/etq_cant_preguntas"
+            android:layout_width="218dp"
+            android:layout_height="25dp"
+            android:text=""
+            android:textStyle="bold"
+            android:textSize="20sp"
+
+             />
+
+
+        <TextView
+            android:layout_width="136dp"
+            android:layout_height="27dp"
+            android:text="Correctas: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+             />
+
+        <TextView
+            android:id="@+id/etq_correctas"
+            android:layout_width="218dp"
+            android:layout_height="25dp"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/green"
+            android:textSize="20sp"
+             />
+
+
+
+        <TextView
+            android:layout_width="136dp"
+            android:layout_height="26dp"
+            android:text="Incorrectas: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+             />
+
+        <TextView
+            android:id="@+id/etq_incorrectas"
+            android:layout_width="218dp"
+            android:layout_height="25dp"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+             />
+
+
+    </GridLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/midium_white">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+
+            </LinearLayout>
+
+
+
+        </ScrollView>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_volver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:srcCompat="@drawable/icn_volver"
+            android:tooltipText="Cerrar Sesión"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="5dp"
+            app:backgroundTint="@color/gris"
+            app:tint="@color/azulOscuro"
+            app:maxImageSize="35dp"
+            app:fabCustomSize="50dp"
+            />
+    </FrameLayout>
+
+</LinearLayout>

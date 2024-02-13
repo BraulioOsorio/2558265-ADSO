@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".Iniciar_cuestionario">
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="NUEVO CUESTIONARIO"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@mipmap/ic_preguntas_foreground"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Usuario: "
+        android:textSize="20sp"
+        android:gravity="center"
+    />
+
+    <TextView
+        android:id="@+id/etq_nombre_usuario"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:text="Nombre de usuario "
+        android:layout_gravity="center"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha Inicio: "
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        />
+
+    <TextView
+        android:id="@+id/etq_fecha_incio"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="AAAA-MM-DD HH:mm:ss"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:onClick="confirmarCuestionario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EMPEZAR"
+        android:layout_marginTop="100dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_gravity="bottom|center"
+        android:backgroundTint="@color/blue"
+        />
+
+</LinearLayout>

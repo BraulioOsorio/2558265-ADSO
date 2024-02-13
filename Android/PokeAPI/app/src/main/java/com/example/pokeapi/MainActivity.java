@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.SoundEffectConstants;
 import android.view.View;
@@ -68,20 +71,46 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 System.out.println("El servidor responde OK");
-                System.out.println(response.toString());
                 List<Pokemon> listaPoke = new ArrayList<>();
                 try {
                     siguiente = response.getString("next");
                     anterior = response.getString("previous");
                     if(anterior.equalsIgnoreCase("null")){
                         pre.setEnabled(false);
+                        pre.setTextColor(Color.WHITE);
+                        pre.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                     }else{
                         pre.setEnabled(true);
+                        pre.setTextColor(Color.WHITE);
+                        pre.setBackgroundTintList(ColorStateList.valueOf(Color.BLUE));
+
+                        Uri uri = Uri.parse(anterior);
+                        String offset = uri.getQueryParameter("offset");
+                        String limit = uri.getQueryParameter("limit");
+
+                        int offsetInt = Integer.parseInt(offset);
+                        int limitInt = Integer.parseInt(limit);
+
+                        if(limitInt == 2){
+                            offsetInt -= 18;
+                            limitInt = 20;
+                            System.out.println("Url dañada "+anterior);
+
+                            anterior = "https://pokeapi.co/api/v2/pokemon?offset=" + offsetInt + "&limit=" + limitInt;
+                            System.out.println("Url nueva "+anterior);
+                        }
+
+
                     }
                     if(siguiente.equalsIgnoreCase("null")){
                         next.setEnabled(false);
+                        next.setTextColor(Color.WHITE);
+                        next.setBackgroundTintList(ColorStateList.valueOf(Color.GRAY));
                     }else{
                         next.setEnabled(true);
+                        next.setTextColor(Color.WHITE);
+                        next.setBackgroundTintList(ColorStateList.valueOf(Color.BLUE));
+
                     }
                     JSONArray results = response.getJSONArray("results");
 
@@ -95,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
                         String ultimoNumero = partesURL[partesURL.length - 1];
 
                         int numero  = Integer.parseInt(ultimoNumero);
+                        if (numero > 10000){
+                            numero = numero - 8975;
+                        }
 
                         String ceros = (numero<10)?"000":(numero<100)?"00":(numero<1000)?"0":"";
                         String numeroCon = ceros+numero;

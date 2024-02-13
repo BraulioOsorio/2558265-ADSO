@@ -5,38 +5,51 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.Instant;
 import java.util.List;
 import android.widget.ImageView;
 
+
 public class AdaptadorPokemon extends RecyclerView.Adapter<AdaptadorPokemon.ViewHolder> {
 
     List<Pokemon> listaPokemon;
-    private Instant Glide;
+
+    private RelativeLayout loadingScreen;
 
     public AdaptadorPokemon(List<Pokemon> listaPokemon) {
         this.listaPokemon = listaPokemon;
     }
 
-
     @NonNull
     @Override
     public AdaptadorPokemon.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pokemon,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pokemon, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdaptadorPokemon.ViewHolder holder, int position) {
         Pokemon temporal = listaPokemon.get(position);
+
+        //holder.loadingImageView.setVisibility(View.VISIBLE);
+
         holder.cargarPokemones(temporal);
+        //holder.loadingImageView.setVisibility(View.VISIBLE);
+        //Glide.with(holder.itemView)
+          //      .load(R.drawable.loading_pokeball)
+            //    .into(holder.loadingImageView);
+
     }
 
     @Override
@@ -44,7 +57,8 @@ public class AdaptadorPokemon extends RecyclerView.Adapter<AdaptadorPokemon.View
         return listaPokemon.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView loadingImageView;
         TextView etqNumeroPokemon;
         TextView etqNombre;
         ImageView btnPropiedades;
@@ -54,21 +68,18 @@ public class AdaptadorPokemon extends RecyclerView.Adapter<AdaptadorPokemon.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             etqNombre = itemView.findViewById(R.id.etqNombre);
             etqNumeroPokemon = itemView.findViewById(R.id.etqNumeroPokemon);
             btnPropiedades = itemView.findViewById(R.id.btnPropiedades);
+            loadingImageView = itemView.findViewById(R.id.loadingImageView);
+            loadingScreen = itemView.findViewById(R.id.loadingScreen);
             contexto = itemView.getContext();
-
-
         }
 
-        public void cargarPokemones(Pokemon poketemp){
+        public void cargarPokemones(Pokemon poketemp) {
             String nombreM = poketemp.getNombre().toUpperCase();
             etqNombre.setText(nombreM);
-
             etqNumeroPokemon.setText(poketemp.getNumero());
-
 
             btnPropiedades.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,14 +87,19 @@ public class AdaptadorPokemon extends RecyclerView.Adapter<AdaptadorPokemon.View
                     String nombre = poketemp.getNombre();
                     String url = poketemp.getUrl();
 
-                    Intent intencion = new Intent(contexto,DetallePokemon.class);
-                    intencion.putExtra("nombre",nombre);
-                    intencion.putExtra("url",url);
-
-
+                    Intent intencion = new Intent(contexto, DetallePokemon.class);
+                    intencion.putExtra("nombre", nombre);
+                    intencion.putExtra("url", url);
                     contexto.startActivity(intencion);
                 }
             });
         }
+    }
+    private void showLoadingScreen() {
+        loadingScreen.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLoadingScreen() {
+        loadingScreen.setVisibility(View.GONE);
     }
 }
