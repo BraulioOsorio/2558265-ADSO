@@ -1,10 +1,14 @@
 package com.example.pokeapi;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -13,6 +17,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,12 +35,15 @@ public class DetallePokemon extends AppCompatActivity {
     TextView etqNombre;
     String urlBase;
     RecyclerView recyclerView;
+    ImageView loadingImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_pokemon);
         etqNombre = findViewById(R.id.nombreP);
+        loadingImageView = findViewById(R.id.loadingImageView);
+
         Bundle datos = getIntent().getExtras();
         String nombreM = datos.getString("nombre").toUpperCase();
         urlBase = datos.getString("url");
@@ -65,11 +76,37 @@ public class DetallePokemon extends AppCompatActivity {
                     }
                     sacarImagenes(response);
                     Habilidades habilidades = new Habilidades(nombreHabilidades, peso, altura);
-                    recyclerView = findViewById(R.id.recyclerhabilidades);
-                    recyclerView.setLayoutManager(new LinearLayoutManager((getApplicationContext())));
+                    loadingImageView.setVisibility(View.VISIBLE);
 
-                    AdaptadorHabilidades adaptador = new AdaptadorHabilidades(habilidades);
-                    recyclerView.setAdapter(adaptador);
+                    Glide.with(DetallePokemon.this)
+                            .asGif()
+                            .load(R.drawable.loading_pokeball)
+                            .into(new SimpleTarget<GifDrawable>() {
+                                @Override
+                                public void onResourceReady(@NonNull GifDrawable resource, @Nullable Transition<? super GifDrawable> transition) {
+
+                                    loadingImageView.setImageDrawable(resource);
+
+                                    resource.start();
+                                }
+                            });
+
+                    new android.os.Handler().postDelayed(
+                            new Runnable() {
+                                public void run() {
+                                    recyclerView = findViewById(R.id.recyclerhabilidades);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager((getApplicationContext())));
+
+                                    AdaptadorHabilidades adaptador = new AdaptadorHabilidades(habilidades);
+                                    recyclerView.setAdapter(adaptador);
+
+
+                                    loadingImageView.setVisibility(View.GONE);
+                                }
+                            },
+                            500
+                    );
+
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);

@@ -68,11 +68,11 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/loadingGif"
+        android:id="@+id/loadingImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:src="@drawable/loading_pokeball"
-        android:visibility="gone" />
+        android:layout_centerInParent="false"
+        android:background="@color/white"
+        android:src="@drawable/loading_pokeball" />
 
 </FrameLayout>
