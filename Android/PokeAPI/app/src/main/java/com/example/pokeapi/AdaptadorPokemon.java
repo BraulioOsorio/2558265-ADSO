@@ -42,14 +42,8 @@ public class AdaptadorPokemon extends RecyclerView.Adapter<AdaptadorPokemon.View
     public void onBindViewHolder(@NonNull AdaptadorPokemon.ViewHolder holder, int position) {
         Pokemon temporal = listaPokemon.get(position);
 
-        //holder.loadingImageView.setVisibility(View.VISIBLE);
 
         holder.cargarPokemones(temporal);
-        //holder.loadingImageView.setVisibility(View.VISIBLE);
-        //Glide.with(holder.itemView)
-          //      .load(R.drawable.loading_pokeball)
-            //    .into(holder.loadingImageView);
-
     }
 
     @Override
@@ -72,7 +66,6 @@ public class AdaptadorPokemon extends RecyclerView.Adapter<AdaptadorPokemon.View
             etqNumeroPokemon = itemView.findViewById(R.id.etqNumeroPokemon);
             btnPropiedades = itemView.findViewById(R.id.btnPropiedades);
             loadingImageView = itemView.findViewById(R.id.loadingImageView);
-            loadingScreen = itemView.findViewById(R.id.loadingScreen);
             contexto = itemView.getContext();
         }
 

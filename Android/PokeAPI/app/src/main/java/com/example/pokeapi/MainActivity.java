@@ -1,5 +1,7 @@
 package com.example.pokeapi;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +21,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     String anterior;
     Button pre;
     Button next;
+    ImageView loadingImageView;
 
 
     @Override
@@ -41,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         pre = findViewById(R.id.pre);
         next = findViewById(R.id.next);
+        loadingImageView = findViewById(R.id.loadingImageView);
         String baseUrl = "https://pokeapi.co/api/v2/pokemon";
         consumoGetJson(baseUrl);
 
@@ -134,11 +142,36 @@ public class MainActivity extends AppCompatActivity {
                         listaPoke.add(new Pokemon(numeroCon, nombre, url));
 
                     }
-                    recyclerView = findViewById(R.id.recyclerPersonas);
-                    recyclerView.setLayoutManager(new LinearLayoutManager((getApplicationContext())));
+                    loadingImageView.setVisibility(View.VISIBLE);
 
-                    AdaptadorPokemon adaptador = new AdaptadorPokemon(listaPoke);
-                    recyclerView.setAdapter(adaptador);
+                    Glide.with(MainActivity.this)
+                            .asGif()
+                            .load(R.drawable.loading_pokeball)
+                            .into(new SimpleTarget<GifDrawable>() {
+                                @Override
+                                public void onResourceReady(@NonNull GifDrawable resource, @Nullable Transition<? super GifDrawable> transition) {
+
+                                    loadingImageView.setImageDrawable(resource);
+
+                                    resource.start();
+                                }
+                            });
+
+                    new android.os.Handler().postDelayed(
+                            new Runnable() {
+                                public void run() {
+                                    recyclerView = findViewById(R.id.recyclerPersonas);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+                                    AdaptadorPokemon adaptador = new AdaptadorPokemon(listaPoke);
+                                    recyclerView.setAdapter(adaptador);
+
+
+                                    loadingImageView.setVisibility(View.GONE);
+                                }
+                            },
+                            500
+                    );
                 }catch (JSONException e){
                     throw new RuntimeException(e);
 

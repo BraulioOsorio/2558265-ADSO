@@ -27,24 +27,6 @@
             android:layout_marginTop="15dp"/>
 
     </LinearLayout>
-
-    <!-- Pantalla de carga -->
-    <RelativeLayout
-        android:id="@+id/loadingScreen"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80000000"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/loadingImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/loading_pokeball" />
-
-    </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,6 +51,15 @@
             app:backgroundTint="#0000ff"
             android:text="SIGUIENTE" />
 
+
+
     </LinearLayout>
+    <ImageView
+        android:id="@+id/loadingImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="false"
+        android:background="@color/white"
+        android:src="@drawable/loading_pokeball" />
 
 </FrameLayout>
