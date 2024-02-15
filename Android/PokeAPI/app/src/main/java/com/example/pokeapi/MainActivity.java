@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     Button pre;
     Button next;
     ImageView loadingImageView;
+    List<Pokemon> listaPoke;
 
 
     @Override
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 System.out.println("El servidor responde OK");
-                List<Pokemon> listaPoke = new ArrayList<>();
+                listaPoke = new ArrayList<>();
                 try {
                     siguiente = response.getString("next");
                     anterior = response.getString("previous");
@@ -142,38 +143,13 @@ public class MainActivity extends AppCompatActivity {
                         listaPoke.add(new Pokemon(numeroCon, nombre, url));
 
                     }
-                    loadingImageView.setVisibility(View.VISIBLE);
-
-                    Glide.with(MainActivity.this)
-                            .asGif()
-                            .load(R.drawable.loading_pokeball)
-                            .into(new SimpleTarget<GifDrawable>() {
-                                @Override
-                                public void onResourceReady(@NonNull GifDrawable resource, @Nullable Transition<? super GifDrawable> transition) {
-
-                                    loadingImageView.setImageDrawable(resource);
-
-                                    resource.start();
-                                }
-                            });
-
-                    new android.os.Handler().postDelayed(
-                            new Runnable() {
-                                public void run() {
-                                    recyclerView = findViewById(R.id.recyclerPersonas);
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-                                    AdaptadorPokemon adaptador = new AdaptadorPokemon(listaPoke);
-                                    recyclerView.setAdapter(adaptador);
+                    pantalla(listaPoke);
 
 
-                                    loadingImageView.setVisibility(View.GONE);
-                                }
-                            },
-                            500
-                    );
                 }catch (JSONException e){
+                    pantalla(listaPoke);
                     throw new RuntimeException(e);
+
 
                 }
 
@@ -181,11 +157,46 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                pantalla(listaPoke);
                 System.out.println("El servidor responde con un error:");
                 System.out.println(error.getMessage());
             }
         });
 
         queue.add(solicitud);
+    }
+
+    public void pantalla( List<Pokemon> listaPoke){
+        loadingImageView.setVisibility(View.VISIBLE);
+
+        Glide.with(MainActivity.this)
+                .asGif()
+                .load(R.drawable.loading_pokeball)
+                .into(new SimpleTarget<GifDrawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull GifDrawable resource, @Nullable Transition<? super GifDrawable> transition) {
+
+                        loadingImageView.setImageDrawable(resource);
+
+                        resource.start();
+                    }
+                });
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        recyclerView = findViewById(R.id.recyclerPersonas);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+                        AdaptadorPokemon adaptador = new AdaptadorPokemon(listaPoke);
+                        recyclerView.setAdapter(adaptador);
+
+
+                        loadingImageView.setVisibility(View.GONE);
+                    }
+                },
+                500
+        );
+
+
     }
 }

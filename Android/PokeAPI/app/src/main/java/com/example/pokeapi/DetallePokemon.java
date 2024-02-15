@@ -36,6 +36,8 @@ public class DetallePokemon extends AppCompatActivity {
     String urlBase;
     RecyclerView recyclerView;
     ImageView loadingImageView;
+    List<String> imagenes;
+    Habilidades habilidade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,46 +77,22 @@ public class DetallePokemon extends AppCompatActivity {
                         nombreHabilidades.add(name);
                     }
                     sacarImagenes(response);
-                    Habilidades habilidades = new Habilidades(nombreHabilidades, peso, altura);
-                    loadingImageView.setVisibility(View.VISIBLE);
-
-                    Glide.with(DetallePokemon.this)
-                            .asGif()
-                            .load(R.drawable.loading_pokeball)
-                            .into(new SimpleTarget<GifDrawable>() {
-                                @Override
-                                public void onResourceReady(@NonNull GifDrawable resource, @Nullable Transition<? super GifDrawable> transition) {
-
-                                    loadingImageView.setImageDrawable(resource);
-
-                                    resource.start();
-                                }
-                            });
-
-                    new android.os.Handler().postDelayed(
-                            new Runnable() {
-                                public void run() {
-                                    recyclerView = findViewById(R.id.recyclerhabilidades);
-                                    recyclerView.setLayoutManager(new LinearLayoutManager((getApplicationContext())));
-
-                                    AdaptadorHabilidades adaptador = new AdaptadorHabilidades(habilidades);
-                                    recyclerView.setAdapter(adaptador);
+                    habilidade = new Habilidades(nombreHabilidades, peso, altura);
+                    pantalla(habilidade);
 
 
-                                    loadingImageView.setVisibility(View.GONE);
-                                }
-                            },
-                            500
-                    );
+
 
 
                 } catch (JSONException e) {
+                    pantalla(habilidade);
                     throw new RuntimeException(e);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                pantalla(habilidade);
                 System.out.println("El servidor responde con un error:");
                 System.out.println(error.getMessage());
             }
@@ -135,7 +113,7 @@ public class DetallePokemon extends AppCompatActivity {
                 "front_shiny_female"
         };
 
-        List<String> imagenes = new ArrayList<>();
+        imagenes = new ArrayList<>();
 
         for (String dato : datos) {
             String url = spritesObject.optString(dato, null);
@@ -173,15 +151,49 @@ public class DetallePokemon extends AppCompatActivity {
         }
         Collections.shuffle(imagenes);
 
-
-
-
         recyclerView = findViewById(R.id.recyclerFotos);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
         AdaptadorImagenes adaptador = new AdaptadorImagenes(imagenes);
         recyclerView.setAdapter(adaptador);
+
+    }
+
+    public void pantalla( Habilidades habilidades){
+        loadingImageView.setVisibility(View.VISIBLE);
+
+        Glide.with(DetallePokemon.this)
+                .asGif()
+                .load(R.drawable.loading_pokeball)
+                .into(new SimpleTarget<GifDrawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull GifDrawable resource, @Nullable Transition<? super GifDrawable> transition) {
+
+                        loadingImageView.setImageDrawable(resource);
+                        resource.start();
+                    }
+                });
+
+
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        recyclerView = findViewById(R.id.recyclerhabilidades);
+                        recyclerView.setLayoutManager(new LinearLayoutManager((getApplicationContext())));
+
+                        AdaptadorHabilidades adaptador = new AdaptadorHabilidades(habilidades);
+                        recyclerView.setAdapter(adaptador);
+
+
+
+                        loadingImageView.setVisibility(View.GONE);
+                    }
+                },
+                500
+        );
+
 
     }
 
