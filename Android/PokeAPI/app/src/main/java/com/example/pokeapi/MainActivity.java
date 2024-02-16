@@ -69,11 +69,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    public void cargarGit(){
+        loadingImageView.setVisibility(View.VISIBLE);
+        Glide.with(getApplicationContext()).load(R.drawable.loading_pokeball).into(loadingImageView);
+    }
+
+    public  void ocultarGif(){
+        loadingImageView.setVisibility(View.GONE);
+    }
 
     public void consumoGetJson(String url){
         System.out.println("Iniciando consumo");
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        cargarGit();
 
 
         JsonObjectRequest solicitud =  new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -143,11 +152,16 @@ public class MainActivity extends AppCompatActivity {
                         listaPoke.add(new Pokemon(numeroCon, nombre, url));
 
                     }
-                    pantalla(listaPoke);
+                    recyclerView = findViewById(R.id.recyclerPersonas);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+                    AdaptadorPokemon adaptador = new AdaptadorPokemon(listaPoke);
+                    recyclerView.setAdapter(adaptador);
+                    ocultarGif();
 
 
                 }catch (JSONException e){
-                    pantalla(listaPoke);
+                    cargarGit();
                     throw new RuntimeException(e);
 
 
@@ -157,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                pantalla(listaPoke);
+                cargarGit();
                 System.out.println("El servidor responde con un error:");
                 System.out.println(error.getMessage());
             }
@@ -166,37 +180,4 @@ public class MainActivity extends AppCompatActivity {
         queue.add(solicitud);
     }
 
-    public void pantalla( List<Pokemon> listaPoke){
-        loadingImageView.setVisibility(View.VISIBLE);
-
-        Glide.with(MainActivity.this)
-                .asGif()
-                .load(R.drawable.loading_pokeball)
-                .into(new SimpleTarget<GifDrawable>() {
-                    @Override
-                    public void onResourceReady(@NonNull GifDrawable resource, @Nullable Transition<? super GifDrawable> transition) {
-
-                        loadingImageView.setImageDrawable(resource);
-
-                        resource.start();
-                    }
-                });
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        recyclerView = findViewById(R.id.recyclerPersonas);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-                        AdaptadorPokemon adaptador = new AdaptadorPokemon(listaPoke);
-                        recyclerView.setAdapter(adaptador);
-
-
-                        loadingImageView.setVisibility(View.GONE);
-                    }
-                },
-                500
-        );
-
-
-    }
 }

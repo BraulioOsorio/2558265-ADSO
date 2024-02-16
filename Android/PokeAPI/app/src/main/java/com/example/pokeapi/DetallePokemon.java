@@ -54,10 +54,20 @@ public class DetallePokemon extends AppCompatActivity {
         consumoGetJson(urlBase);
     }
 
+    public void cargarGit(){
+        loadingImageView.setVisibility(View.VISIBLE);
+        Glide.with(getApplicationContext()).load(R.drawable.loading_pokeball).into(loadingImageView);
+    }
+
+    public  void ocultarGif(){
+        loadingImageView.setVisibility(View.GONE);
+    }
+
     public void consumoGetJson(String url) {
         System.out.println("Iniciando consumo");
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        cargarGit();
 
         JsonObjectRequest solicitud = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -78,21 +88,28 @@ public class DetallePokemon extends AppCompatActivity {
                     }
                     sacarImagenes(response);
                     habilidade = new Habilidades(nombreHabilidades, peso, altura);
-                    pantalla(habilidade);
+
+
+                    recyclerView = findViewById(R.id.recyclerhabilidades);
+                    recyclerView.setLayoutManager(new LinearLayoutManager((getApplicationContext())));
+
+                    AdaptadorHabilidades adaptador = new AdaptadorHabilidades(habilidade);
+                    recyclerView.setAdapter(adaptador);
+                    ocultarGif();
 
 
 
 
 
                 } catch (JSONException e) {
-                    pantalla(habilidade);
+                    cargarGit();
                     throw new RuntimeException(e);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                pantalla(habilidade);
+                cargarGit();
                 System.out.println("El servidor responde con un error:");
                 System.out.println(error.getMessage());
             }
@@ -160,41 +177,5 @@ public class DetallePokemon extends AppCompatActivity {
 
     }
 
-    public void pantalla( Habilidades habilidades){
-        loadingImageView.setVisibility(View.VISIBLE);
-
-        Glide.with(DetallePokemon.this)
-                .asGif()
-                .load(R.drawable.loading_pokeball)
-                .into(new SimpleTarget<GifDrawable>() {
-                    @Override
-                    public void onResourceReady(@NonNull GifDrawable resource, @Nullable Transition<? super GifDrawable> transition) {
-
-                        loadingImageView.setImageDrawable(resource);
-                        resource.start();
-                    }
-                });
-
-
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        recyclerView = findViewById(R.id.recyclerhabilidades);
-                        recyclerView.setLayoutManager(new LinearLayoutManager((getApplicationContext())));
-
-                        AdaptadorHabilidades adaptador = new AdaptadorHabilidades(habilidades);
-                        recyclerView.setAdapter(adaptador);
-
-
-
-                        loadingImageView.setVisibility(View.GONE);
-                    }
-                },
-                500
-        );
-
-
-    }
 
 }
