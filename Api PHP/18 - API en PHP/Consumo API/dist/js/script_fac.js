@@ -31,7 +31,7 @@ window.onload = function() {
         
     });
 
-    getClients("http://localhost/APIenPHP/Productos/obtenerPro.php");
+    getClients("http://localhost/APIenPHP/Productos/ObtenerPro.php");
 }
 
 function getClients(endpoint){
@@ -88,7 +88,7 @@ function crearFactura(){
         console.log(data);
         id_facturaActual = data.id;
         if(data.status){
-            getClients("http://localhost/APIenPHP/Productos/obtenerPro.php");
+            getClients("http://localhost/APIenPHP/Productos/ObtenerPro.php");
             swal('Creado con Exito','Se a creado la Factura con exito','success');
             
         }else if(data.message ==  "CEDULA"){

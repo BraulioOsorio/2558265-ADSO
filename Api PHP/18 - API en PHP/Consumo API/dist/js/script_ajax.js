@@ -42,7 +42,7 @@ window.onload = function(){
         eliminarPersona();
     });
 
-    getClients("http://localhost/APIenPHP/Clientes/obtener.php");
+    getClients("http://localhost/APIenPHP/Clientes/Obtener.php");
 
 
 }
@@ -116,7 +116,7 @@ function crearPersona(){
         if(data.status){
             formInsertarUsuario.reset();
             modalCrearUsuario.hide();
-            getClients("http://localhost/APIenPHP/Clientes/obtener.php");
+            getClients("http://localhost/APIenPHP/Clientes/Obtener.php");
             swal('Creado con Exito','Se a creado el usuario con exito','success');
             
         }else{
@@ -142,7 +142,7 @@ function editarPersona(){
         if(data.status){
             formEditarUsuario.reset();
             modalEditarUsuario.hide();
-            getClients("http://localhost/APIenPHP/Clientes/obtener.php");
+            getClients("http://localhost/APIenPHP/Clientes/Obtener.php");
             swal('Modificado con Exito','Se a modificado el usuario con exito','success');
             
         }else{
@@ -168,7 +168,7 @@ function eliminarPersona(){
         if(data.status){
             formEditarUsuario.reset();
             modalEliminarUsuario.hide();
-            getClients("http://localhost/APIenPHP/Clientes/obtener.php");
+            getClients("http://localhost/APIenPHP/Clientes/Obtener.php");
             swal('Eliminado con Exito','Se a Eliminado el usuario con exito','success');
             
         }else{

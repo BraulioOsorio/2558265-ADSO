@@ -48,7 +48,7 @@ window.onload = function(){
         eliminarProducto();
     });
 
-    getClients("http://localhost/APIenPHP/Productos/obtenerPro.php");
+    getClients("http://localhost/APIenPHP/Productos/ObtenerPro.php");
 
 
 }
@@ -114,7 +114,7 @@ function editarProducto(){
         if(data.status){
             formEditarProducto.reset();
             modalEditarProducto.hide();
-            getClients("http://localhost/APIenPHP/Productos/obtenerPro.php");
+            getClients("http://localhost/APIenPHP/Productos/ObtenerPro.php");
             swal('Modificado con Exito','Se a modificado el Producto con exito','success');
             
         }else{
@@ -140,7 +140,7 @@ function eliminarProducto(){
         if(data.status){
             formEditarProducto.reset();
             modalEliminarProducto.hide();
-            getClients("http://localhost/APIenPHP/Productos/obtenerPro.php");
+            getClients("http://localhost/APIenPHP/Productos/ObtenerPro.php");
             swal('Eliminado con Exito','Se a Eliminado el Producto con exito','success');
             
         }else{
@@ -167,7 +167,7 @@ function crearProducto(){
         if(data.status){
             formInsertarProducto.reset();
             modalCrearProducto.hide();
-            getClients("http://localhost/APIenPHP/Productos/obtenerPro.php");
+            getClients("http://localhost/APIenPHP/Productos/ObtenerPro.php");
             swal('Creado con Exito','Se a creado el Producto con exito','success');
             
         }else{

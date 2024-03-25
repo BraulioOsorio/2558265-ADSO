@@ -66,8 +66,8 @@ window.onload = function(){
     });
 
     getClients("http://localhost/APIenPHP/Facturas/ObtenerFa.php");
-    getpro("http://localhost/APIenPHP/Productos/obtenerPro.php");
-    getproducts("http://localhost/APIenPHP/Productos/obtenerPro.php")
+    getpro("http://localhost/APIenPHP/Productos/ObtenerPro.php");
+    getproducts("http://localhost/APIenPHP/Productos/ObtenerPro.php")
 }
 
 function getClients(endpoint){
